@@ -1,0 +1,508 @@
+/* =====================================================
+   VARIABLES GLOBALES Y ESTILOS BASE
+   ===================================================== */
+:root {
+  --color-primary: #003300;    /* Verde oscuro */
+  --color-secondary: #597931;  /* Verde oliva */
+  --color-warning: #ff9900;    /* Naranja brillante */
+  --color-light: #f5f5f5;      /* Blanco suave */
+  --color-accent: #00aaff;     /* Color de acento (definición ejemplo) */
+}
+
+/* Reset y estilos base */
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  color: var(--color-primary);
+}
+
+/* Clases adicionales para tipografía (si las necesitas) */
+.libre-baskerville-regular {
+  font-family: "Libre Baskerville", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+.libre-baskerville-bold {
+  font-family: "Libre Baskerville", serif;
+  font-weight: 700;
+  font-style: normal;
+}
+.libre-baskerville-regular-italic {
+  font-family: "Libre Baskerville", serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+/* =====================================================
+   HEADER (CABECERA)
+   ===================================================== */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: var(--color-light);
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  flex-wrap: wrap;
+}
+
+/* Logo */
+.header .logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.header .logo img {
+  max-width: 60px;
+  height: auto;
+}
+.header .logo h4 {
+  font-family: "Libre Baskerville", serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin: 0;
+}
+
+/* Navegación */
+.navigation ul {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+.navigation a {
+  font-family: "Libre Baskerville", serif;
+  font-weight: 400;
+  font-size: 1.1rem;
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+.navigation a:hover {
+  color: var(--color-accent);
+}
+
+/* Íconos del header */
+.header-icons {
+  display: flex;
+  gap: 1.5rem;
+}
+.header-icons a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  background-color: var(--color-primary);
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+}
+.header-icons a:hover {
+  background-color: var(--color-secondary);
+}
+.header-icons img {
+  width: 20px;
+  height: 20px;
+}
+
+/* =====================================================
+   MODAL - ESTILOS MEJORADOS
+   ===================================================== */
+
+/* Overlay del modal */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6); /* Fondo oscuro semitransparente */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+/* Contenedor del contenido del modal */
+.modal-content {
+  position: relative;
+  background-color: var(--color-light); /* Fondo del modal */
+  border-radius: 12px;
+  padding: 30px;
+  width: 90%;
+  max-width: 420px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  animation: modalFadeIn 0.3s ease-out;
+  text-align: center;
+}
+
+/* Título del modal */
+.modal-title {
+  font-family: "Libre Baskerville", serif;
+  color: var(--color-primary);
+  font-size: 2rem;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);
+}
+
+
+/* Subtítulo o descripción del modal */
+.modal-text {
+  font-size: 1rem;
+  color: #444;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+/* Botón de cierre del modal */
+.close-modal {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  font-size: 1.6rem;
+  color: var(--color-primary);
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.close-modal:hover,
+.close-modal:focus {
+  color: var(--color-secondary);
+  outline: none;
+}
+
+/* Formulario dentro del modal */
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Estilos para los inputs */
+.modal-input {
+  width: 100%;
+  padding: 14px;
+  border: 2px solid #f5f5f5;
+  border-radius: 6px;
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.3s ease;
+  box-shadow: 3px 3px 0px 0px #003300;
+}
+
+.modal-input:focus {
+  border-color: var(--color-primary);
+  transform: translateY(2px);
+  box-shadow: 1px 2px 0px 0px #003300;
+}
+
+/* Botón de enviar */
+.modal-btn {
+  background: linear-gradient(135deg, #ff9900 0%, #ff7700 100%);
+  background-color: var(--color-primary);
+  padding: 14px;
+  font-size: 1rem;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 4px 4px 0px 0px #003300;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: inline-block;
+  width: 100%;
+}
+
+.modal-btn:hover {
+  background: linear-gradient(135deg, #ff7700 0%, #ff5500 100%);
+  transform: translateY(-2px);
+  box-shadow: 2px 2px 0px 0px #003300;
+}
+
+/* Animación al hacer clic */
+.modal-btn:active {
+  transform: translateY(4px);
+  box-shadow: none;
+}
+
+/* Animación para la aparición del modal */
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Responsividad */
+@media (max-width: 480px) {
+  .modal-content {
+    width: 95%;
+    padding: 20px;
+  }
+
+  .modal-title {
+    font-size: 1.5rem;
+  }
+
+  .modal-text {
+    font-size: 0.9rem;
+  }
+
+  .modal-input {
+    font-size: 0.9rem;
+  }
+
+  .modal-btn {
+    font-size: 0.9rem;
+  }
+}
+
+.form_group {
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  margin: 15px;
+  margin-bottom: 25px;
+}
+
+.form_style {
+  outline: none;
+  border: 2px solid #f5f5f5;
+  box-shadow: 3px 4px 0px 1px #003300;
+  width: 290px;
+  padding: 12px 10px;
+  border-radius: 4px;
+  font-size: 15px;
+}
+
+.form_style:focus,
+.btn:focus {
+  transform: translateY(4px);
+  box-shadow: 1px 2px 0px 0px #003300;
+}
+
+.btn {
+  padding: 15px;
+  margin: 25px 0px;
+  width: 290px;
+  font-size: 15px;
+  background: var(--color-secondary);
+  border-radius: 10px;
+  font-weight: 800;
+  box-shadow: 3px 3px 0px 0px #002200;
+  cursor: pointer;
+}
+
+.link {
+  color: var(--color-secondary);
+  font-weight: 800;
+  font-size: 14px;
+  text-decoration: none;
+}
+.line{
+  margin-top: 25px;
+}
+
+/* =====================================================
+   CARRUSEL DE IMÁGENES
+   ===================================================== */
+/* Personalización del carrusel (además de Bootstrap) */
+.custom-carousel {
+  max-width: 100%;
+  max-height: 60vh;
+  overflow: hidden;
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.custom-carousel img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* =====================================================
+   SECCIÓN DE MEJORES PRODUCTOS Y BUSCADOR
+   ===================================================== */
+/* Texto principal de la sección */
+.text {
+  font-family: "Libre Baskerville", serif;
+  font-weight: 400;
+  font-size: 3.1rem;
+  margin: 30px auto;
+  color: var(--color-primary);
+  text-align: center;
+  text-decoration: none;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+.text:hover {
+  color: var(--color-secondary);
+  transform: scale(1.05);
+}
+
+/* Caja de búsqueda */
+.search-box {
+  max-width: 600px;
+  margin: 30px auto;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: var(--color-light);
+}
+.search-input {
+  width: 100%;
+  padding: 12px 15px;
+  font-size: 16px;
+  color: var(--color-secondary);
+  border: 2px solid var(--color-secondary);
+  outline: none;
+  border-radius: 8px;
+  background-color: #ffffff;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.search-input:focus {
+  border-color: var(--color-warning);
+  box-shadow: 0 0 8px var(--color-warning);
+}
+
+/* =====================================================
+   SECCIÓN DE CARACTERÍSTICAS (FEATURES) - 2 POR FILA
+   ===================================================== */
+.features-container {
+  margin: 40px auto;
+  padding: 30px 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  text-align: center;
+}
+
+/* Contenedor con grid de 2 columnas */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.feature-box {
+  background-color: var(--color-light);
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-box:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.feature-icon {
+  width: 100px;
+  margin: 0 auto 12px;
+  display: block;
+}
+
+.feature-content {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-secondary);
+  margin-bottom: 12px;
+}
+
+.feature-link {
+  font-size: 0.9rem;
+  color: var(--color-accent);
+  text-decoration: none;
+  font-weight: 600;
+  border: 1px solid var(--color-accent);
+  padding: 6px 12px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.feature-link:hover {
+  background-color: var(--color-warning);
+  color: #ffffff;
+  border-color: var(--color-warning);
+}
+
+/* =====================================================
+   FOOTER
+   ===================================================== */
+footer {
+  background-color: var(--color-primary);
+  color: white;
+  padding: 20px 0;
+  text-align: center;
+}
+footer a {
+  color: white;
+  text-decoration: none;
+}
+footer a:hover {
+  color: #c8e6c9;
+}
+
+/* =====================================================
+   ESTILOS RESPONSIVOS
+   ===================================================== */
+@media (max-width: 768px) {
+  /* Header: apilar elementos y ajustar tamaños */
+  .header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1rem;
+  }
+  .logo {
+    flex-direction: column;
+    gap: 0.25rem;
+    margin-bottom: 1rem;
+  }
+  .logo img {
+    max-width: 50px;
+  }
+  .navigation ul {
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  .header-icons {
+    gap: 1rem;
+  }
+  .header-icons a {
+    width: 35px;
+    height: 35px;
+  }
+  .header-icons img {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+/* Responsividad para el Search Box en pantallas muy pequeñas */
+@media (max-width: 576px) {
+  .search-box {
+    max-width: 90%;
+    padding: 8px;
+  }
+
+  .search-input {
+    font-size: 14px;
+    padding: 10px;
+  }
+}
