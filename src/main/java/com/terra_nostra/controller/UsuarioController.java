@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import com.terra_nostra.dto.UsuarioDto;
 import jakarta.servlet.http.HttpSession;
 
-@Controller // 🔹 Cambiado de @RestController a @Controller
+@Controller
 @RequestMapping("/usuario")
 public class UsuarioController {
 

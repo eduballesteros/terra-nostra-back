@@ -267,7 +267,7 @@
 						<div class="form_group">
 							<label class="sub_title" for="loginPassword">Contraseña</label> <input
 								placeholder="Ingresa tu contraseña" id="loginPassword"
-								name="password" class="form_style" type="password" required />
+								name="contrasenia" class="form_style" type="password" required />
 						</div>
 
 						<button class="modal-btn" type="submit">INICIA SESIÓN</button>
@@ -282,12 +282,56 @@
 		</div>
 	</div>
 
+    <!-- Modal de Notificación -->
+    <div class="modal fade" id="notificationModal" tabindex="-1" aria-labelledby="notificationModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="notificationModalLabel">Notificación</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body" id="notificationMessage">
+            <!-- Aquí se insertará el mensaje -->
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Aceptar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
 	<!-- Scripts -->
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 
 
 	<script>
+
+      document.addEventListener("DOMContentLoaded", function () {
+        var mensaje = new URLSearchParams(window.location.search).get("mensaje");
+        var modal = new bootstrap.Modal(document.getElementById('notificationModal'));
+
+        if (mensaje) {
+          var mensajeTexto = "";
+          var titulo = "Notificación";
+
+          if (mensaje === "success") {
+            mensajeTexto = "✅ ¡Registro exitoso! Bienvenido a Terra Nostra.";
+            titulo = "Éxito";
+          } else if (mensaje === "error") {
+            mensajeTexto = "❌ Error en el registro. Por favor, intenta nuevamente.";
+            titulo = "Error";
+          }
+
+          if (mensajeTexto) {
+            document.getElementById("notificationModalLabel").innerText = titulo;
+            document.getElementById("notificationMessage").innerText = mensajeTexto;
+            modal.show();
+          }
+        }
+      });
+
 		document
 				.addEventListener(
 						"DOMContentLoaded",
