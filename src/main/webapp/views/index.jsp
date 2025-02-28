@@ -10,6 +10,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Terra Nostra - Productos Naturales</title>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/formIndex.js"></script>
 <link rel="stylesheet" type="text/css" href="css/index.css">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
@@ -191,96 +193,75 @@
 	</footer>
 
 	<!-- Modal de Inicio de Sesión / Registro -->
-	<div id="loginModal" class="modal" style="display: none;">
-		<div class="modal-content">
-			<!-- Botón para cerrar el modal -->
-			<button class="close-modal" id="closeModalButton">×</button>
-			<div class="container">
-				<div class="form_area">
-					<p class="modal-title" id="modalTitle">INICIO DE SESIÓN</p>
+    <div id="loginModal" class="modal fade" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <!-- Botón para cerrar el modal -->
+          <button class="close-modal" id="closeModalButton">×</button>
+          <div class="container">
+            <div class="form_area">
+              <!-- Título del modal -->
+              <p class="modal-title" id="modalTitle">INICIO DE SESIÓN</p>
 
-					<!-- Formulario de Registro -->
-					<form action="/usuario/registrar" method="POST" id="registerForm"
-						style="display: none;" onsubmit="return validarRegistro();">
-						<div class="form_group">
-							<label class="sub_title" for="regEmail">Email</label> <input
-								placeholder="Ingresa tu email" id="email" name="email"
-								class="form_style" type="email" required
-								onblur="verificarCorreo()" />
-							<p class="error" id="emailError" style="display: none;">Este
-								correo ya está registrado</p>
-						</div>
+              <!-- Formulario de Registro -->
+              <form action="/usuario/registrar" method="POST" id="registerForm" onsubmit="return validarRegistro();" style="display: none;">
+                <div class="form_group">
+                  <label class="sub_title" for="regEmail">Email</label>
+                  <input placeholder="Ingresa tu email" id="email" name="email" class="form_style" type="email" required onblur="verificarCorreo()" />
+                  <p class="error" id="emailError" style="display: none;">Este correo ya está registrado</p>
+                </div>
 
-						<div class="form_group">
-							<label class="sub_title" for="nombre">Nombre</label> <input
-								placeholder="Ingresa tu nombre" id="nombre" name="nombre"
-								class="form_style" required />
-						</div>
+                <div class="form_group">
+                  <label class="sub_title" for="nombre">Nombre</label>
+                  <input placeholder="Ingresa tu nombre" id="nombre" name="nombre" class="form_style" required />
+                </div>
 
-						<div class="form_group">
-							<label class="sub_title" for="apellido">Apellido</label> <input
-								placeholder="Ingresa tu apellido" id="apellido" name="apellido"
-								class="form_style" required />
-						</div>
+                <div class="form_group">
+                  <label class="sub_title" for="apellido">Apellido</label>
+                  <input placeholder="Ingresa tu apellido" id="apellido" name="apellido" class="form_style" required />
+                </div>
 
-						<div class="form_group">
-                            <label class="sub_title" for="contrasenia">Contraseña</label>
-                            <input
-                                placeholder="Crea una contraseña"
-                                id="contrasenia"
-                                name="contrasenia"
-                                class="form_style"
-                                type="password"
-                                required minlength="6" />
+                <div class="form_group">
+                  <label class="sub_title" for="contrasenia">Contraseña</label>
+                  <input placeholder="Crea una contraseña" id="contrasenia" name="contrasenia" class="form_style" type="password" required minlength="6" />
+                  <p class="error" id="passwordError" style="display: none; color: red;">❌ La contraseña debe tener al menos 6 caracteres.</p>
+                </div>
 
-                                <p class="error" id="passwordError" style="display: none; color: red;">
-                                        ❌ La contraseña debe tener al menos 6 caracteres.
-                                    </p>
+                <div class="form_group">
+                  <label class="sub_title" for="confirmPassword">Confirmar Contraseña</label>
+                  <input placeholder="Repite tu contraseña" id="confirmPassword" name="confirmPassword" class="form_style" type="password" required />
+                  <p class="error" id="passwordError" style="display: none;">Las contraseñas no coinciden</p>
+                </div>
 
-                        </div>
+                <button class="modal-btn" type="submit">REGISTRARSE</button>
+                <p class="line">
+                  ¿Ya tienes cuenta? <a class="link" href="javascript:void(0)" onclick="toggleForm()">Inicia Sesión</a>
+                </p>
+              </form>
 
-						<div class="form_group">
-							<label class="sub_title" for="confirmPassword">Confirmar
-								Contraseña</label> <input placeholder="Repite tu contraseña"
-								id="confirmPassword" name="confirmPassword" class="form_style"
-								type="password" required />
-							<p class="error" id="passwordError" style="display: none;">Las
-								contraseñas no coinciden</p>
-						</div>
+              <!-- Formulario de Inicio de Sesión -->
+              <form action="/auth/login" method="POST" id="loginForm" onsubmit="return validarLogin();">
+                <div class="form_group">
+                  <label class="sub_title" for="loginEmail">Email</label>
+                  <input placeholder="Ingresa tu email" id="loginEmail" name="email" class="form_style" type="email" required />
+                </div>
 
-						<button class="modal-btn" type="submit">REGISTRARSE</button>
-						<p class="line">
-							¿Ya tienes cuenta? <a class="link" href="javascript:void(0)"
-								onclick="toggleForm()">Inicia Sesión</a>
-						</p>
-					</form>
+                <div class="form_group">
+                  <label class="sub_title" for="loginPassword">Contraseña</label>
+                  <input placeholder="Ingresa tu contraseña" id="loginPassword" name="contrasenia" class="form_style" type="password" required />
+                </div>
 
-					<!-- Formulario de Inicio de Sesión -->
-					<form action="/auth/login" method="POST" id="loginForm"
-						onsubmit="return validarLogin();">
-						<div class="form_group">
-							<label class="sub_title" for="loginEmail">Email</label> <input
-								placeholder="Ingresa tu email" id="loginEmail" name="email"
-								class="form_style" type="email" required />
-						</div>
+                <button class="modal-btn" type="submit">INICIA SESIÓN</button>
+                <p class="line">
+                  ¿No tienes cuenta? <a class="link" href="javascript:void(0)" onclick="toggleForm()">Regístrate!</a>
+                </p>
+              </form>
 
-						<div class="form_group">
-							<label class="sub_title" for="loginPassword">Contraseña</label> <input
-								placeholder="Ingresa tu contraseña" id="loginPassword"
-								name="contrasenia" class="form_style" type="password" required />
-						</div>
-
-						<button class="modal-btn" type="submit">INICIA SESIÓN</button>
-						<p class="line">
-							¿No tienes cuenta? <a class="link" href="javascript:void(0)"
-								onclick="toggleForm()">Regístrate!</a>
-						</p>
-					</form>
-
-				</div>
-			</div>
-		</div>
-	</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- Modal de Notificación -->
     <div class="modal fade" id="notificationModal" tabindex="-1" aria-labelledby="notificationModalLabel" aria-hidden="true">
@@ -299,146 +280,5 @@
         </div>
       </div>
     </div>
-
-
-	<!-- Scripts -->
-
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-
-
-	<script>
-
-      document.addEventListener("DOMContentLoaded", function () {
-        var mensaje = new URLSearchParams(window.location.search).get("mensaje");
-        var modal = new bootstrap.Modal(document.getElementById('notificationModal'));
-
-        if (mensaje) {
-          var mensajeTexto = "";
-          var titulo = "Notificación";
-
-          if (mensaje === "success") {
-            mensajeTexto = "✅ ¡Registro exitoso! Bienvenido a Terra Nostra.";
-            titulo = "Éxito";
-          } else if (mensaje === "error") {
-            mensajeTexto = "❌ Error en el registro. Por favor, intenta nuevamente.";
-            titulo = "Error";
-          }
-
-          if (mensajeTexto) {
-            document.getElementById("notificationModalLabel").innerText = titulo;
-            document.getElementById("notificationMessage").innerText = mensajeTexto;
-            modal.show();
-          }
-        }
-      });
-
-		document
-				.addEventListener(
-						"DOMContentLoaded",
-						function() {
-							var modal = document.getElementById("loginModal");
-							var accountIcon = document
-									.querySelector(".account");
-							var closeModalButton = document
-									.getElementById("closeModalButton");
-
-							// Estado para controlar la vista (registro o login)
-							var isRegister = false;
-
-							// Abrir modal al hacer clic en el icono de usuario
-							accountIcon.addEventListener("click", function(
-									event) {
-								event.preventDefault();
-								modal.style.display = "flex";
-								showLogin(); // Mostrar inicio de sesión por defecto
-							});
-
-							// Cerrar modal al pulsar el botón de cierre
-							closeModalButton.addEventListener("click",
-									function() {
-										modal.style.display = "none";
-									});
-
-							// Función para alternar entre Registro e Inicio de Sesión
-							window.toggleForm = function() {
-								isRegister = !isRegister;
-								if (isRegister) {
-									document.getElementById("modalTitle").textContent = "REGISTRO";
-									document.getElementById("registerForm").style.display = "block";
-									document.getElementById("loginForm").style.display = "none";
-									document.getElementById("loginForm")
-											.reset(); // Limpiar formulario de login
-								} else {
-									showLogin();
-								}
-							};
-
-							function showLogin() {
-								isRegister = false;
-								document.getElementById("modalTitle").textContent = "INICIO DE SESIÓN";
-								document.getElementById("registerForm").style.display = "none";
-								document.getElementById("loginForm").style.display = "block";
-								document.getElementById("registerForm").reset(); // Limpiar formulario de registro
-							}
-
-							// Validación para el registro (ejemplo)
-							document.getElementById("registerForm").onsubmit = function() {
-								if (!validarRegistro()) {
-									return false; // Evita el envío del formulario
-								}
-							};
-
-							// Validación para el inicio de sesión (ejemplo)
-							document.getElementById("loginForm").onsubmit = function() {
-								if (!validarLogin()) {
-									return false; // Evita el envío del formulario
-								}
-							};
-						});
-
-		// Ejemplo de validación para el registro
-		function validarRegistro() {
-            const password = document.getElementById("contrasenia").value;
-            const confirmPassword = document.getElementById("confirmPassword").value;
-            const passwordError = document.getElementById("passwordError");
-
-            console.log("Contraseña ingresada:", password); // Verifica si el campo está capturando datos correctamente
-
-            if (password !== confirmPassword) {
-                passwordError.style.display = "block";
-                return false; // Evita el envío del formulario si no coinciden
-            }
-
-            passwordError.style.display = "none";
-            return true; // Permite el envío del formulario
-        }
-
-
-		// Ejemplo de validación para el inicio de sesión
-		function validarLogin() {
-			const loginEmail = document.getElementById("loginEmail").value;
-			const loginPassword = document.getElementById("loginPassword").value;
-
-			// Aquí puedes añadir lógica de validación adicional (ej. verificar correo y contraseña)
-			if (loginEmail === "" || loginPassword === "") {
-				alert("Por favor, complete todos los campos.");
-				return false; // Evita el envío del formulario
-			}
-			return true; // Permite el envío del formulario
-		}
-
-		// Función de ejemplo para verificar el correo (simulación)
-		function verificarCorreo() {
-			var emailInput = document.getElementById("email");
-			var emailError = document.getElementById("emailError");
-			if (emailInput.value === "existe@correo.com") {
-				emailError.style.display = "block";
-			} else {
-				emailError.style.display = "none";
-			}
-		}
-	</script>
-
-
-</body>
-</html>
+  </body>
+  </html>

@@ -1,0 +1,213 @@
+2025-02-28T14:40:19.240+01:00  INFO 35316 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : Starting TerraNostraApplication using Java 21.0.5 with PID 35316 (C:\Users\balle\Documents\Proyectos\terra-nostra\terra-nostra\target\classes started by balle in C:\Users\balle\Documents\Proyectos\terra-nostra\terra-nostra)
+2025-02-28T14:40:19.244+01:00 DEBUG 35316 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-02-28T14:40:19.245+01:00  INFO 35316 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : No active profile set, falling back to 1 default profile: "default"
+2025-02-28T14:40:19.300+01:00  INFO 35316 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-02-28T14:40:19.300+01:00  INFO 35316 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-02-28T14:40:20.632+01:00  INFO 35316 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-02-28T14:40:20.651+01:00  INFO 35316 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-02-28T14:40:20.651+01:00  INFO 35316 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-02-28T14:40:20.867+01:00  INFO 35316 --- [restartedMain] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-02-28T14:40:20.882+01:00  INFO 35316 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-02-28T14:40:20.882+01:00  INFO 35316 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1582 ms
+2025-02-28T14:40:21.058+01:00  WARN 35316 --- [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: e6f88828-1c01-43a5-a6fc-6f208441fb7f
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-02-28T14:40:21.066+01:00  INFO 35316 --- [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2025-02-28T14:40:21.189+01:00  INFO 35316 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2025-02-28T14:40:21.221+01:00  INFO 35316 --- [restartedMain] o.s.v.b.OptionalValidatorFactoryBean     : Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-02-28T14:40:21.591+01:00  INFO 35316 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-02-28T14:40:21.635+01:00  INFO 35316 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-02-28T14:40:21.645+01:00  INFO 35316 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : Started TerraNostraApplication in 2.979 seconds (process running for 3.554)
+2025-02-28T14:40:23.636+01:00  INFO 35316 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-02-28T14:40:23.637+01:00  INFO 35316 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-02-28T14:40:23.638+01:00  INFO 35316 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2025-02-28T14:40:50.729+01:00  INFO 35316 --- [http-nio-8080-exec-1] c.t.controller.UsuarioController         : 📌 El controlador ha recibido la solicitud de registro.
+2025-02-28T14:40:50.729+01:00  INFO 35316 --- [http-nio-8080-exec-1] c.t.controller.UsuarioController         : 📥 Nombre recibido: Eduardo
+2025-02-28T14:40:50.731+01:00  INFO 35316 --- [http-nio-8080-exec-1] c.t.controller.UsuarioController         : 📥 Apellido recibido: Ballesteros
+2025-02-28T14:40:50.732+01:00  INFO 35316 --- [http-nio-8080-exec-1] c.t.controller.UsuarioController         : 📥 Email recibido: ballesterosperezfsdffde@gmail.com
+2025-02-28T14:40:50.732+01:00  INFO 35316 --- [http-nio-8080-exec-1] c.t.controller.UsuarioController         : 📥 Teléfono recibido: null
+2025-02-28T14:40:50.732+01:00  INFO 35316 --- [http-nio-8080-exec-1] c.t.controller.UsuarioController         : 📥 Contraseña recibida: 1234567
+2025-02-28T14:40:50.797+01:00  INFO 35316 --- [http-nio-8080-exec-1] c.t.controller.UsuarioController         : 📌 Fecha de registro asignada: 2025-02-28T14:40:50.732349400
+2025-02-28T14:40:51.018+01:00  INFO 35316 --- [http-nio-8080-exec-1] c.t.controller.UsuarioController         : 📌 Resultado del registro: success
+2025-02-28T14:40:51.044+01:00  INFO 35316 --- [http-nio-8080-exec-1] c.t.controller.UsuarioController         : 📌 Token generado: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJiYWxsZXN0ZXJvc3BlcmV6ZnNkZmZkZUBnbWFpbC5jb20iLCJpYXQiOjE3NDA3NTAwNTEsImV4cCI6MTc0MDc4NjA1MX0.aWtB0JWB06a7acliJSap8MczKKqyuPaBvorSgsuxBdE
+2025-02-28T14:40:51.044+01:00  INFO 35316 --- [http-nio-8080-exec-1] c.t.controller.UsuarioController         : ✅ Registro exitoso. Bienvenido a Terra Nostra!
+2025-02-28T17:09:40.533+01:00  INFO 35316 --- [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-02-28T17:09:40.545+01:00  INFO 35316 --- [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-02-28T17:09:43.751+01:00  INFO 17332 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : Starting TerraNostraApplication using Java 21.0.5 with PID 17332 (C:\Users\balle\Documents\Proyectos\terra-nostra\terra-nostra\target\classes started by balle in C:\Users\balle\Documents\Proyectos\terra-nostra\terra-nostra)
+2025-02-28T17:09:43.753+01:00 DEBUG 17332 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-02-28T17:09:43.754+01:00  INFO 17332 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : No active profile set, falling back to 1 default profile: "default"
+2025-02-28T17:09:43.809+01:00  INFO 17332 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-02-28T17:09:43.809+01:00  INFO 17332 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-02-28T17:09:45.158+01:00  INFO 17332 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-02-28T17:09:45.177+01:00  INFO 17332 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-02-28T17:09:45.178+01:00  INFO 17332 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-02-28T17:09:45.403+01:00  INFO 17332 --- [restartedMain] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-02-28T17:09:45.416+01:00  INFO 17332 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-02-28T17:09:45.417+01:00  INFO 17332 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1606 ms
+2025-02-28T17:09:45.551+01:00  WARN 17332 --- [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: a0b02294-6e0b-4109-8c73-f3ed2857a04e
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-02-28T17:09:45.559+01:00  INFO 17332 --- [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2025-02-28T17:09:45.679+01:00  INFO 17332 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2025-02-28T17:09:45.713+01:00  INFO 17332 --- [restartedMain] o.s.v.b.OptionalValidatorFactoryBean     : Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-02-28T17:09:45.993+01:00  INFO 17332 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-02-28T17:09:46.049+01:00  INFO 17332 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-02-28T17:09:46.059+01:00  INFO 17332 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : Started TerraNostraApplication in 2.854 seconds (process running for 3.712)
+2025-02-28T17:21:21.047+01:00  INFO 17332 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-02-28T17:21:21.048+01:00  INFO 17332 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-02-28T17:21:21.053+01:00  INFO 17332 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 4 ms
+2025-02-28T17:22:16.499+01:00  INFO 17332 --- [http-nio-8080-exec-10] c.t.controller.UsuarioController         : 📌 El controlador ha recibido la solicitud de registro.
+2025-02-28T17:22:16.500+01:00  INFO 17332 --- [http-nio-8080-exec-10] c.t.controller.UsuarioController         : 📥 Nombre recibido: Eduardo
+2025-02-28T17:22:16.502+01:00  INFO 17332 --- [http-nio-8080-exec-10] c.t.controller.UsuarioController         : 📥 Apellido recibido: Ballesteros
+2025-02-28T17:22:16.503+01:00  INFO 17332 --- [http-nio-8080-exec-10] c.t.controller.UsuarioController         : 📥 Email recibido: ballesterosperezedede@gmail.com
+2025-02-28T17:22:16.503+01:00  INFO 17332 --- [http-nio-8080-exec-10] c.t.controller.UsuarioController         : 📥 Teléfono recibido: null
+2025-02-28T17:22:16.503+01:00  INFO 17332 --- [http-nio-8080-exec-10] c.t.controller.UsuarioController         : 📥 Contraseña recibida: 1234567
+2025-02-28T17:22:16.644+01:00  INFO 17332 --- [http-nio-8080-exec-10] c.t.controller.UsuarioController         : 📌 Fecha de registro asignada: 2025-02-28T17:22:16.504768400
+2025-02-28T17:22:17.185+01:00  INFO 17332 --- [http-nio-8080-exec-10] c.t.controller.UsuarioController         : 📌 Resultado del registro: success
+2025-02-28T17:22:17.245+01:00  INFO 17332 --- [http-nio-8080-exec-10] c.t.controller.UsuarioController         : 📌 Token generado: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJiYWxsZXN0ZXJvc3BlcmV6ZWRlZGVAZ21haWwuY29tIiwiaWF0IjoxNzQwNzU5NzM3LCJleHAiOjE3NDA3OTU3Mzd9.LuOXaoAZx-s1CY3Tt3S5YxxM5fGXINDMn-H0WGiRIfY
+2025-02-28T17:22:17.245+01:00  INFO 17332 --- [http-nio-8080-exec-10] c.t.controller.UsuarioController         : ✅ Registro exitoso. Bienvenido a Terra Nostra!
+2025-02-28T18:08:40.005+01:00  INFO 17332 --- [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-02-28T18:08:40.024+01:00  INFO 17332 --- [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-02-28T18:08:47.722+01:00  INFO 11144 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : Starting TerraNostraApplication using Java 21.0.5 with PID 11144 (C:\Users\balle\Documents\Proyectos\terra-nostra\terra-nostra\target\classes started by balle in C:\Users\balle\Documents\Proyectos\terra-nostra\terra-nostra)
+2025-02-28T18:08:47.726+01:00 DEBUG 11144 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-02-28T18:08:47.727+01:00  INFO 11144 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : No active profile set, falling back to 1 default profile: "default"
+2025-02-28T18:08:47.814+01:00  INFO 11144 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-02-28T18:08:47.815+01:00  INFO 11144 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-02-28T18:08:49.792+01:00  INFO 11144 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-02-28T18:08:49.813+01:00  INFO 11144 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-02-28T18:08:49.813+01:00  INFO 11144 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-02-28T18:08:50.079+01:00  INFO 11144 --- [restartedMain] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-02-28T18:08:50.092+01:00  INFO 11144 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-02-28T18:08:50.092+01:00  INFO 11144 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2276 ms
+2025-02-28T18:08:50.234+01:00  WARN 11144 --- [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 3a04377e-57e5-4aab-98cf-18328f3ea3b8
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-02-28T18:08:50.243+01:00  INFO 11144 --- [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2025-02-28T18:08:50.396+01:00  INFO 11144 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2025-02-28T18:08:50.443+01:00  INFO 11144 --- [restartedMain] o.s.v.b.OptionalValidatorFactoryBean     : Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-02-28T18:08:50.750+01:00  INFO 11144 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-02-28T18:08:50.808+01:00  INFO 11144 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-02-28T18:08:50.820+01:00  INFO 11144 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : Started TerraNostraApplication in 4.055 seconds (process running for 5.067)
+2025-02-28T18:09:33.057+01:00  INFO 11144 --- [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-02-28T18:09:33.058+01:00  INFO 11144 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-02-28T18:09:33.061+01:00  INFO 11144 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
+2025-02-28T18:11:12.755+01:00  INFO 11144 --- [http-nio-8080-exec-6] c.t.controller.UsuarioController         : 📌 El controlador ha recibido la solicitud de registro.
+2025-02-28T18:11:12.756+01:00  INFO 11144 --- [http-nio-8080-exec-6] c.t.controller.UsuarioController         : 📥 Nombre recibido: Eduardo
+2025-02-28T18:11:12.759+01:00  INFO 11144 --- [http-nio-8080-exec-6] c.t.controller.UsuarioController         : 📥 Apellido recibido: Ballesteros
+2025-02-28T18:11:12.759+01:00  INFO 11144 --- [http-nio-8080-exec-6] c.t.controller.UsuarioController         : 📥 Email recibido: ballesterofdsfspereze@gmail.com
+2025-02-28T18:11:12.759+01:00  INFO 11144 --- [http-nio-8080-exec-6] c.t.controller.UsuarioController         : 📥 Teléfono recibido: null
+2025-02-28T18:11:12.761+01:00  INFO 11144 --- [http-nio-8080-exec-6] c.t.controller.UsuarioController         : 📥 Contraseña recibida: dudududududu
+2025-02-28T18:11:12.889+01:00  INFO 11144 --- [http-nio-8080-exec-6] c.t.controller.UsuarioController         : 📌 Fecha de registro asignada: 2025-02-28T18:11:12.761053600
+2025-02-28T18:11:13.369+01:00  INFO 11144 --- [http-nio-8080-exec-6] c.t.controller.UsuarioController         : 📌 Resultado del registro: success
+2025-02-28T18:11:13.433+01:00  INFO 11144 --- [http-nio-8080-exec-6] c.t.controller.UsuarioController         : 📌 Token generado: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJiYWxsZXN0ZXJvZmRzZnNwZXJlemVAZ21haWwuY29tIiwiaWF0IjoxNzQwNzYyNjczLCJleHAiOjE3NDA3OTg2NzN9.l2j57rxlZ760MBIKLBF5UF75vaJgZGNIf6G1P3gSSvs
+2025-02-28T18:11:13.433+01:00  INFO 11144 --- [http-nio-8080-exec-6] c.t.controller.UsuarioController         : ✅ Registro exitoso. Bienvenido a Terra Nostra!
+2025-02-28T18:36:49.687+01:00  INFO 11144 --- [http-nio-8080-exec-2] c.t.controller.UsuarioController         : 📌 El controlador ha recibido la solicitud de registro.
+2025-02-28T18:36:49.687+01:00  INFO 11144 --- [http-nio-8080-exec-2] c.t.controller.UsuarioController         : 📥 Nombre recibido: Eduardo
+2025-02-28T18:36:49.688+01:00  INFO 11144 --- [http-nio-8080-exec-2] c.t.controller.UsuarioController         : 📥 Apellido recibido: Ballesteros
+2025-02-28T18:36:49.688+01:00  INFO 11144 --- [http-nio-8080-exec-2] c.t.controller.UsuarioController         : 📥 Email recibido: balledfdffsterospereze@gmail.com
+2025-02-28T18:36:49.688+01:00  INFO 11144 --- [http-nio-8080-exec-2] c.t.controller.UsuarioController         : 📥 Teléfono recibido: null
+2025-02-28T18:36:49.688+01:00  INFO 11144 --- [http-nio-8080-exec-2] c.t.controller.UsuarioController         : 📥 Contraseña recibida: 123456
+2025-02-28T18:36:49.797+01:00  INFO 11144 --- [http-nio-8080-exec-2] c.t.controller.UsuarioController         : 📌 Fecha de registro asignada: 2025-02-28T18:36:49.689433
+2025-02-28T18:36:49.862+01:00  INFO 11144 --- [http-nio-8080-exec-2] c.t.controller.UsuarioController         : 📌 Resultado del registro: success
+2025-02-28T18:36:49.865+01:00  INFO 11144 --- [http-nio-8080-exec-2] c.t.controller.UsuarioController         : 📌 Token generado: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJiYWxsZWRmZGZmc3Rlcm9zcGVyZXplQGdtYWlsLmNvbSIsImlhdCI6MTc0MDc2NDIwOSwiZXhwIjoxNzQwODAwMjA5fQ.thFCQDurSXPivZY8K8mlUQ-j3Ig2NiZzGwd1F7nE0gg
+2025-02-28T18:36:49.866+01:00  INFO 11144 --- [http-nio-8080-exec-2] c.t.controller.UsuarioController         : ✅ Registro exitoso. Bienvenido a Terra Nostra!
+2025-02-28T18:50:24.853+01:00  INFO 11144 --- [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-02-28T18:50:24.871+01:00  INFO 11144 --- [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-02-28T18:50:31.933+01:00  INFO 27248 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : Starting TerraNostraApplication using Java 21.0.5 with PID 27248 (C:\Users\balle\Documents\Proyectos\terra-nostra\terra-nostra\target\classes started by balle in C:\Users\balle\Documents\Proyectos\terra-nostra\terra-nostra)
+2025-02-28T18:50:31.938+01:00 DEBUG 27248 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-02-28T18:50:31.939+01:00  INFO 27248 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : No active profile set, falling back to 1 default profile: "default"
+2025-02-28T18:50:32.041+01:00  INFO 27248 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-02-28T18:50:32.042+01:00  INFO 27248 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-02-28T18:50:34.014+01:00  INFO 27248 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-02-28T18:50:34.036+01:00  INFO 27248 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-02-28T18:50:34.036+01:00  INFO 27248 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-02-28T18:50:34.298+01:00  INFO 27248 --- [restartedMain] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-02-28T18:50:34.314+01:00  INFO 27248 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-02-28T18:50:34.314+01:00  INFO 27248 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2272 ms
+2025-02-28T18:50:34.495+01:00  WARN 27248 --- [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: b2050d34-9ab6-4fca-b75d-dc570072a763
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-02-28T18:50:34.504+01:00  INFO 27248 --- [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2025-02-28T18:50:34.669+01:00  INFO 27248 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2025-02-28T18:50:34.709+01:00  INFO 27248 --- [restartedMain] o.s.v.b.OptionalValidatorFactoryBean     : Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-02-28T18:50:35.023+01:00  INFO 27248 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-02-28T18:50:35.100+01:00  INFO 27248 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-02-28T18:50:35.119+01:00  INFO 27248 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : Started TerraNostraApplication in 4.126 seconds (process running for 5.122)
+2025-02-28T18:50:35.767+01:00  INFO 27248 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-02-28T18:50:35.768+01:00  INFO 27248 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-02-28T18:50:35.769+01:00  INFO 27248 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-02-28T19:25:13.675+01:00  INFO 27248 --- [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-02-28T19:25:13.691+01:00  INFO 27248 --- [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-02-28T19:25:20.514+01:00  INFO 20148 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : Starting TerraNostraApplication using Java 21.0.5 with PID 20148 (C:\Users\balle\Documents\Proyectos\terra-nostra\terra-nostra\target\classes started by balle in C:\Users\balle\Documents\Proyectos\terra-nostra\terra-nostra)
+2025-02-28T19:25:20.517+01:00 DEBUG 20148 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-02-28T19:25:20.519+01:00  INFO 20148 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : No active profile set, falling back to 1 default profile: "default"
+2025-02-28T19:25:20.613+01:00  INFO 20148 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-02-28T19:25:20.613+01:00  INFO 20148 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-02-28T19:25:22.631+01:00  INFO 20148 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-02-28T19:25:22.656+01:00  INFO 20148 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-02-28T19:25:22.656+01:00  INFO 20148 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-02-28T19:25:22.999+01:00  INFO 20148 --- [restartedMain] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-02-28T19:25:23.020+01:00  INFO 20148 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-02-28T19:25:23.020+01:00  INFO 20148 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2406 ms
+2025-02-28T19:25:23.284+01:00  WARN 20148 --- [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 17be740a-39dd-4977-ad54-abe5a45251e6
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-02-28T19:25:23.300+01:00  INFO 20148 --- [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2025-02-28T19:25:23.467+01:00  INFO 20148 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2025-02-28T19:25:23.518+01:00  INFO 20148 --- [restartedMain] o.s.v.b.OptionalValidatorFactoryBean     : Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-02-28T19:25:24.018+01:00  INFO 20148 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-02-28T19:25:24.087+01:00  INFO 20148 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-02-28T19:25:24.103+01:00  INFO 20148 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : Started TerraNostraApplication in 4.506 seconds (process running for 5.444)
+2025-02-28T19:25:38.716+01:00  INFO 20148 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-02-28T19:25:38.717+01:00  INFO 20148 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-02-28T19:25:38.722+01:00  INFO 20148 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 5 ms
+2025-02-28T19:25:49.799+01:00  INFO 20148 --- [http-nio-8080-exec-1] c.t.controller.AuthController            : 📥 Email recibido: pepa@gmail.com
+2025-02-28T19:25:49.802+01:00  INFO 20148 --- [http-nio-8080-exec-1] c.t.controller.AuthController            : 📥 Contraseña recibida: [PROTEGIDA]
+2025-02-28T19:25:49.808+01:00  INFO 20148 --- [http-nio-8080-exec-1] c.t.controller.AuthController            : 🔑 Token encontrado en cookies: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwZXBhQGdtYWlsLmNvbSIsImlhdCI6MTc0MDc2NzA1MiwiZXhwIjoxNzQwODAzMDUyfQ.6Xy_yCfDed1d_1EHTGm6HI6APKlXhJqFw76J21J-Wls
+2025-02-28T19:25:50.006+01:00  INFO 20148 --- [http-nio-8080-exec-1] c.t.controller.AuthController            : ✅ Usuario ya autenticado con un token válido.
+2025-02-28T19:30:51.635+01:00  INFO 20148 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 14 class path changes (0 additions, 14 deletions, 0 modifications)
+2025-02-28T19:30:51.643+01:00  INFO 20148 --- [Thread-5] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-02-28T19:30:51.657+01:00  INFO 20148 --- [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-02-28T19:31:01.220+01:00  INFO 20148 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : Starting TerraNostraApplication using Java 21.0.5 with PID 20148 (C:\Users\balle\Documents\Proyectos\terra-nostra\terra-nostra\target\classes started by balle in C:\Users\balle\Documents\Proyectos\terra-nostra\terra-nostra)
+2025-02-28T19:31:01.221+01:00 DEBUG 20148 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-02-28T19:31:01.221+01:00  INFO 20148 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : No active profile set, falling back to 1 default profile: "default"
+2025-02-28T19:31:01.997+01:00  INFO 20148 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-02-28T19:31:01.999+01:00  INFO 20148 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-02-28T19:31:02.000+01:00  INFO 20148 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-02-28T19:31:02.185+01:00  INFO 20148 --- [restartedMain] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-02-28T19:31:02.201+01:00  INFO 20148 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-02-28T19:31:02.201+01:00  INFO 20148 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 976 ms
+2025-02-28T19:31:02.328+01:00  INFO 20148 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2025-02-28T19:31:02.342+01:00  INFO 20148 --- [restartedMain] o.s.v.b.OptionalValidatorFactoryBean     : Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-02-28T19:31:02.460+01:00  WARN 20148 --- [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 0d39c23f-c877-4661-815c-f3dd785a8ce4
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-02-28T19:31:02.463+01:00  INFO 20148 --- [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2025-02-28T19:31:02.507+01:00  INFO 20148 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-02-28T19:31:02.526+01:00  INFO 20148 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-02-28T19:31:02.531+01:00  INFO 20148 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : Started TerraNostraApplication in 1.403 seconds (process running for 343.872)
+2025-02-28T19:31:02.533+01:00  INFO 20148 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2025-02-28T19:31:05.964+01:00  INFO 20148 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 3 class path changes (0 additions, 2 deletions, 1 modification)
+2025-02-28T19:31:05.966+01:00  INFO 20148 --- [Thread-11] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-02-28T19:31:05.979+01:00  INFO 20148 --- [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-02-28T19:31:06.127+01:00  INFO 20148 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : Starting TerraNostraApplication using Java 21.0.5 with PID 20148 (C:\Users\balle\Documents\Proyectos\terra-nostra\terra-nostra\target\classes started by balle in C:\Users\balle\Documents\Proyectos\terra-nostra\terra-nostra)
+2025-02-28T19:31:06.127+01:00 DEBUG 20148 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-02-28T19:31:06.128+01:00  INFO 20148 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : No active profile set, falling back to 1 default profile: "default"
