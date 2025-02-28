@@ -30,4 +30,21 @@ public class JwtUtil {
                 .getBody()
                 .getSubject();
     }
+
+    public boolean isTokenValido(String token) {
+        try {
+            // Parsear el token para verificar su validez
+            Jws<Claims> claimsJws = Jwts.parserBuilder()
+                    .setSigningKey(SECRET_KEY.getBytes())
+                    .build()
+                    .parseClaimsJws(token); // Si el token no es válido, esto lanzará una excepción
+
+            // Verificar si el token ha expirado
+            Date expirationDate = claimsJws.getBody().getExpiration();
+            return expirationDate.after(new Date()); // Si la fecha de expiración es mayor que la fecha actual, el token es válido
+        } catch (JwtException | IllegalArgumentException e) {
+            // Si el token no es válido o ha expirado, se captura la excepción
+            return false;
+        }
+    }
 }
