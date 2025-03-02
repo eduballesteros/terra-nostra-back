@@ -1,142 +1,91 @@
-// Función para obtener el token desde las cookies
-function obtenerTokenDesdeCookies() {
-    const match = document.cookie.match(new RegExp('(^| )authToken=([^;]+)'));
-    return match ? match[2] : null; // Retorna el token si existe
-}
-
-// Función para mostrar una notificación
-function mostrarNotificacion(titulo, mensaje, tipo) {
-    document.getElementById("notificationModalLabel").innerText = titulo;
-    document.getElementById("notificationMessage").innerText = mensaje;
-
-    var modal = new bootstrap.Modal(document.getElementById("notificationModal"));
-    modal.show();
-
-    // Ocultar el modal automáticamente después de 3 segundos
-    setTimeout(() => {
-        modal.hide();
-    }, 3000);
-}
-
-// Muestra la notificación en caso de éxito o error de registro/inicio de sesión
+// Manejo del modal
 document.addEventListener("DOMContentLoaded", function () {
     var modalElement = document.getElementById("loginModal");
     var accountIcon = document.querySelector(".account");
     var closeModalButton = document.getElementById("closeModalButton");
 
-    var loginModal = new bootstrap.Modal(modalElement); // ✅ Crear instancia del modal correctamente
+    var loginModal = new bootstrap.Modal(modalElement);
 
-    // Abrir modal al hacer clic en el icono de usuario
     accountIcon.addEventListener("click", function(event) {
         event.preventDefault();
-        loginModal.show(); // ✅ Abre el modal correctamente
+        loginModal.show();
+        verificarSesion();
     });
 
-    // Cerrar modal al pulsar el botón de cierre
     closeModalButton.addEventListener("click", function() {
-        loginModal.hide(); // ✅ Cierra el modal correctamente
+        loginModal.hide();
     });
 
-    // Estado para controlar la vista (registro o login)
     var isRegister = false;
 
-    // Función para alternar entre Registro e Inicio de Sesión
     window.toggleForm = function() {
         isRegister = !isRegister;
         if (isRegister) {
-            document.getElementById("modalTitle").textContent = "REGISTRO";
+            document.getElementById("modalTitle").textContent = "REGISTRARSE";
             document.getElementById("registerForm").style.display = "block";
             document.getElementById("loginForm").style.display = "none";
-            document.getElementById("loginForm").reset(); // Limpiar formulario de login
+            document.getElementById("loginForm").reset();
         } else {
-            showLogin();
+            mostrarLogin();
         }
     };
 
-    function showLogin() {
+    function mostrarLogin() {
         isRegister = false;
-        document.getElementById("modalTitle").textContent = "INICIO DE SESIÓN";
+        document.getElementById("modalTitle").textContent = "INICIAR SESIÓN";
         document.getElementById("registerForm").style.display = "none";
         document.getElementById("loginForm").style.display = "block";
-        document.getElementById("registerForm").reset(); // Limpiar formulario de registro
+        document.getElementById("registerForm").reset();
     }
 
-    // Manejo del formulario de registro con AJAX
-    document.getElementById("registerForm").onsubmit = async function(event) {
-        event.preventDefault(); // Evita que el formulario se envíe de manera tradicional
+    function verificarSesion() {
+        fetch("/auth/verificar-sesion", {
+            method: "GET",
+            credentials: "include" // Para incluir las cookies en la solicitud
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("🔍 Respuesta del servidor:", data);
 
-        const formData = new FormData(this); // Obtener los datos del formulario
+            if (data.sesionActiva) {
+                // 🔹 Usuario autenticado: Mostrar "Mi Cuenta" y ocultar formularios
+                document.getElementById("userManager").style.display = "block";
+                document.getElementById("loginForm").style.display = "none";
+                document.getElementById("registerForm").style.display = "none";
 
-        // Realizar la solicitud AJAX
-        const response = await fetch(this.action, {
-            method: "POST",
-            body: new URLSearchParams(formData) // Enviar los datos del formulario
-        });
-
-        const data = await response.json(); // Obtener la respuesta JSON
-
-        if (response.ok) {
-            // Almacenar el token JWT en la cookie
-            const token = data.token;  // El token estará en la respuesta
-            document.cookie = `authToken=${token}; path=/; secure; HttpOnly; SameSite=Strict`;
-
-            mostrarNotificacion("Éxito", data.mensaje || "✅ Registro exitoso. Bienvenido a Terra Nostra!", "success");
-
-            setTimeout(() => {}, 3000); // Recargar la página después del éxito
-        } else {
-            mostrarNotificacion("Error", data.mensaje || "❌ Error en el registro. Inténtalo nuevamente.", "error");
-        }
-    };
-
-    // Manejo del formulario de inicio de sesión con AJAX
-    document.getElementById("loginForm").onsubmit = async function(event) {
-        event.preventDefault();
-        const formData = new FormData(this);
-
-        // Realizar la solicitud AJAX al backend para inicio de sesión
-        const response = await fetch(this.action, {
-            method: "POST",
-            body: new URLSearchParams(formData) // Enviar los datos del formulario
-        });
-
-        const data = await response.json();
-
-        if (response.ok) {
-            mostrarNotificacion("Éxito", data.mensaje || "✅ Inicio de sesión exitoso. Redirigiendo...", "success");
-
-            // 🔥 Cerrar el modal de login después de éxito
-            setTimeout(() => {
-                loginModal.hide();
-            }, 3000);
-        } else {
-            mostrarNotificacion("Error", data.mensaje || "❌ Credenciales incorrectas. Inténtalo de nuevo.", "error");
-        }
-    };
-});
-
-// Validación para el registro
-function validarRegistro() {
-    const password = document.getElementById("contrasenia").value;
-    const confirmPassword = document.getElementById("confirmPassword").value;
-    const passwordError = document.getElementById("passwordError");
-
-    // Verifica si las contraseñas coinciden
-    if (password !== confirmPassword) {
-        passwordError.style.display = "block";
-        return false; // Evita que se envíe el formulario si no coinciden
+                // Actualizar el nombre del usuario en el modal
+                document.getElementById("userName").textContent = data.nombreUsuario || "Usuario";
+            } else {
+                // 🔹 Usuario NO autenticado: Mostrar formularios y ocultar "Mi Cuenta"
+                document.getElementById("userManager").style.display = "none";
+                document.getElementById("loginForm").style.display = "block";
+                document.getElementById("registerForm").style.display = "none";
+            }
+        })
+        .catch(error => console.error("❌ Error verificando sesión:", error));
     }
 
-    passwordError.style.display = "none";
-    return true; // Permite el envío del formulario si las contraseñas coinciden
-}
+    function cerrarSesion() {
+        fetch("/auth/logout", {
+            method: "POST",
+            credentials: "include" // Asegura que se envíen las cookies
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("🔴 Sesión cerrada:", data.mensaje);
+            location.reload(); // Recargar la página para reflejar los cambios
+        })
+        .catch(error => console.error("❌ Error cerrando sesión:", error));
+    }
 
-// Función de ejemplo para verificar el correo (simulación)
-function verificarCorreo() {
-    var emailInput = document.getElementById("email");
-    var emailError = document.getElementById("emailError");
-    if (emailInput.value === "existe@correo.com") {
-        mostrarNotificacion("Error", "❌ Este correo ya está registrado.", "error");
+    // Verificar si el botón de cerrar sesión existe antes de agregar el evento
+    var logoutButton = document.getElementById("logoutButton");
+    if (logoutButton) {
+        logoutButton.addEventListener("click", cerrarSesion);
     } else {
-        emailError.style.display = "none";
+        console.warn("⚠️ Botón de cerrar sesión no encontrado en el DOM.");
     }
-}
+
+    // Llamar a la verificación de sesión UNA SOLA VEZ
+    verificarSesion();
+});

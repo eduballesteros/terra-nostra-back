@@ -11,16 +11,43 @@ public class JwtUtil {
 
     private static final String SECRET_KEY = "TuClaveSuperSecretaParaFirmarJWT1234567890123456";
 
-    public String generarToken(String email) {
-        SecretKey key = Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
+    public String generarToken(String email, String rol) {
+        byte[] keyBytes = SECRET_KEY.getBytes();
+        SecretKey key = Keys.hmacShaKeyFor(keyBytes);
 
         return Jwts.builder()
-                .setSubject(email) // ✅ Uso correcto de setSubject()
+                .setSubject(email) // Email como identificador del usuario
+                .claim("rol", rol) // Guardar el rol en el token
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10)) // 10 horas
                 .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
     }
+
+    public String generarTokenII(String email) {
+        byte[] keyBytes = SECRET_KEY.getBytes();
+        SecretKey key = Keys.hmacShaKeyFor(keyBytes);
+
+        return Jwts.builder()
+                .setSubject(email) // Email como identificador del usuario
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10)) // 10 horas
+                .signWith(key, SignatureAlgorithm.HS256)
+                .compact();
+    }
+
+    public String obtenerRolDesdeToken(String token) {
+        byte[] keyBytes = SECRET_KEY.getBytes();
+        SecretKey key = Keys.hmacShaKeyFor(keyBytes);
+
+        Claims claims = Jwts.parserBuilder()
+                .setSigningKey(key)
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
+
+        return claims.get("rol", String.class); // Extraer el rol del token
+    }
+
 
     public String obtenerEmailDesdeToken(String token) {
         return Jwts.parserBuilder() // ✅ Cambio aquí: usar parserBuilder()
