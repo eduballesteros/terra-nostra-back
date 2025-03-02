@@ -10,8 +10,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Terra Nostra - Productos Naturales</title>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="js/formIndex.js"></script>
 <link rel="stylesheet" type="text/css" href="css/index.css">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
@@ -191,76 +189,77 @@
 			</div>
 		</div>
 	</footer>
-
-	<!-- Modal de Inicio de Sesión / Registro -->
-    <div id="loginModal" class="modal fade" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+<!-- Modal de Inicio de Sesión / Gestión de Cuenta -->
+	<div id="loginModal" class="modal fade" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <!-- Botón para cerrar el modal -->
           <button class="close-modal" id="closeModalButton">×</button>
           <div class="container">
             <div class="form_area">
-              <!-- Título del modal -->
-              <p class="modal-title" id="modalTitle">INICIO DE SESIÓN</p>
+
+              <!-- Contenedor para el Gestor de Usuario -->
+              <div id="userManager" style="display: none;">
+                  <p class="modal-title">👤 Mi Cuenta</p>
+                  <div class="user-info">
+                      <p><strong>Bienvenido, <span id="userName">Usuario</span></strong></p>
+                      <ul class="user-options">
+                          <li>
+                              <a id="profileLink" href="#">Mi perfil</a>
+                          </li>
+                          <li><a href="/pedidos">Mis pedidos</a></li>
+                          <li><a href="#" id="logoutButton">Cerrar sesión</a></li>
+                      </ul>
+                  </div>
+              </div>
 
               <!-- Formulario de Registro -->
-              <form action="/usuario/registrar" method="POST" id="registerForm" onsubmit="return validarRegistro();" style="display: none;">
-                <div class="form_group">
-                  <label class="sub_title" for="regEmail">Email</label>
-                  <input placeholder="Ingresa tu email" id="email" name="email" class="form_style" type="email" required onblur="verificarCorreo()" />
-                  <p class="error" id="emailError" style="display: none;">Este correo ya está registrado</p>
+                  <form action="/usuario/registrar" method="POST" id="registerForm" onsubmit="return validarRegistro();">
+                    <p class="modal-title" id="modalTitle">REGISTRARSE</p>
+                    <div class="form_group">
+                      <label class="sub_title" for="regEmail">Email</label>
+                      <input type="email" placeholder="Ingresa tu email" id="regEmail" name="email" class="form_style" required>
+                    </div>
+                    <div class="form_group">
+                      <label class="sub_title" for="nombre">Nombre</label>
+                      <input type="text" placeholder="Ingresa tu nombre" id="nombre" name="nombre" class="form_style" required>
+                    </div>
+                    <div class="form_group">
+                      <label class="sub_title" for="apellido">Apellido</label>
+                      <input type="text" placeholder="Ingresa tu apellido" id="apellido" name="apellido" class="form_style" required>
+                    </div>
+                    <div class="form_group">
+                      <label class="sub_title" for="contrasenia">Contraseña</label>
+                      <input type="password" placeholder="Crea una contraseña" id="contrasenia" name="contrasenia" class="form_style" required minlength="6">
+                    </div>
+                     <div class="form_group">
+                                      <label class="sub_title" for="confirmPassword">Confirmar Contraseña</label>
+                                      <input placeholder="Repite tu contraseña" id="confirmPassword" name="confirmPassword" class="form_style" type="password" required />
+                                      <p class="error" id="passwordError" style="display: none;">Las contraseñas no coinciden</p>
+                                    </div>
+                    <button class="modal-btn" type="submit">REGISTRARSE</button>
+                    <p class="line">¿Ya tienes cuenta? <a href="javascript:void(0)" onclick="toggleForm()">Inicia Sesión</a></p>
+                  </form>
+
+                  <!-- Formulario de Inicio de Sesión -->
+                  <form action="/auth/login" method="POST" id="loginForm" onsubmit="return validarLogin();">
+                    <p class="modal-title">INICIAR SESIÓN</p>
+                    <div class="form_group">
+                      <label class="sub_title" for="loginEmail">Email</label>
+                      <input type="email" placeholder="Ingresa tu email" id="loginEmail" name="email" class="form_style" required>
+                    </div>
+                    <div class="form_group">
+                      <label class="sub_title" for="loginPassword">Contraseña</label>
+                      <input type="password" placeholder="Ingresa tu contraseña" id="loginPassword" name="contrasenia" class="form_style" required>
+                    </div>
+                    <button class="modal-btn" type="submit">INICIA SESIÓN</button>
+                    <p class="line">¿No tienes cuenta? <a href="javascript:void(0)" onclick="toggleForm()">Regístrate</a></p>
+                  </form>
+
                 </div>
-
-                <div class="form_group">
-                  <label class="sub_title" for="nombre">Nombre</label>
-                  <input placeholder="Ingresa tu nombre" id="nombre" name="nombre" class="form_style" required />
-                </div>
-
-                <div class="form_group">
-                  <label class="sub_title" for="apellido">Apellido</label>
-                  <input placeholder="Ingresa tu apellido" id="apellido" name="apellido" class="form_style" required />
-                </div>
-
-                <div class="form_group">
-                  <label class="sub_title" for="contrasenia">Contraseña</label>
-                  <input placeholder="Crea una contraseña" id="contrasenia" name="contrasenia" class="form_style" type="password" required minlength="6" />
-                  <p class="error" id="passwordError" style="display: none; color: red;">❌ La contraseña debe tener al menos 6 caracteres.</p>
-                </div>
-
-                <div class="form_group">
-                  <label class="sub_title" for="confirmPassword">Confirmar Contraseña</label>
-                  <input placeholder="Repite tu contraseña" id="confirmPassword" name="confirmPassword" class="form_style" type="password" required />
-                  <p class="error" id="passwordError" style="display: none;">Las contraseñas no coinciden</p>
-                </div>
-
-                <button class="modal-btn" type="submit">REGISTRARSE</button>
-                <p class="line">
-                  ¿Ya tienes cuenta? <a class="link" href="javascript:void(0)" onclick="toggleForm()">Inicia Sesión</a>
-                </p>
-              </form>
-
-              <!-- Formulario de Inicio de Sesión -->
-              <form action="/auth/login" method="POST" id="loginForm" onsubmit="return validarLogin();">
-                <div class="form_group">
-                  <label class="sub_title" for="loginEmail">Email</label>
-                  <input placeholder="Ingresa tu email" id="loginEmail" name="email" class="form_style" type="email" required />
-                </div>
-
-                <div class="form_group">
-                  <label class="sub_title" for="loginPassword">Contraseña</label>
-                  <input placeholder="Ingresa tu contraseña" id="loginPassword" name="contrasenia" class="form_style" type="password" required />
-                </div>
-
-                <button class="modal-btn" type="submit">INICIA SESIÓN</button>
-                <p class="line">
-                  ¿No tienes cuenta? <a class="link" href="javascript:void(0)" onclick="toggleForm()">Regístrate!</a>
-                </p>
-              </form>
-
+              </div>
             </div>
           </div>
-        </div>
-      </div>
     </div>
 
     <!-- Modal de Notificación -->
@@ -280,5 +279,11 @@
         </div>
       </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/formIndex.js"></script>
+    <script src="js/auth.js"></script>
+
+
   </body>
   </html>

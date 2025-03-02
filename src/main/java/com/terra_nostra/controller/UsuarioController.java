@@ -1,5 +1,6 @@
 package com.terra_nostra.controller;
 
+import ch.qos.logback.core.model.Model;
 import com.terra_nostra.service.UsuarioService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
@@ -53,7 +54,7 @@ public class UsuarioController {
 			usuarioNuevo.setEmail(email);
 			usuarioNuevo.setTelefono(telefono);
 			usuarioNuevo.setFechaRegistro(LocalDateTime.now(ZoneId.of("Europe/Madrid")));
-
+			usuarioNuevo.setRol("ROLE_USER");
 			usuarioNuevo.setContrasenia(passwordEncoder.encode(contrasenia));
 
 			logger.info("📌 Fecha de registro asignada: {}", usuarioNuevo.getFechaRegistro());
@@ -63,12 +64,12 @@ public class UsuarioController {
 			logger.info("📌 Resultado del registro: {}", resultado);
 
 			if ("success".equals(resultado)) {
-				String token = jwtUtil.generarToken(email);
+				String token = jwtUtil.generarToken(email, usuarioNuevo.getRol());
 				logger.info("📌 Token generado: {}", token);
 				logger.info("✅ Registro exitoso. Bienvenido a Terra Nostra!");
 
 				// Crear la cookie con el token
-				Cookie cookie = new Cookie("authToken", token);
+				Cookie cookie = new Cookie("SESSIONID", token);
 				cookie.setHttpOnly(true);
 				cookie.setSecure(true);
 				cookie.setPath("/");
@@ -87,5 +88,23 @@ public class UsuarioController {
 			logger.error("❌ Error en el servidor: {}", e.getMessage(), e);
 			return ResponseEntity.status(500).body("{\"mensaje\": \"❌ Error en el servidor. Intenta nuevamente.\"}");
 		}
+
 	}
+
+	@GetMapping("/usuario/perfil")
+	public String perfilUsuario(HttpSession session) {
+		UsuarioDto usuario = (UsuarioDto) session.getAttribute("usuario");
+
+		if (usuario == null) {
+			return "redirect:/login"; // Si no hay sesión, redirigir al login
+		}
+
+		if ("ROLE_ADMIN".equals(usuario.getRol())) {
+			return "redirect:/admin/panel"; // Si es admin, redirigir al panel de administración
+		}
+
+		// Si es usuario normal, ir al perfil del usuario
+		return "perfil-usuario"; // Cargar perfil-usuario.jsp
+	}
+
 }
