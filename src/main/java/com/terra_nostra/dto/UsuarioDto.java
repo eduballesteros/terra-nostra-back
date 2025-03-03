@@ -1,4 +1,4 @@
-package com.terra_nostra.dto;
+package com.tfg.terranostra.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -6,7 +6,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
-import lombok.*;
+import lombok.Data;
 import java.time.LocalDateTime;
 
 @Data
@@ -29,12 +29,13 @@ public class UsuarioDto {
     private String contrasenia;
 
     private String telefono;
-
     private String direccion;
 
     @JsonProperty("fechaRegistro")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime fechaRegistro;
 
-    private String rol = "ROLE_USER";
+    private String rol;
+
+
 }
