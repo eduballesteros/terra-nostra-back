@@ -1,6 +1,6 @@
 package com.terra_nostra.controller;
 
-import ch.qos.logback.core.model.Model;
+import com.tfg.terranostra.dto.UsuarioDto;
 import com.terra_nostra.service.UsuarioService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
@@ -9,12 +9,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.http.ResponseEntity;
 import com.terra_nostra.utils.JwtUtil;
 import org.springframework.web.bind.annotation.*;
-import com.terra_nostra.dto.UsuarioDto;
 import jakarta.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.List;
 
 @RestController
 @RequestMapping("/usuario")
@@ -48,7 +48,7 @@ public class UsuarioController {
 		logger.info("📥 Contraseña recibida: {}", contrasenia);
 
 		try {
-			UsuarioDto usuarioNuevo = new UsuarioDto();
+			UsuarioDto usuarioNuevo = new com.tfg.terranostra.dto.UsuarioDto();
 			usuarioNuevo.setNombre(nombre);
 			usuarioNuevo.setApellido(apellido);
 			usuarioNuevo.setEmail(email);
@@ -91,6 +91,20 @@ public class UsuarioController {
 
 	}
 
+	@GetMapping("/listar")
+	public ResponseEntity<List<UsuarioDto>> listarUsuarios() {
+		logger.info("📢 Solicitando lista de usuarios desde el controlador.");
+		List<UsuarioDto> usuarios = usuarioService.obtenerTodosLosUsuarios();
+
+		if (usuarios.isEmpty()) {
+			logger.warn("⚠️ No hay usuarios registrados en la base de datos.");
+			return ResponseEntity.noContent().build();
+		} else {
+			logger.info("✅ Usuarios obtenidos correctamente. Total: {}", usuarios.size());
+			return ResponseEntity.ok(usuarios);
+		}
+	}
+
 	@GetMapping("/usuario/perfil")
 	public String perfilUsuario(HttpSession session) {
 		UsuarioDto usuario = (UsuarioDto) session.getAttribute("usuario");
@@ -106,5 +120,6 @@ public class UsuarioController {
 		// Si es usuario normal, ir al perfil del usuario
 		return "perfil-usuario"; // Cargar perfil-usuario.jsp
 	}
+
 
 }

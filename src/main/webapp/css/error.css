@@ -1,0 +1,106 @@
+/* =====================================================
+   VARIABLES GLOBALES Y ESTILOS BASE
+   ===================================================== */
+:root {
+  --color-primary: #003300;    /* Verde oscuro */
+  --color-secondary: #597931;  /* Verde oliva */
+  --color-warning: #ff9900;    /* Naranja brillante */
+  --color-light: #f5f5f5;      /* Blanco suave */
+}
+
+/* Reset y estilos base */
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  color: var(--color-primary);
+}
+
+/* =====================================================
+   ERROR PAGE ESTILOS
+   ===================================================== */
+body {
+  background: linear-gradient(135deg, var(--color-light) 0%, var(--color-primary) 100%);  /* Gradiente de fondo */
+  font-family: "Libre Baskerville", serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  color: var(--color-light);
+}
+
+.error-container {
+  text-align: center;
+  background-color: var(--color-primary);
+  color: var(--color-light);
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  width: 100%;
+}
+
+.error-container h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  color: var(--color-warning);
+}
+
+.error-container p {
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+}
+
+.error-container .btn {
+  background-color: var(--color-secondary);
+  padding: 14px 30px;
+  font-size: 1.1rem;
+  color: var(--color-light);
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+}
+
+.error-container .btn:hover {
+  background-color: var(--color-warning);
+  transform: translateY(-2px);
+}
+
+.error-container .btn:active {
+  transform: translateY(2px);
+}
+
+/* =====================================================
+   ESTILOS PARA EL LOGO
+   ===================================================== */
+.error-container img {
+  width: 60px;
+  margin-bottom: 20px;
+}
+
+/* =====================================================
+   RESPONSIVIDAD PARA MÓVILES
+   ===================================================== */
+@media (max-width: 576px) {
+  .error-container {
+    width: 90%;
+    padding: 30px;
+  }
+
+  .error-container h1 {
+    font-size: 2rem;
+  }
+
+  .error-container p {
+    font-size: 1rem;
+  }
+
+  .error-container .btn {
+    font-size: 1rem;
+  }
+}

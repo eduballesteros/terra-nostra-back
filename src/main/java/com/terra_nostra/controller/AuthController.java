@@ -1,8 +1,7 @@
 package com.terra_nostra.controller;
-
+import com.terra_nostra.service.AuthService;
+import com.tfg.terranostra.dto.UsuarioDto;
 import com.terra_nostra.dto.LoginDto;
-import com.terra_nostra.dto.UsuarioDto;
-import com.terra_nostra.service.UsuarioService;
 import com.terra_nostra.utils.JwtUtil;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
@@ -18,12 +17,13 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/auth")
+
 public class AuthController {
 
     private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
 
     @Autowired
-    private UsuarioService usuarioService;
+    private AuthService authService;
 
     @Autowired
     private JwtUtil jwtUtil;
@@ -44,7 +44,7 @@ public class AuthController {
             loginDto.setContrasenia(contrasenia);
 
             // 📌 Autenticamos al usuario con el servicio
-            UsuarioDto usuario = usuarioService.autenticarUsuario(loginDto);
+            UsuarioDto usuario = authService.autenticarUsuario(loginDto);
 
             if (usuario == null) {
                 logger.warn("❌ Credenciales incorrectas para el usuario: {}", email);

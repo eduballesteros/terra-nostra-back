@@ -124,7 +124,7 @@ async function verificarSesion() {
 
             // Cambiar el enlace del perfil según el rol
             if (profileLink) {
-                profileLink.href = data.rol === "ROLE_ADMIN" ? "/admin/panel" : "/usuario/perfil";
+                profileLink.href = data.rol === "ROLE_ADMIN" ? "/admin" : "/adminUser";
                 console.log("🔗 Enlace de perfil actualizado:", profileLink.href);
             } else {
                 console.warn("⚠ No se encontró el enlace de perfil en el DOM.");
