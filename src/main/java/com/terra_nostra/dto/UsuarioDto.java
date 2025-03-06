@@ -1,4 +1,4 @@
-package com.tfg.terranostra.dto;
+package com.terra_nostra.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;

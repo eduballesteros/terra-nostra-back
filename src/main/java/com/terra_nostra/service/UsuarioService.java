@@ -11,7 +11,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.tfg.terranostra.dto.UsuarioDto;
+import com.terra_nostra.dto.UsuarioDto;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Service;
 import org.slf4j.Logger;

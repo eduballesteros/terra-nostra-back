@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.terra_nostra.service.UsuarioService;
-import com.tfg.terranostra.dto.UsuarioDto;
+import com.terra_nostra.dto.UsuarioDto;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -41,11 +41,11 @@ public class AdminController {
     }
 
     @PutMapping("/editarUsuario")
-    public ResponseEntity<Map<String, String>> editarUsuario(@RequestParam String email, @RequestBody UsuarioDto userDto) {
+    public ResponseEntity<Map<String, String>> editarUsuario(@RequestParam String email, @RequestBody UsuarioDto usuario) {
         logger.info("✏️ Solicitando actualización del usuario con email: {}", email);
-        logger.debug("🔹 Datos recibidos: {}", userDto);
+        logger.debug("🔹 Datos recibidos: {}", usuario);
 
-        boolean actualizado = usuarioService.actualizarUsuario(email, userDto);
+        boolean actualizado = usuarioService.actualizarUsuario(email, usuario);
         Map<String, String> respuesta = new HashMap<>();
 
         if (actualizado) {
