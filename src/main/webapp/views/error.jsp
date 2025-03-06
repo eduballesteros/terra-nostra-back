@@ -3,6 +3,7 @@
 <head>
     <title>Error de Acceso</title>
     <link rel="stylesheet" href="css/error.css">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
 </head>
 <body>
     <div class="error-container">

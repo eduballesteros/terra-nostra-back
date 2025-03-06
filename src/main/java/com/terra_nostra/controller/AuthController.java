@@ -1,6 +1,6 @@
 package com.terra_nostra.controller;
 import com.terra_nostra.service.AuthService;
-import com.tfg.terranostra.dto.UsuarioDto;
+import com.terra_nostra.dto.UsuarioDto;
 import com.terra_nostra.dto.LoginDto;
 import com.terra_nostra.utils.JwtUtil;
 import jakarta.servlet.http.Cookie;

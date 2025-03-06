@@ -20,25 +20,6 @@
 
 </head>
 <body>
-
-    <%
-            if ("success".equals(mensaje)) {
-        %>
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                ✅ ¡Registro exitoso! Bienvenido a Terra Nostra.
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        <%
-            } else if ("error".equals(mensaje)) {
-        %>
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                ❌ Error en el registro. Por favor, intenta nuevamente.
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        <%
-            }
-        %>
-
 	<!-- Header -->
 	<header class="header">
 		<!-- Logo de la tienda -->
@@ -50,7 +31,7 @@
 		<!-- Barra de navegación -->
 		<nav class="navigation">
 			<ul>
-				<li><a href="/">Home</a></li>
+                <li><a href="/" class="active">Home</a></li>
 				<li><a href="/shop">Productos</a></li>
 				<li><a href="/about">Sobre Nosotros</a></li>
 				<li><a href="/blog">Blog</a></li>
@@ -104,14 +85,16 @@
 		</button>
 	</div>
 
-	<!-- Sección de mejores productos -->
-	<p class="text">Nuestros mejores productos</p>
-	<div class="search-box">
-		<div class="input-group">
-			<input type="text" class="form-control search-input"
-				placeholder="¿Qué estás buscando?" aria-describedby="button-search">
-		</div>
-	</div>
+        <!-- Sección de mejores productos -->
+        <p class="text">Nuestros mejores productos</p>
+
+        <!-- Contenedor de productos destacados -->
+        <div class="container mt-4">
+            <div class="row" id="mejoresProductos">
+                <!-- Los productos destacados se insertarán aquí dinámicamente -->
+            </div>
+        </div>
+
 
 	<!-- Sección de características -->
 	<section class="container features-container">
@@ -282,6 +265,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/formIndex.js"></script>
+     <script src="js/cargarProductos.js"></script>
     <script src="js/auth.js"></script>
 
 

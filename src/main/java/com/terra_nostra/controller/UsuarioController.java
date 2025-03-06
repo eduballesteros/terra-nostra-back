@@ -1,6 +1,5 @@
 package com.terra_nostra.controller;
-
-import com.tfg.terranostra.dto.UsuarioDto;
+import com.terra_nostra.dto.UsuarioDto;
 import com.terra_nostra.service.UsuarioService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
@@ -48,7 +47,7 @@ public class UsuarioController {
 		logger.info("📥 Contraseña recibida: {}", contrasenia);
 
 		try {
-			UsuarioDto usuarioNuevo = new com.tfg.terranostra.dto.UsuarioDto();
+			UsuarioDto usuarioNuevo = new UsuarioDto();
 			usuarioNuevo.setNombre(nombre);
 			usuarioNuevo.setApellido(apellido);
 			usuarioNuevo.setEmail(email);
