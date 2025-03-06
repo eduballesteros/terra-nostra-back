@@ -14,13 +14,34 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/admin")
+
+/**
+ * Controlador para la administración de usuarios en la aplicación.
+ * Proporciona endpoints para eliminar y editar usuarios.
+ *
+ * @author ebp
+ * @version 1.0
+ */
+
 public class AdminController {
+
+    /**
+     * Logger para registrar información sobre las operaciones de administración de usuarios.
+     */
 
     private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
 
 
     @Autowired
     private UsuarioService usuarioService; // Servicio para obtener usuarios
+
+    /**
+     * Elimina un usuario del sistema según su correo electrónico.
+     *
+     * @param email Correo electrónico del usuario a eliminar.
+     * @return `ResponseEntity` con un mensaje indicando el resultado de la operación.
+     */
+
 
     @DeleteMapping("/eliminarUsuario")
     public ResponseEntity<Map<String, String>> eliminarUsuario(@RequestParam String email) {
@@ -39,6 +60,15 @@ public class AdminController {
             return ResponseEntity.badRequest().body(respuesta);
         }
     }
+
+    /**
+     * Actualiza la información de un usuario en el sistema.
+     *
+     * @param email Correo electrónico del usuario a actualizar.
+     * @param usuario Objeto `UsuarioDto` con los nuevos datos del usuario.
+     * @return `ResponseEntity` con un mensaje indicando el resultado de la operación.
+     */
+
 
     @PutMapping("/editarUsuario")
     public ResponseEntity<Map<String, String>> editarUsuario(@RequestParam String email, @RequestBody UsuarioDto usuario) {

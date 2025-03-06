@@ -15,11 +15,32 @@ import java.util.*;
 
 @RestController
 @RequestMapping("/productos")
+
+/**
+ * Controlador para la gestión de productos.
+ * Proporciona endpoints para agregar, listar, obtener, editar y eliminar productos.
+ *
+ * @author ebp
+ * @version 1.0
+ */
+
 public class ProductoController {
 
     @Autowired ProductoService productoService;
 
     private static final Logger logger = LoggerFactory.getLogger(ProductoController.class);
+
+    /**
+     * Guarda un nuevo producto en el DTO.
+     *
+     * @param nombre Nombre del producto.
+     * @param descripcion Descripción del producto.
+     * @param precio Precio del producto.
+     * @param stock Cantidad disponible en stock.
+     * @param categoria Categoría del producto.
+     * @param imagen Imagen opcional del producto en formato `MultipartFile`.
+     * @return `ResponseEntity` con el producto guardado o un mensaje de error.
+     */
 
 
     @PostMapping("/guardar")
@@ -47,11 +68,24 @@ public class ProductoController {
         }
     }
 
+    /**
+     * Obtiene la lista de todos los productos disponibles.*
+     * @return `ResponseEntity` con la lista de productos en formato `ProductoDto`.
+     */
+
     @GetMapping("/listar")
     public ResponseEntity<List<ProductoDto>> listarProductos() {
         List<ProductoDto> productos = productoService.obtenerTodosLosProductos();
         return ResponseEntity.ok(productos);
     }
+
+    /**
+     * Obtiene un producto por su identificador único.
+     *
+     * @param id Identificador del producto a buscar.
+     * @return `ResponseEntity` con el producto encontrado o un `404 Not Found` si no existe.
+     */
+
 
     @GetMapping("/{id}")
     public ResponseEntity<ProductoDto> obtenerProductoPorId(@PathVariable Long id) {
@@ -62,6 +96,13 @@ public class ProductoController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    /**
+     * Elimina un producto de la base de datos.
+     *
+     * @param id Identificador del producto a eliminar.
+     * @return `ResponseEntity` con un mensaje de éxito o error.
+     */
 
 
     @DeleteMapping("/eliminar/{id}")
@@ -76,6 +117,20 @@ public class ProductoController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
         }
     }
+
+    /**
+     * Edita un producto existente.
+     *
+     * @param id Identificador del producto a actualizar.
+     * @param nombre Nuevo nombre del producto.
+     * @param descripcion Nueva descripción del producto.
+     * @param precio Nuevo precio del producto.
+     * @param stock Nueva cantidad en stock.
+     * @param categoria Nueva categoría del producto.
+     * @param imagen Nueva imagen opcional del producto en formato `MultipartFile`.
+     * @return `ResponseEntity` con un mensaje de éxito o error.
+     */
+
 
     @PutMapping("/editar/{id}")
     public ResponseEntity<Map<String, String>> editarProducto(

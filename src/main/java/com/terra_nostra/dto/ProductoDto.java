@@ -12,6 +12,15 @@ import lombok.Data;
 import java.math.BigDecimal;
 @Data
 
+
+/**
+ * DTO (Data Transfer Object) para la gestión de productos.
+ * Contiene la información necesaria para representar un producto en la aplicación.
+ *
+ * @author ebp
+ * @version 1.0
+ */
+
 public class ProductoDto {
 
     private Long id;

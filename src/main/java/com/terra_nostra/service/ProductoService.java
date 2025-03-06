@@ -19,6 +19,15 @@ import java.util.Collections;
 import java.util.List;
 
 @Service
+
+/**
+ * Servicio para la gestión de productos.
+ * Proporciona métodos para interactuar con la API externa de productos.*
+ * @author ebp
+ * @version 1.0
+ */
+
+
 public class ProductoService {
 
     private static final Logger logger = LoggerFactory.getLogger(ProductoService.class);
@@ -34,8 +43,14 @@ public class ProductoService {
     }
 
     /**
-     * 📌 Guarda un producto en la API.
+     * Guarda un nuevo producto en la API.
+     * @param productoDto DTO que contiene la información del producto a guardar.
+     * @param imagen Imagen opcional del producto en formato `MultipartFile`.
+     * @return `ProductoDto` con los datos del producto guardado si la operación fue exitosa,
+     *         o `null` si hubo un error.
      */
+
+
     public ProductoDto guardarProducto(ProductoDto productoDto, MultipartFile imagen) {
         try {
             if (imagen != null && !imagen.isEmpty()) {
@@ -65,10 +80,13 @@ public class ProductoService {
         }
     }
 
-
     /**
-     * 📌 Obtiene todos los productos de la API.
+     * Obtiene la lista de todos los productos disponibles en la API.
+     * @return Lista de `ProductoDto` con los productos obtenidos,
+     *         o una lista vacía si no se encontraron productos o hubo un error.
      */
+
+
     public List<ProductoDto> obtenerTodosLosProductos() {
         try {
             logger.info("🔍 Enviando solicitud GET a la API para obtener productos...");
@@ -97,8 +115,14 @@ public class ProductoService {
     }
 
     /**
-     * ✏ Edita un producto existente en la API.
+     * Actualiza un producto en la API con los nuevos datos proporcionados.
+     * @param id Identificador del producto a actualizar.
+     * @param productoDto DTO con los datos actualizados del producto.
+     * @param imagen Nueva imagen opcional del producto en formato `MultipartFile`.
+     * @return `success` si el producto fue actualizado correctamente, o `error` si hubo un problema.
      */
+
+
     public String editarProducto(Long id, ProductoDto productoDto, MultipartFile imagen) {
         try {
             if (imagen != null && !imagen.isEmpty()) {
@@ -133,6 +157,14 @@ public class ProductoService {
         }
     }
 
+    /**
+     * Obtiene los detalles de un producto específico a partir de su ID.
+     * @param id Identificador del producto a obtener.
+     * @return `ProductoDto` con la información del producto si se encuentra,
+     *         o `null` si no se encuentra el producto.
+     */
+
+
     public ProductoDto obtenerProductoPorId(Long id) {
         try {
             HttpRequest request = HttpRequest.newBuilder()
@@ -155,9 +187,14 @@ public class ProductoService {
             throw new RuntimeException("Producto no encontrado");
         }
     }
+
     /**
-     * 🗑 Elimina un producto por ID en la API.
+     * Elimina un producto de la API utilizando su ID.
+     * @param id Identificador del producto a eliminar.
+     * @return `success` si el producto fue eliminado correctamente, o `error` si hubo un problema.
      */
+
+
     public String eliminarProducto(Long id) {
         try {
             logger.info("🗑 Enviando solicitud DELETE para eliminar producto ID: {}", id);

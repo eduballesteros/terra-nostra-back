@@ -7,6 +7,14 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
     }
 
+    /**
+     * Obtiene la lista de productos desde el backend y selecciona los tres primeros.
+     * Luego, los envía a la función `mostrarMejoresProductos` para mostrarlos en la interfaz.
+     *
+     * @returns {void}
+     */
+
+
     function cargarProductos() {
         fetch("/productos/listar")
             .then(response => {
@@ -20,6 +28,20 @@ document.addEventListener("DOMContentLoaded", function () {
             })
             .catch(error => console.error("Error al cargar productos:", error));
     }
+
+    /**
+     * Muestra los productos destacados en la sección correspondiente de la interfaz.
+     * Genera dinámicamente tarjetas con los datos de los productos y los inserta en el contenedor.
+     *
+     * @param {Array<Object>} productos - Lista de productos a mostrar.
+     * @param {number} productos[].id - ID del producto.
+     * @param {string} productos[].nombre - Nombre del producto.
+     * @param {string} productos[].descripcion - Descripción del producto.
+     * @param {number} productos[].precio - Precio del producto.
+     * @param {string} [productos[].imagen] - Imagen del producto en base64 (opcional).
+     * @returns {void}
+     */
+
 
     function mostrarMejoresProductos(productos) {
         mejoresProductosContainer.innerHTML = ""; // Limpiar antes de agregar productos

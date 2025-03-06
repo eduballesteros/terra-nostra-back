@@ -7,6 +7,15 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Data
+
+/**
+ * DTO (Data Transfer Object) para el proceso de autenticación de usuarios.
+ * Contiene los datos necesarios para el inicio de sesión.
+ *
+ * @author ebp
+ * @version 1.0
+ */
+
 public class LoginDto {
 
     @NotBlank(message = "El correo no puede estar vacío")

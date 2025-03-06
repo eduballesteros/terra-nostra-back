@@ -7,12 +7,32 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+
+/**
+ * Configuración global para Jackson en la aplicación.
+ * Define un `ObjectMapper` personalizado para manejar fechas de Java 8 correctamente.
+ *
+ * @author ebp
+ * @version 1.0
+ */
+
 public class JacksonConfig {
 
     @Bean
+
+    /**
+     * Configura un `ObjectMapper` para manejar correctamente las fechas de Java 8.
+     *
+     * - Registra `JavaTimeModule` para permitir la serialización/deserialización de `LocalDateTime`.
+     * - Deshabilita la escritura de fechas como timestamps para mejorar la legibilidad.
+     *
+     * @return Un `ObjectMapper` configurado con soporte para Java 8 Date/Time API.
+     */
+
+
     public ObjectMapper objectMapper() {
         ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.registerModule(new JavaTimeModule());  // Registra el módulo para Java 8 date/time
+        objectMapper.registerModule(new JavaTimeModule());
         objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);  // Deshabilitar escritura de fechas como timestamps
         return objectMapper;
     }

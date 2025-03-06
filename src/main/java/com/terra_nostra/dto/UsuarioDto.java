@@ -10,6 +10,16 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 @Data
+
+/**
+ * DTO (Data Transfer Object) para la gestión de usuarios.
+ * Contiene la información necesaria para representar un usuario en la aplicación.
+ *
+ * @author ebp
+ * @version 1.0
+ */
+
+
 public class UsuarioDto {
 
     private Long id;

@@ -910,3 +910,132 @@ This generated password is for development use only. Your security configuration
 2025-03-06T13:09:37.792+01:00  INFO 16096 --- [http-nio-8080-exec-9] c.terra_nostra.service.ProductoService   : 🔹 Código de respuesta de la API: 200
 2025-03-06T13:09:44.883+01:00  INFO 16096 --- [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
 2025-03-06T13:09:44.891+01:00  INFO 16096 --- [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-03-06T13:09:47.123+01:00  INFO 7228 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : Starting TerraNostraApplication using Java 21.0.5 with PID 7228 (C:\Users\balle\Documents\Proyectos\terra-nostra\target\classes started by balle in C:\Users\balle\Documents\Proyectos\terra-nostra)
+2025-03-06T13:09:47.125+01:00 DEBUG 7228 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-03-06T13:09:47.126+01:00  INFO 7228 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : No active profile set, falling back to 1 default profile: "default"
+2025-03-06T13:09:47.191+01:00  INFO 7228 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-03-06T13:09:47.191+01:00  INFO 7228 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-03-06T13:09:48.681+01:00  INFO 7228 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-03-06T13:09:48.701+01:00  INFO 7228 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-03-06T13:09:48.701+01:00  INFO 7228 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-03-06T13:09:48.923+01:00  INFO 7228 --- [restartedMain] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-03-06T13:09:48.932+01:00  INFO 7228 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-03-06T13:09:48.932+01:00  INFO 7228 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1740 ms
+2025-03-06T13:09:49.221+01:00  WARN 7228 --- [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: faf23fdd-638c-4ce9-9f06-3873f3a84199
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-03-06T13:09:49.229+01:00  INFO 7228 --- [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2025-03-06T13:09:49.381+01:00  INFO 7228 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2025-03-06T13:09:49.417+01:00  INFO 7228 --- [restartedMain] o.s.v.b.OptionalValidatorFactoryBean     : Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-03-06T13:09:49.728+01:00  WARN 7228 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : Unable to start LiveReload server
+2025-03-06T13:09:49.771+01:00  INFO 7228 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-03-06T13:09:49.783+01:00  INFO 7228 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : Started TerraNostraApplication in 3.249 seconds (process running for 3.871)
+2025-03-06T13:10:38.122+01:00  INFO 7228 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-03-06T13:10:38.123+01:00  INFO 7228 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-03-06T13:10:38.124+01:00  INFO 7228 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-03-06T13:10:39.086+01:00  INFO 7228 --- [http-nio-8080-exec-5] c.terra_nostra.service.ProductoService   : 🔍 Enviando solicitud GET a la API para obtener productos...
+2025-03-06T13:10:39.265+01:00  INFO 7228 --- [http-nio-8080-exec-5] c.terra_nostra.service.ProductoService   : 🔹 Código de respuesta de la API: 200
+2025-03-06T13:10:45.160+01:00  INFO 7228 --- [http-nio-8080-exec-9] c.t.controller.AuthController            : 📥 Email recibido: ballesterospereze@gmail.com
+2025-03-06T13:10:45.160+01:00  INFO 7228 --- [http-nio-8080-exec-9] c.t.controller.AuthController            : 📥 Contraseña recibida: [PROTEGIDA]
+2025-03-06T13:10:45.160+01:00  INFO 7228 --- [http-nio-8080-exec-9] c.t.controller.AuthController            : 🔍 Autenticando usuario...
+2025-03-06T13:10:45.249+01:00  INFO 7228 --- [http-nio-8080-exec-9] c.t.controller.AuthController            : 🔍 Usuario autenticado correctamente: ballesterospereze@gmail.com
+2025-03-06T13:10:45.249+01:00  INFO 7228 --- [http-nio-8080-exec-9] c.t.controller.AuthController            : 🎭 Rol obtenido del usuario autenticado: ROLE_ADMIN
+2025-03-06T13:10:45.274+01:00  INFO 7228 --- [http-nio-8080-exec-9] c.t.controller.AuthController            : ✅ Nuevo token generado con rol 'ROLE_ADMIN' para el usuario ballesterospereze@gmail.com
+2025-03-06T13:10:46.926+01:00  INFO 7228 --- [http-nio-8080-exec-4] c.terra_nostra.service.ProductoService   : 🔍 Enviando solicitud GET a la API para obtener productos...
+2025-03-06T13:10:46.953+01:00  INFO 7228 --- [http-nio-8080-exec-4] c.terra_nostra.service.ProductoService   : 🔹 Código de respuesta de la API: 200
+2025-03-06T13:31:31.018+01:00  INFO 7228 --- [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-03-06T13:31:31.027+01:00  INFO 7228 --- [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-03-06T13:31:33.408+01:00  INFO 9896 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : Starting TerraNostraApplication using Java 21.0.5 with PID 9896 (C:\Users\balle\Documents\Proyectos\terra-nostra\target\classes started by balle in C:\Users\balle\Documents\Proyectos\terra-nostra)
+2025-03-06T13:31:33.411+01:00 DEBUG 9896 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-03-06T13:31:33.412+01:00  INFO 9896 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : No active profile set, falling back to 1 default profile: "default"
+2025-03-06T13:31:33.475+01:00  INFO 9896 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-03-06T13:31:33.475+01:00  INFO 9896 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-03-06T13:31:34.920+01:00  INFO 9896 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-03-06T13:31:34.939+01:00  INFO 9896 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-03-06T13:31:34.939+01:00  INFO 9896 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-03-06T13:31:35.171+01:00  INFO 9896 --- [restartedMain] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-03-06T13:31:35.180+01:00  INFO 9896 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-03-06T13:31:35.180+01:00  INFO 9896 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1705 ms
+2025-03-06T13:31:35.466+01:00  WARN 9896 --- [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 6feb7266-f31a-4052-b2be-8e529e381cb8
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-03-06T13:31:35.473+01:00  INFO 9896 --- [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2025-03-06T13:31:35.613+01:00  INFO 9896 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2025-03-06T13:31:35.645+01:00  INFO 9896 --- [restartedMain] o.s.v.b.OptionalValidatorFactoryBean     : Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-03-06T13:31:35.985+01:00  WARN 9896 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : Unable to start LiveReload server
+2025-03-06T13:31:36.032+01:00  INFO 9896 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-03-06T13:31:36.043+01:00  INFO 9896 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : Started TerraNostraApplication in 3.281 seconds (process running for 4.013)
+2025-03-06T13:31:38.703+01:00  INFO 9896 --- [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-03-06T13:31:38.710+01:00  INFO 9896 --- [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-03-06T20:02:58.128+01:00  INFO 20936 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : Starting TerraNostraApplication using Java 21.0.5 with PID 20936 (C:\Users\balle\Documents\Proyectos\terra-nostra\target\classes started by balle in C:\Users\balle\Documents\Proyectos\terra-nostra)
+2025-03-06T20:02:58.132+01:00 DEBUG 20936 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-03-06T20:02:58.133+01:00  INFO 20936 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : No active profile set, falling back to 1 default profile: "default"
+2025-03-06T20:02:58.210+01:00  INFO 20936 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-03-06T20:02:58.210+01:00  INFO 20936 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-03-06T20:02:59.615+01:00  INFO 20936 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-03-06T20:02:59.632+01:00  INFO 20936 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-03-06T20:02:59.633+01:00  INFO 20936 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-03-06T20:02:59.840+01:00  INFO 20936 --- [restartedMain] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-03-06T20:02:59.848+01:00  INFO 20936 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-03-06T20:02:59.848+01:00  INFO 20936 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1636 ms
+2025-03-06T20:03:00.144+01:00  WARN 20936 --- [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: a229c386-2673-4913-b286-eddb966666af
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-03-06T20:03:00.151+01:00  INFO 20936 --- [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2025-03-06T20:03:00.308+01:00  INFO 20936 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2025-03-06T20:03:00.340+01:00  INFO 20936 --- [restartedMain] o.s.v.b.OptionalValidatorFactoryBean     : Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-03-06T20:03:00.654+01:00  WARN 20936 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : Unable to start LiveReload server
+2025-03-06T20:03:00.695+01:00  INFO 20936 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-03-06T20:03:00.707+01:00  INFO 20936 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : Started TerraNostraApplication in 3.287 seconds (process running for 3.87)
+2025-03-06T20:03:05.150+01:00  INFO 20936 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-03-06T20:03:05.151+01:00  INFO 20936 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-03-06T20:03:05.152+01:00  INFO 20936 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-03-06T20:03:05.993+01:00  INFO 20936 --- [http-nio-8080-exec-6] c.terra_nostra.service.ProductoService   : 🔍 Enviando solicitud GET a la API para obtener productos...
+2025-03-06T20:03:06.491+01:00  INFO 20936 --- [http-nio-8080-exec-6] c.terra_nostra.service.ProductoService   : 🔹 Código de respuesta de la API: 200
+2025-03-06T20:03:26.858+01:00  INFO 20936 --- [http-nio-8080-exec-8] c.t.controller.HomeController            : 📢 Iniciando carga de la página de administración...
+2025-03-06T20:03:26.867+01:00  INFO 20936 --- [http-nio-8080-exec-8] c.t.controller.HomeController            : ✅ Usuario autenticado como ADMIN: ballesterospereze@gmail.com
+2025-03-06T20:03:26.867+01:00  INFO 20936 --- [http-nio-8080-exec-8] c.terra_nostra.service.UsuarioService    : 📢 Iniciando solicitud para obtener todos los usuarios desde la API...
+2025-03-06T20:03:26.870+01:00  INFO 20936 --- [http-nio-8080-exec-8] c.terra_nostra.service.UsuarioService    : 📤 Enviando solicitud GET a la API: http://localhost:8081/api/usuario
+2025-03-06T20:03:26.899+01:00  INFO 20936 --- [http-nio-8080-exec-8] c.terra_nostra.service.UsuarioService    : 🔹 Código de respuesta de la API: 200
+2025-03-06T20:03:26.900+01:00  INFO 20936 --- [http-nio-8080-exec-8] c.terra_nostra.service.UsuarioService    : 🔹 Respuesta de la API: [{"id":1,"nombre":"Eduardo","apellido":"Ballesteros Pérez","email":"ballesterospereze@gmail.com","contrasenia":null,"telefono":"692498584","direccion":"Avenida Clara Campoamor, 6","rol":"ROLE_ADMIN","fechaRegistro":"2025-03-01 15:39:14"},{"id":10,"nombre":"Pepe","apellido":"Pérez","email":"pepe@gmail.com","contrasenia":null,"telefono":null,"direccion":null,"rol":"ROLE_USER","fechaRegistro":"2025-03-06 12:53:26"}]
+2025-03-06T20:03:26.914+01:00  INFO 20936 --- [http-nio-8080-exec-8] c.terra_nostra.service.UsuarioService    : ✅ Usuarios obtenidos con éxito. Total: 2
+2025-03-06T20:03:26.914+01:00  INFO 20936 --- [http-nio-8080-exec-8] c.t.controller.HomeController            : ✅ Usuarios obtenidos con éxito: 2 registros.
+2025-03-06T20:03:27.120+01:00  INFO 20936 --- [http-nio-8080-exec-6] c.t.controller.UsuarioController         : 📢 Solicitando lista de usuarios desde el controlador.
+2025-03-06T20:03:27.119+01:00  INFO 20936 --- [http-nio-8080-exec-5] c.terra_nostra.service.ProductoService   : 🔍 Enviando solicitud GET a la API para obtener productos...
+2025-03-06T20:03:27.120+01:00  INFO 20936 --- [http-nio-8080-exec-6] c.terra_nostra.service.UsuarioService    : 📢 Iniciando solicitud para obtener todos los usuarios desde la API...
+2025-03-06T20:03:27.133+01:00  INFO 20936 --- [http-nio-8080-exec-6] c.terra_nostra.service.UsuarioService    : 📤 Enviando solicitud GET a la API: http://localhost:8081/api/usuario
+2025-03-06T20:03:27.179+01:00  INFO 20936 --- [http-nio-8080-exec-6] c.terra_nostra.service.UsuarioService    : 🔹 Código de respuesta de la API: 200
+2025-03-06T20:03:27.179+01:00  INFO 20936 --- [http-nio-8080-exec-6] c.terra_nostra.service.UsuarioService    : 🔹 Respuesta de la API: [{"id":1,"nombre":"Eduardo","apellido":"Ballesteros Pérez","email":"ballesterospereze@gmail.com","contrasenia":null,"telefono":"692498584","direccion":"Avenida Clara Campoamor, 6","rol":"ROLE_ADMIN","fechaRegistro":"2025-03-01 15:39:14"},{"id":10,"nombre":"Pepe","apellido":"Pérez","email":"pepe@gmail.com","contrasenia":null,"telefono":null,"direccion":null,"rol":"ROLE_USER","fechaRegistro":"2025-03-06 12:53:26"}]
+2025-03-06T20:03:27.192+01:00  INFO 20936 --- [http-nio-8080-exec-6] c.terra_nostra.service.UsuarioService    : ✅ Usuarios obtenidos con éxito. Total: 2
+2025-03-06T20:03:27.195+01:00  INFO 20936 --- [http-nio-8080-exec-6] c.t.controller.UsuarioController         : ✅ Usuarios obtenidos correctamente. Total: 2
+2025-03-06T20:03:27.203+01:00  INFO 20936 --- [http-nio-8080-exec-5] c.terra_nostra.service.ProductoService   : 🔹 Código de respuesta de la API: 200
+2025-03-06T20:03:48.342+01:00  INFO 20936 --- [http-nio-8080-exec-10] c.t.controller.AdminController           : 🗑 Solicitando eliminación del usuario con email: pepe@gmail.com
+2025-03-06T20:03:48.342+01:00  INFO 20936 --- [http-nio-8080-exec-10] c.terra_nostra.service.UsuarioService    : 🗑 Enviando solicitud DELETE a la API para eliminar usuario con email: pepe@gmail.com
+2025-03-06T20:03:48.464+01:00  INFO 20936 --- [http-nio-8080-exec-10] c.terra_nostra.service.UsuarioService    : 🔹 Código de respuesta de la API: 200
+2025-03-06T20:03:48.465+01:00  INFO 20936 --- [http-nio-8080-exec-10] c.terra_nostra.service.UsuarioService    : 🔹 Respuesta de la API: Usuario eliminado correctamente
+2025-03-06T20:03:48.465+01:00  INFO 20936 --- [http-nio-8080-exec-10] c.terra_nostra.service.UsuarioService    : ✅ Usuario eliminado correctamente en la API.
+2025-03-06T20:03:48.465+01:00  INFO 20936 --- [http-nio-8080-exec-10] c.t.controller.AdminController           : ✅ Usuario eliminado correctamente: pepe@gmail.com
+2025-03-06T20:03:49.522+01:00  INFO 20936 --- [http-nio-8080-exec-4] c.t.controller.UsuarioController         : 📢 Solicitando lista de usuarios desde el controlador.
+2025-03-06T20:03:49.522+01:00  INFO 20936 --- [http-nio-8080-exec-4] c.terra_nostra.service.UsuarioService    : 📢 Iniciando solicitud para obtener todos los usuarios desde la API...
+2025-03-06T20:03:49.524+01:00  INFO 20936 --- [http-nio-8080-exec-4] c.terra_nostra.service.UsuarioService    : 📤 Enviando solicitud GET a la API: http://localhost:8081/api/usuario
+2025-03-06T20:03:49.539+01:00  INFO 20936 --- [http-nio-8080-exec-4] c.terra_nostra.service.UsuarioService    : 🔹 Código de respuesta de la API: 200
+2025-03-06T20:03:49.539+01:00  INFO 20936 --- [http-nio-8080-exec-4] c.terra_nostra.service.UsuarioService    : 🔹 Respuesta de la API: [{"id":1,"nombre":"Eduardo","apellido":"Ballesteros Pérez","email":"ballesterospereze@gmail.com","contrasenia":null,"telefono":"692498584","direccion":"Avenida Clara Campoamor, 6","rol":"ROLE_ADMIN","fechaRegistro":"2025-03-01 15:39:14"}]
+2025-03-06T20:03:49.542+01:00  INFO 20936 --- [http-nio-8080-exec-4] c.terra_nostra.service.UsuarioService    : ✅ Usuarios obtenidos con éxito. Total: 1
+2025-03-06T20:03:49.542+01:00  INFO 20936 --- [http-nio-8080-exec-4] c.t.controller.UsuarioController         : ✅ Usuarios obtenidos correctamente. Total: 1
+2025-03-06T20:03:58.149+01:00  INFO 20936 --- [http-nio-8080-exec-1] c.terra_nostra.service.ProductoService   : 🔍 Enviando solicitud GET a la API para obtener productos...
+2025-03-06T20:03:58.208+01:00  INFO 20936 --- [http-nio-8080-exec-1] c.terra_nostra.service.ProductoService   : 🔹 Código de respuesta de la API: 200
+2025-03-06T20:04:04.792+01:00  INFO 20936 --- [http-nio-8080-exec-3] c.terra_nostra.service.ProductoService   : 🔍 Enviando solicitud GET a la API para obtener productos...
+2025-03-06T20:04:04.831+01:00  INFO 20936 --- [http-nio-8080-exec-3] c.terra_nostra.service.ProductoService   : 🔹 Código de respuesta de la API: 200
+2025-03-06T20:04:09.185+01:00  INFO 20936 --- [http-nio-8080-exec-10] c.terra_nostra.service.ProductoService   : 🔍 Enviando solicitud GET a la API para obtener productos...
+2025-03-06T20:04:09.226+01:00  INFO 20936 --- [http-nio-8080-exec-10] c.terra_nostra.service.ProductoService   : 🔹 Código de respuesta de la API: 200
+2025-03-06T20:04:15.027+01:00  INFO 20936 --- [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-03-06T20:04:15.034+01:00  INFO 20936 --- [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
