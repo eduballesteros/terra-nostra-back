@@ -18,11 +18,28 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Service
+
+/**
+ * Servicio para la gestión de usuarios.
+ * Proporciona métodos para registrar, obtener, actualizar y eliminar usuarios a través de una API externa.
+ *
+ * @author [Tu Nombre]
+ * @version 1.0
+ */
+
+
 public class UsuarioService {
 
     private static final Logger logger = LoggerFactory.getLogger(UsuarioService.class);
     private static final String API_BASE_URL = "http://localhost:8081/api/usuario";
 
+    /**
+     * Registra un nuevo usuario en la API.
+     *
+     * @param nuevoUsuario DTO que contiene los datos del usuario a registrar.
+     * @param session Objeto `HttpSession` para almacenar información de la sesión del usuario.
+     * @return `"success"` si el usuario se registró correctamente, `"error"` en caso de fallo.
+     */
 
 
     public String registrarUsuario(UsuarioDto nuevoUsuario, HttpSession session) {
@@ -65,6 +82,14 @@ public class UsuarioService {
         }
     }
 
+    /**
+     * Obtiene la lista de todos los usuarios registrados en la API.
+     *
+     * @return Lista de `UsuarioDto` con los usuarios obtenidos,
+     *         o una lista vacía si no se encontraron usuarios o hubo un error.
+     */
+
+
     public List<UsuarioDto> obtenerTodosLosUsuarios() {
         logger.info("📢 Iniciando solicitud para obtener todos los usuarios desde la API...");
 
@@ -102,6 +127,14 @@ public class UsuarioService {
         }
     }
 
+    /**
+     * Elimina un usuario de la API utilizando su dirección de correo electrónico.
+     *
+     * @param email Correo electrónico del usuario a eliminar.
+     * @return `true` si el usuario fue eliminado correctamente, `false` si hubo un error.
+     */
+
+
     public boolean eliminarUsuarioDesdeAPI(String email) {
         try {
             logger.info("🗑 Enviando solicitud DELETE a la API para eliminar usuario con email: {}", email);
@@ -130,6 +163,15 @@ public class UsuarioService {
             return false;
         }
     }
+
+    /**
+     * Actualiza los datos de un usuario en la API.
+     *
+     * @param email Correo electrónico del usuario a actualizar.
+     * @param userDto DTO con los nuevos datos del usuario.
+     * @return `true` si el usuario fue actualizado correctamente, `false` en caso de error.
+     */
+
 
     public boolean actualizarUsuario(String email, UsuarioDto userDto) {
         try {

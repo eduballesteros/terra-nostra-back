@@ -18,7 +18,21 @@ import java.util.Map;
 @RestController
 @RequestMapping("/auth")
 
+/**
+ * Controlador para la autenticación de usuarios.
+ * Proporciona endpoints para el inicio de sesión, verificación de sesión y cierre de sesión.
+ *
+ * @author ebp
+ * @version 1.0
+ */
+
+
 public class AuthController {
+
+    /**
+     * Logger para registrar información sobre las operaciones de autenticación de usuarios.
+     */
+
 
     private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
 
@@ -27,6 +41,17 @@ public class AuthController {
 
     @Autowired
     private JwtUtil jwtUtil;
+
+    /**
+     * Maneja el inicio de sesión de un usuario autenticándolo con sus credenciales.
+     * Si el usuario es válido, genera un token JWT y lo almacena en una cookie.
+     *
+     * @param email Correo electrónico del usuario.
+     * @param contrasenia Contraseña del usuario.
+     * @param response Objeto `HttpServletResponse` para agregar la cookie con el token.
+     * @return `ResponseEntity` con un mensaje indicando el resultado del inicio de sesión.
+     */
+
 
     @PostMapping("/login")
     public ResponseEntity<?> loginUsuario(
@@ -60,12 +85,21 @@ public class AuthController {
             String newToken = jwtUtil.generarToken(usuario.getEmail(), rolReal);
             logger.info("✅ Nuevo token generado con rol '{}' para el usuario {}", rolReal, usuario.getEmail());
 
-            // ✅ Crear la cookie con el nuevo token
+
+            /**
+             * Crea una cookie segura con el token de autenticación.
+             *
+             * - `HttpOnly`: Evita accesos desde JavaScript para mayor seguridad.
+             * - `Secure`: Solo se envía en conexiones HTTPS.
+             * - `Path("/")`: Disponible en todo el dominio.
+             * - `MaxAge(60 * 60 * 24)`: Expira en 1 día.
+             */
+
             Cookie sessionCookie = new Cookie("SESSIONID", newToken);
             sessionCookie.setHttpOnly(true);
             sessionCookie.setSecure(true);
             sessionCookie.setPath("/");
-            sessionCookie.setMaxAge(60 * 60 * 24); // 1 día
+            sessionCookie.setMaxAge(60 * 60 * 24);
 
             response.addCookie(sessionCookie);
 
@@ -77,6 +111,14 @@ public class AuthController {
             return ResponseEntity.status(500).body("{\"mensaje\": \"❌ Error en el servidor\"}");
         }
     }
+
+    /**
+     * Este método verifica si algun usuario tiene una sesión activa mediante el token almacenado en la cookie
+     * Si el token es valido, devuelve los detalles del usuario como el nombre, el rol ...
+     *
+     * @param request Objeto `HttpServletRequest` para obtener las cookies de sesión.
+     * @return `ResponseEntity` con un `Map` que indica si la sesión está activa y el rol del usuario.
+     */
 
 
     @GetMapping("/verificar-sesion")
@@ -111,6 +153,14 @@ public class AuthController {
 
         return ResponseEntity.ok(response);
     }
+
+    /**
+     * Cierra la sesión del usuario eliminando la cookie de autenticación.
+     *
+     * @param response Objeto `HttpServletResponse` para eliminar la cookie de sesión.
+     * @return `ResponseEntity` con un mensaje confirmando que la sesión se ha cerrado.
+     */
+
 
     @PostMapping("/logout")
     public ResponseEntity<?> logout(HttpServletResponse response) {

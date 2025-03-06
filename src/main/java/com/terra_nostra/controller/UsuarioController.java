@@ -17,6 +17,15 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/usuario")
+
+/**
+ * Controlador para la gestión de usuarios.
+ * Proporciona endpoints para el registro, la consulta y la autenticación de usuarios.
+ *
+ * @author ebp
+ * @version 1.0
+ */
+
 public class UsuarioController {
 
 	@Autowired
@@ -29,6 +38,19 @@ public class UsuarioController {
 	private PasswordEncoder passwordEncoder;
 
 	private static final Logger logger = LoggerFactory.getLogger(UsuarioController.class);
+
+	/**
+	 * Registra un nuevo usuario y genera un token de sesión.
+	 *
+	 * @param nombre Nombre del usuario.
+	 * @param apellido Apellido del usuario.
+	 * @param email Correo electrónico del usuario.
+	 * @param telefono Número de teléfono del usuario (opcional).
+	 * @param contrasenia Contraseña del usuario.
+	 * @param session Objeto `HttpSession` para gestionar la sesión del usuario.
+	 * @param response Objeto `HttpServletResponse` para agregar cookies a la respuesta.
+	 * @return `ResponseEntity` con un mensaje de éxito o error en el registro.
+	 */
 
 	@PostMapping("/registrar")
 	public ResponseEntity<?> registroUsuario(
@@ -67,7 +89,16 @@ public class UsuarioController {
 				logger.info("📌 Token generado: {}", token);
 				logger.info("✅ Registro exitoso. Bienvenido a Terra Nostra!");
 
-				// Crear la cookie con el token
+				/**
+				 * Crea una cookie segura con el token de autenticación del usuario.
+				 *
+				 * - `HttpOnly`: Evita accesos desde JavaScript para mayor seguridad.
+				 * - `Secure`: Solo se envía en conexiones HTTPS.
+				 * - `Path("/")`: Disponible en todo el dominio.
+				 * - `MaxAge(60 * 60 * 24)`: Expira en 1 día.
+				 */
+
+
 				Cookie cookie = new Cookie("SESSIONID", token);
 				cookie.setHttpOnly(true);
 				cookie.setSecure(true);
@@ -90,6 +121,12 @@ public class UsuarioController {
 
 	}
 
+	/**
+	 * Obtiene la lista de todos los usuarios registrados en la base de datos.*
+	 * @return `ResponseEntity` con la lista de usuarios en formato `UsuarioDto` o un estado `204 No Content` si no hay usuarios.
+	 */
+
+
 	@GetMapping("/listar")
 	public ResponseEntity<List<UsuarioDto>> listarUsuarios() {
 		logger.info("📢 Solicitando lista de usuarios desde el controlador.");
@@ -103,6 +140,13 @@ public class UsuarioController {
 			return ResponseEntity.ok(usuarios);
 		}
 	}
+
+	/**
+	 * Determina la página a la que debe ser redirigido un usuario según su rol.*
+	 * @param session Objeto `HttpSession` para obtener la información del usuario en sesión.
+	 * @return `String` con la redirección a la vista correspondiente (perfil de usuario o panel de administración).
+	 */
+
 
 	@GetMapping("/usuario/perfil")
 	public String perfilUsuario(HttpSession session) {

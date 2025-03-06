@@ -11,11 +11,21 @@ import org.springframework.web.servlet.ModelAndView;
 import com.terra_nostra.dto.UsuarioDto;
 import com.terra_nostra.service.UsuarioService;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 
 import java.util.List;
 
 @Controller
+
+/**
+ * Controlador principal para manejar la navegación de la aplicación.
+ * Proporciona rutas para la página principal, la tienda, el panel de administración
+ * y el panel de usuario.
+ *
+ * @author ebp
+ * @version 1.0
+ */
+
 public class HomeController {
 
     @Autowired
@@ -27,15 +37,36 @@ public class HomeController {
     @Autowired
     private JwtUtil jwtUtil;
 
+    /**
+     * Muestra la página de inicio.*
+     * @return Nombre de la vista `index`.
+     */
+
+
     @GetMapping("/terra-nostra")
     public String home() {
         return "index";
     }
 
+    /**
+     * Muestra la página de la tienda.*
+     * @return `ModelAndView` con la vista `shop`.
+     */
+
+
     @GetMapping("/shop")
     public ModelAndView mostrarTienda() {
         return new ModelAndView("shop");
     }
+
+    /**
+     * Muestra el panel de administración si el usuario tiene el rol adecuado.
+     * Verifica el token almacenado en las cookies para determinar si el usuario es ADMIN.
+     * Si el token es válido, obtiene la lista de usuarios desde la API.
+     * @param request Objeto `HttpServletRequest` para acceder a las cookies.
+     * @return `ModelAndView` con la vista de administración o una redirección en caso de error.
+     */
+
 
     @GetMapping("/admin")
     public ModelAndView panelAdmin(HttpServletRequest request) {
@@ -57,7 +88,6 @@ public class HomeController {
                 logger.info("✅ Usuario autenticado como ADMIN: {}", usuarioLogueado);
                 mav.addObject("usuarioLogueado", usuarioLogueado);
 
-                // 🔥 Obtener la lista de usuarios desde la API
                 List<UsuarioDto> usuarios = usuarioService.obtenerTodosLosUsuarios();
 
                 if (usuarios == null || usuarios.isEmpty()) {
@@ -75,6 +105,14 @@ public class HomeController {
 
         return mav;
     }
+
+    /**
+     * Muestra el panel de usuario si el usuario tiene el rol adecuado.
+     * Verifica el token almacenado en las cookies para determinar si el usuario es USER.*
+     * @param request Objeto `HttpServletRequest` para acceder a las cookies.
+     * @return `ModelAndView` con la vista de usuario o una redirección en caso de error.
+     */
+
 
     @GetMapping("/adminUser")
     public ModelAndView panelUsuario(HttpServletRequest request) {
@@ -96,6 +134,12 @@ public class HomeController {
 
         return mav;
     }
+
+    /**
+     * Muestra la página de error.*
+     * @return `ModelAndView` con la vista `error`.
+     */
+
 
     @GetMapping("/error")
     public ModelAndView errorPage() {

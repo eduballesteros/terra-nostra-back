@@ -1,6 +1,15 @@
 document.addEventListener("DOMContentLoaded", function () {
     console.log("📡 Cargando módulo de gestión de usuarios...");
 
+    /**
+     * Obtiene la lista de usuarios desde el backend y los muestra en la tabla HTML.
+     * Realiza una solicitud `fetch` al controlador y, si la respuesta es válida,
+     * inserta los usuarios.
+     *
+     * @returns {void}
+     */
+
+
     function cargarUsuarios() {
         console.log("🔄 Solicitando lista de usuarios...");
 
@@ -51,7 +60,24 @@ document.addEventListener("DOMContentLoaded", function () {
             .catch(error => console.error("❌ Error al cargar usuarios:", error));
     }
 
+    /**
+     * Asigna eventos de edición y eliminación a los botones dentro de la tabla de usuarios.
+     * Permite editar y eliminar usuarios mediante modales y confirmaciones.
+     *
+     * @returns {void}
+     */
+
+
     function agregarEventosUsuarios() {
+
+    /**
+     * Maneja el evento de eliminación de un usuario.
+     * Solicita confirmación mediante un `prompt` y envía una petición `DELETE` al backend.
+     *
+     * @param {string} email - Correo del usuario a eliminar.
+     * @returns {void}
+     */
+
         document.querySelectorAll(".eliminar-usuario").forEach(btn => {
             btn.addEventListener("click", function () {
                 let email = this.getAttribute("data-email");
@@ -82,6 +108,15 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         });
 
+        /**
+         * Maneja el evento de edición de un usuario.
+         * Rellena los campos del formulario de edición con los datos del usuario y muestra el modal.
+         *
+         * @param {HTMLElement} btn - Botón que activó la edición.
+         * @returns {void}
+         */
+
+
         document.querySelectorAll(".editar-usuario").forEach(btn => {
             btn.addEventListener("click", function () {
                 let modalElement = document.getElementById("editarUsuarioModal");
@@ -102,6 +137,14 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         });
     }
+
+    /**
+     * Envía los datos editados del usuario al backend para su actualización.
+     * Captura el evento `submit`, evita la recarga de la página y realiza una petición `PUT`.
+     *
+     * @returns {void}
+     */
+
 
     document.getElementById("editarUsuarioForm")?.addEventListener("submit", function (event) {
         event.preventDefault();
