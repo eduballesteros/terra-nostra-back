@@ -82,7 +82,7 @@ public class AuthController {
             logger.info("🎭 Rol obtenido del usuario autenticado: {}", rolReal);
 
             // ✅ Generamos un nuevo token con el rol correcto
-            String newToken = jwtUtil.generarToken(usuario.getEmail(), rolReal);
+            String newToken = jwtUtil.generarToken(usuario.getEmail(), rolReal, usuario.getNombre());
             logger.info("✅ Nuevo token generado con rol '{}' para el usuario {}", rolReal, usuario.getEmail());
 
 
@@ -146,9 +146,11 @@ public class AuthController {
         // Extraer el email desde el JWT (sin consultar la base de datos)
         String emailUsuario = jwtUtil.obtenerEmailDesdeToken(token);
         String rolUsuario = jwtUtil.obtenerRolDesdeToken(token);
+        String nombreUsuario = jwtUtil.obtenerNombreDesdeToken(token);
 
         response.put("sesionActiva", true);
-        response.put("nombreUsuario", emailUsuario); // Usamos el email como identificador
+        response.put("emailUsuario", emailUsuario);
+        response.put("nombreUsuario", nombreUsuario);
         response.put("rol", rolUsuario);
 
         return ResponseEntity.ok(response);
