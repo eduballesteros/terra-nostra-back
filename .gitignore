@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Directories
 target/
 build/
@@ -34,6 +35,8 @@ gradlew.bat
 # Other sensitive files
 application.properties
 =======
+=======
+>>>>>>> 1a6902d27555ac3a37c7b1689a2e14afec122e18
 HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
@@ -67,4 +70,7 @@ build/
 
 ### VS Code ###
 .vscode/
+<<<<<<< HEAD
+>>>>>>> 1a6902d27555ac3a37c7b1689a2e14afec122e18
+=======
 >>>>>>> 1a6902d27555ac3a37c7b1689a2e14afec122e18
