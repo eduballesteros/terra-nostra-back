@@ -1,181 +1,181 @@
-package com.terra_nostra.controller;
+    package com.terra_nostra.controller;
 
-import com.terra_nostra.utils.JwtUtil;
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServletRequest;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
-import com.terra_nostra.dto.UsuarioDto;
-import com.terra_nostra.service.UsuarioService;
-import org.slf4j.Logger;
-
-
-import java.util.List;
-
-@Controller
-
-/**
- * Controlador principal para manejar la navegación de la aplicación.
- * Proporciona rutas para la página principal, la tienda, el panel de administración
- * y el panel de usuario.
- *
- * @author ebp
- * @version 1.0
- */
-
-public class HomeController {
-
-    @Autowired
-    private UsuarioService usuarioService;
-
-    private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+    import com.terra_nostra.utils.JwtUtil;
+    import jakarta.servlet.http.Cookie;
+    import jakarta.servlet.http.HttpServletRequest;
+    import org.slf4j.LoggerFactory;
+    import org.springframework.beans.factory.annotation.Autowired;
+    import org.springframework.stereotype.Controller;
+    import org.springframework.web.bind.annotation.GetMapping;
+    import org.springframework.web.bind.annotation.RequestParam;
+    import org.springframework.web.servlet.ModelAndView;
+    import com.terra_nostra.dto.UsuarioDto;
+    import com.terra_nostra.service.UsuarioService;
+    import org.slf4j.Logger;
 
 
-    @Autowired
-    private JwtUtil jwtUtil;
+    import java.util.List;
+
+    @Controller
 
     /**
-     * Muestra la página de inicio.*
-     * @return Nombre de la vista `index`.
+     * Controlador principal para manejar la navegación de la aplicación.
+     * Proporciona rutas para la página principal, la tienda, el panel de administración
+     * y el panel de usuario.
+     *
+     * @author ebp
+     * @version 1.0
      */
 
+    public class HomeController {
 
-    @GetMapping("/terra-nostra")
-    public String home() {
-        return "index";
-    }
+        @Autowired
+        private UsuarioService usuarioService;
 
-    /**
-     * Muestra la página de la tienda.*
-     * @return `ModelAndView` con la vista `shop`.
-     */
+        private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
 
-    @GetMapping("/shop")
-    public ModelAndView mostrarTienda() {
-        return new ModelAndView("shop");
-    }
+        @Autowired
+        private JwtUtil jwtUtil;
 
-    /**
-     * Muestra el panel de administración si el usuario tiene el rol adecuado.
-     * Verifica el token almacenado en las cookies para determinar si el usuario es ADMIN.
-     * Si el token es válido, obtiene la lista de usuarios desde la API.
-     * @param request Objeto `HttpServletRequest` para acceder a las cookies.
-     * @return `ModelAndView` con la vista de administración o una redirección en caso de error.
-     */
+        /**
+         * Muestra la página de inicio.*
+         * @return Nombre de la vista `index`.
+         */
 
 
-    @GetMapping("/admin")
-    public ModelAndView panelAdmin(HttpServletRequest request) {
-        logger.info("📢 Iniciando carga de la página de administración...");
+        @GetMapping("/terra-nostra")
+        public String home() {
+            return "index";
+        }
 
-        ModelAndView mav = new ModelAndView("admin");
+        /**
+         * Muestra la página de la tienda.*
+         * @return `ModelAndView` con la vista `shop`.
+         */
 
-        // Verificar el token desde las cookies
-        String token = obtenerTokenDesdeCookies(request);
 
-        if (token == null || !jwtUtil.isTokenValido(token)) {
-            logger.warn("⚠ Token no válido o inexistente. Redirigiendo a error.");
-            mav.setViewName("error");
-        } else {
-            String usuarioLogueado = jwtUtil.obtenerEmailDesdeToken(token);
-            String rolUsuario = jwtUtil.obtenerRolDesdeToken(token);
+        @GetMapping("/shop")
+        public ModelAndView mostrarTienda() {
+            return new ModelAndView("shop");
+        }
 
-            if ("ROLE_ADMIN".equals(rolUsuario)) {
-                logger.info("✅ Usuario autenticado como ADMIN: {}", usuarioLogueado);
-                mav.addObject("usuarioLogueado", usuarioLogueado);
+        /**
+         * Muestra el panel de administración si el usuario tiene el rol adecuado.
+         * Verifica el token almacenado en las cookies para determinar si el usuario es ADMIN.
+         * Si el token es válido, obtiene la lista de usuarios desde la API.
+         * @param request Objeto `HttpServletRequest` para acceder a las cookies.
+         * @return `ModelAndView` con la vista de administración o una redirección en caso de error.
+         */
 
-                List<UsuarioDto> usuarios = usuarioService.obtenerTodosLosUsuarios();
 
-                if (usuarios == null || usuarios.isEmpty()) {
-                    logger.warn("⚠ No se encontraron usuarios en la API.");
+        @GetMapping("/admin")
+        public ModelAndView panelAdmin(HttpServletRequest request) {
+            logger.info("📢 Iniciando carga de la página de administración...");
+
+            ModelAndView mav = new ModelAndView("admin");
+
+            // Verificar el token desde las cookies
+            String token = obtenerTokenDesdeCookies(request);
+
+            if (token == null || !jwtUtil.isTokenValido(token)) {
+                logger.warn("⚠ Token no válido o inexistente. Redirigiendo a error.");
+                mav.setViewName("error");
+            } else {
+                String usuarioLogueado = jwtUtil.obtenerEmailDesdeToken(token);
+                String rolUsuario = jwtUtil.obtenerRolDesdeToken(token);
+
+                if ("ROLE_ADMIN".equals(rolUsuario)) {
+                    logger.info("✅ Usuario autenticado como ADMIN: {}", usuarioLogueado);
+                    mav.addObject("usuarioLogueado", usuarioLogueado);
+
+                    List<UsuarioDto> usuarios = usuarioService.obtenerTodosLosUsuarios();
+
+                    if (usuarios == null || usuarios.isEmpty()) {
+                        logger.warn("⚠ No se encontraron usuarios en la API.");
+                    } else {
+                        logger.info("✅ Usuarios obtenidos con éxito: {} registros.", usuarios.size());
+                    }
+
+                    mav.addObject("usuarios", usuarios);
                 } else {
-                    logger.info("✅ Usuarios obtenidos con éxito: {} registros.", usuarios.size());
-                }
-
-                mav.addObject("usuarios", usuarios);
-            } else {
-                logger.warn("⛔ Acceso denegado para usuario: {} (No es ADMIN)", usuarioLogueado);
-                mav.setViewName("redirect:/error");
-            }
-        }
-
-        return mav;
-    }
-
-    /**
-     * Muestra el panel de usuario si el usuario tiene el rol adecuado.
-     * Verifica el token almacenado en las cookies para determinar si el usuario es USER.*
-     * @param request Objeto `HttpServletRequest` para acceder a las cookies.
-     * @return `ModelAndView` con la vista de usuario o una redirección en caso de error.
-     */
-
-
-    @GetMapping("/infoUser")
-    public ModelAndView panelUsuario(HttpServletRequest request) {
-        ModelAndView mav = new ModelAndView("infoUser");
-        String token = obtenerTokenDesdeCookies(request);
-
-        if (token == null || !jwtUtil.isTokenValido(token)) {
-            mav.setViewName("error");
-        } else {
-            String usuarioLogueado = jwtUtil.obtenerEmailDesdeToken(token);
-            String rolUsuario = jwtUtil.obtenerRolDesdeToken(token);
-
-            if ("ROLE_USER".equals(rolUsuario)) {
-                mav.addObject("usuarioLogueado", usuarioLogueado);
-            } else {
-                mav.setViewName("redirect:/error");
-            }
-        }
-
-        return mav;
-    }
-
-    /**
-     * Muestra la página de error.*
-     * @return `ModelAndView` con la vista `error`.
-     */
-
-
-    @GetMapping("/error")
-    public ModelAndView errorPage() {
-        return new ModelAndView("error");
-    }
-
-    private String obtenerTokenDesdeCookies(HttpServletRequest request) {
-        Cookie[] cookies = request.getCookies();
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if ("SESSIONID".equals(cookie.getName())) {
-                    return cookie.getValue();
+                    logger.warn("⛔ Acceso denegado para usuario: {} (No es ADMIN)", usuarioLogueado);
+                    mav.setViewName("redirect:/error");
                 }
             }
-        }
-        return null;
-    }
 
-    @GetMapping("/cambiar-contrasenia")
-    public ModelAndView mostrarFormularioCambio(@RequestParam("token") String token) {
-        ModelAndView mav;
-
-        // Validar si el token existe y es válido
-        boolean tokenValido = usuarioService.validarTokenRecuperacion(token); // Este método debes implementarlo si aún no existe
-
-        if (!tokenValido) {
-            mav = new ModelAndView("error");
-        } else {
-            mav = new ModelAndView("cambiar-contrasenia");
-            mav.addObject("token", token);
+            return mav;
         }
 
-        return mav;
+        /**
+         * Muestra el panel de usuario si el usuario tiene el rol adecuado.
+         * Verifica el token almacenado en las cookies para determinar si el usuario es USER.*
+         * @param request Objeto `HttpServletRequest` para acceder a las cookies.
+         * @return `ModelAndView` con la vista de usuario o una redirección en caso de error.
+         */
+
+
+        @GetMapping("/infoUser")
+        public ModelAndView panelUsuario(HttpServletRequest request) {
+            ModelAndView mav = new ModelAndView("infoUser");
+            String token = obtenerTokenDesdeCookies(request);
+
+            if (token == null || !jwtUtil.isTokenValido(token)) {
+                mav.setViewName("error");
+            } else {
+                String usuarioLogueado = jwtUtil.obtenerEmailDesdeToken(token);
+                String rolUsuario = jwtUtil.obtenerRolDesdeToken(token);
+
+                if ("ROLE_USER".equals(rolUsuario)) {
+                    mav.addObject("usuarioLogueado", usuarioLogueado);
+                } else {
+                    mav.setViewName("redirect:/error");
+                }
+            }
+
+            return mav;
+        }
+
+        /**
+         * Muestra la página de error.*
+         * @return `ModelAndView` con la vista `error`.
+         */
+
+
+        @GetMapping("/error")
+        public ModelAndView errorPage() {
+            return new ModelAndView("error");
+        }
+
+        private String obtenerTokenDesdeCookies(HttpServletRequest request) {
+            Cookie[] cookies = request.getCookies();
+            if (cookies != null) {
+                for (Cookie cookie : cookies) {
+                    if ("SESSIONID".equals(cookie.getName())) {
+                        return cookie.getValue();
+                    }
+                }
+            }
+            return null;
+        }
+
+        @GetMapping("/cambiar-contrasenia")
+        public ModelAndView mostrarFormularioCambio(@RequestParam("token") String token) {
+            ModelAndView mav;
+
+            // Validar si el token existe y es válido
+            boolean tokenValido = usuarioService.validarTokenRecuperacion(token); // Este método debes implementarlo si aún no existe
+
+            if (!tokenValido) {
+                mav = new ModelAndView("error");
+            } else {
+                mav = new ModelAndView("cambiar-contrasenia");
+                mav.addObject("token", token);
+            }
+
+            return mav;
+        }
+
+
     }
-
-
-}
 

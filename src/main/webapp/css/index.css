@@ -134,6 +134,40 @@ html, body {
   margin: auto;
 }
 
+.google-login-btn {
+  background-color: var(--color-primary); /* Verde oscuro Terra Nostra */
+  color: white;
+  font-weight: 600;
+  width: 100%;
+  border: none;
+  padding: 14px 0;
+  border-radius: 12px;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  text-decoration: none;
+}
+
+.google-login-btn img {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%; /* Hace el logo redondo */
+  background-color: white; /* Fondo blanco para que destaque */
+  padding: 2px;
+}
+
+.google-login-btn:hover {
+  background-color: var(--color-secondary); /* Verde oliva al hacer hover */
+  transform: translateY(-2px);
+}
+
+
+
 /* Botón cerrar */
 .close-modal {
   position: absolute;
