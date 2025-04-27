@@ -24,7 +24,6 @@ import java.util.Map;
  */
 
 public class AdminController {
-
     /**
      * Logger para registrar información sobre las operaciones de administración de usuarios.
      */

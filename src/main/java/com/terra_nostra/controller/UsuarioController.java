@@ -76,7 +76,7 @@ public class UsuarioController {
 			usuarioNuevo.setTelefono(telefono);
 			usuarioNuevo.setFechaRegistro(LocalDateTime.now(ZoneId.of("Europe/Madrid")));
 			usuarioNuevo.setRol("ROLE_USER");
-			usuarioNuevo.setContrasenia(passwordEncoder.encode(contrasenia));
+			usuarioNuevo.setContrasenia(contrasenia);
 
 			logger.info("📌 Fecha de registro asignada: {}", usuarioNuevo.getFechaRegistro());
 
@@ -85,7 +85,7 @@ public class UsuarioController {
 			logger.info("📌 Resultado del registro: {}", resultado);
 
 			if ("success".equals(resultado)) {
-				String token = jwtUtil.generarToken(email, usuarioNuevo.getRol());
+				String token = jwtUtil.generarToken(email, usuarioNuevo.getRol(), usuarioNuevo.getNombre());
 				logger.info("📌 Token generado: {}", token);
 				logger.info("✅ Registro exitoso. Bienvenido a Terra Nostra!");
 
@@ -163,6 +163,24 @@ public class UsuarioController {
 		// Si es usuario normal, ir al perfil del usuario
 		return "perfil-usuario"; // Cargar perfil-usuario.jsp
 	}
+
+
+	@GetMapping("/detalle")
+	public ResponseEntity<?> obtenerDetalleUsuario(@RequestParam String email) {
+		try {
+			logger.info("🔍 Solicitando detalle del usuario con email: {}", email);
+			UsuarioDto usuario = usuarioService.obtenerDetalleUsuarioDesdeAPI(email);
+			if (usuario != null) {
+				return ResponseEntity.ok(usuario);
+			} else {
+				return ResponseEntity.status(404).body("Usuario no encontrado");
+			}
+		} catch (Exception e) {
+			logger.error("❌ Error al obtener detalle del usuario: {}", e.getMessage(), e);
+			return ResponseEntity.status(500).body("Error en el servidor");
+		}
+	}
+
 
 
 }

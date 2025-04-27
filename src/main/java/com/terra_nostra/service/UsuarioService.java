@@ -211,6 +211,60 @@ public class UsuarioService {
             return false;
         }
     }
-}
 
+    public UsuarioDto obtenerDetalleUsuarioDesdeAPI(String email) {
+        try {
+            HttpClient cliente = HttpClient.newHttpClient();
+            ObjectMapper mapeo = new ObjectMapper();
+            mapeo.registerModule(new JavaTimeModule());
+            mapeo.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(new URI(API_BASE_URL + "/email/" + email))
+                    .header("Accept", "application/json")
+                    .GET()
+                    .build();
+
+            HttpResponse<String> response = cliente.send(request, HttpResponse.BodyHandlers.ofString());
+
+            if (response.statusCode() == 200) {
+                return mapeo.readValue(response.body(), UsuarioDto.class);
+            } else {
+                logger.warn("⚠️ Usuario no encontrado ({}): {}", response.statusCode(), response.body());
+                return null;
+            }
+        } catch (Exception e) {
+            logger.error("❌ Error al obtener detalle del usuario desde la API:", e);
+            return null;
+        }
+    }
+
+    public boolean validarTokenRecuperacion(String token) {
+        try {
+            HttpClient cliente = HttpClient.newHttpClient();
+            String url = "http://localhost:8081/api/auth/validar-token?token=" + token;
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(new URI(url))
+                    .header("Accept", "application/json")
+                    .GET()
+                    .build();
+
+            HttpResponse<String> response = cliente.send(request, HttpResponse.BodyHandlers.ofString());
+
+            if (response.statusCode() == 200) {
+                // Si el backend responde con true/false
+                return Boolean.parseBoolean(response.body());
+            } else {
+                logger.warn("⚠️ Token inválido o expirado. Código: {}, Respuesta: {}", response.statusCode(), response.body());
+                return false;
+            }
+
+        } catch (Exception e) {
+            logger.error("❌ Error al validar el token de recuperación:", e);
+            return false;
+        }
+    }
+
+}
 

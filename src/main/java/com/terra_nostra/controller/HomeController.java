@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import com.terra_nostra.dto.UsuarioDto;
 import com.terra_nostra.service.UsuarioService;
@@ -114,9 +115,9 @@ public class HomeController {
      */
 
 
-    @GetMapping("/adminUser")
+    @GetMapping("/infoUser")
     public ModelAndView panelUsuario(HttpServletRequest request) {
-        ModelAndView mav = new ModelAndView("adminUser");
+        ModelAndView mav = new ModelAndView("infoUser");
         String token = obtenerTokenDesdeCookies(request);
 
         if (token == null || !jwtUtil.isTokenValido(token)) {
@@ -157,4 +158,24 @@ public class HomeController {
         }
         return null;
     }
+
+    @GetMapping("/cambiar-contrasenia")
+    public ModelAndView mostrarFormularioCambio(@RequestParam("token") String token) {
+        ModelAndView mav;
+
+        // Validar si el token existe y es válido
+        boolean tokenValido = usuarioService.validarTokenRecuperacion(token); // Este método debes implementarlo si aún no existe
+
+        if (!tokenValido) {
+            mav = new ModelAndView("error");
+        } else {
+            mav = new ModelAndView("cambiar-contrasenia");
+            mav.addObject("token", token);
+        }
+
+        return mav;
+    }
+
+
 }
+

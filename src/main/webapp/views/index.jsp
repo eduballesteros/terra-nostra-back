@@ -173,77 +173,90 @@
 		</div>
 	</footer>
 <!-- Modal de Inicio de Sesión / Gestión de Cuenta -->
-	<div id="loginModal" class="modal fade" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <!-- Botón para cerrar el modal -->
-          <button class="close-modal" id="closeModalButton">×</button>
-          <div class="container">
-            <div class="form_area">
+<div id="loginModal" class="modal fade" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content login-modal-content">
 
-              <!-- Contenedor para el Gestor de Usuario -->
-              <div id="userManager" style="display: none;">
-                  <p class="modal-title">👤 Mi Cuenta</p>
-                  <div class="user-info">
-                      <p><strong>Bienvenido, <span id="userName">Usuario</span></strong></p>
-                      <ul class="user-options">
-                          <li>
-                              <a id="profileLink" href="#">Mi perfil</a>
-                          </li>
-                          <li><a href="/pedidos">Mis pedidos</a></li>
-                          <li><a href="#" id="logoutButton">Cerrar sesión</a></li>
-                      </ul>
-                  </div>
-              </div>
+      <!-- Botón de cierre -->
+      <button type="button" class="close-modal" id="closeModalButton" aria-label="Cerrar">×</button>
 
-              <!-- Formulario de Registro -->
-                  <form action="/usuario/registrar" method="POST" id="registerForm" onsubmit="return validarRegistro();">
-                    <p class="modal-title" id="modalTitle">REGISTRARSE</p>
-                    <div class="form_group">
-                      <label class="sub_title" for="regEmail">Email</label>
-                      <input type="email" placeholder="Ingresa tu email" id="regEmail" name="email" class="form_style" required>
-                    </div>
-                    <div class="form_group">
-                      <label class="sub_title" for="nombre">Nombre</label>
-                      <input type="text" placeholder="Ingresa tu nombre" id="nombre" name="nombre" class="form_style" required>
-                    </div>
-                    <div class="form_group">
-                      <label class="sub_title" for="apellido">Apellido</label>
-                      <input type="text" placeholder="Ingresa tu apellido" id="apellido" name="apellido" class="form_style" required>
-                    </div>
-                    <div class="form_group">
-                      <label class="sub_title" for="contrasenia">Contraseña</label>
-                      <input type="password" placeholder="Crea una contraseña" id="contrasenia" name="contrasenia" class="form_style" required minlength="6">
-                    </div>
-                     <div class="form_group">
-                                      <label class="sub_title" for="confirmPassword">Confirmar Contraseña</label>
-                                      <input placeholder="Repite tu contraseña" id="confirmPassword" name="confirmPassword" class="form_style" type="password" required />
-                                      <p class="error" id="passwordError" style="display: none;">Las contraseñas no coinciden</p>
-                                    </div>
-                    <button class="modal-btn" type="submit">REGISTRARSE</button>
-                    <p class="line">¿Ya tienes cuenta? <a href="javascript:void(0)" onclick="toggleForm()">Inicia Sesión</a></p>
-                  </form>
+      <div class="modal-body">
+        <div class="form-area">
 
-                  <!-- Formulario de Inicio de Sesión -->
-                  <form action="/auth/login" method="POST" id="loginForm" onsubmit="return validarLogin();">
-                    <p class="modal-title">INICIAR SESIÓN</p>
-                    <div class="form_group">
-                      <label class="sub_title" for="loginEmail">Email</label>
-                      <input type="email" placeholder="Ingresa tu email" id="loginEmail" name="email" class="form_style" required>
-                    </div>
-                    <div class="form_group">
-                      <label class="sub_title" for="loginPassword">Contraseña</label>
-                      <input type="password" placeholder="Ingresa tu contraseña" id="loginPassword" name="contrasenia" class="form_style" required>
-                    </div>
-                    <button class="modal-btn" type="submit">INICIA SESIÓN</button>
-                    <p class="line">¿No tienes cuenta? <a href="javascript:void(0)" onclick="toggleForm()">Regístrate</a></p>
-                  </form>
-
-                </div>
-              </div>
+          <!-- Vista Mi Cuenta -->
+          <div id="userManager" class="user-manager" style="display: none;">
+            <p class="modal-title">Mi Cuenta</p>
+            <div class="user-info">
+              <p class="user-welcome"><strong>Hola, <span id="userName">Usuario</span></strong></p>
+              <ul class="user-options">
+                <li><a id="profileLink" href="#"><i class="fa-solid fa-user"></i> Mi perfil</a></li>
+                <li><a href="#" id="logoutButton"><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión</a></li>
+              </ul>
             </div>
           </div>
+
+          <!-- Formulario de Registro -->
+          <form action="/usuario/registrar" method="POST" id="registerForm" onsubmit="return validarRegistro();">
+            <p class="modal-title" id="modalTitle">REGISTRARSE</p>
+            <div class="form_group">
+              <label class="sub_title" for="regEmail">Email</label>
+              <input type="email" placeholder="Ingresa tu email" id="regEmail" name="email" class="form_style" required>
+            </div>
+            <div class="form_group">
+              <label class="sub_title" for="nombre">Nombre</label>
+              <input type="text" placeholder="Ingresa tu nombre" id="nombre" name="nombre" class="form_style" required>
+            </div>
+            <div class="form_group">
+              <label class="sub_title" for="apellido">Apellido</label>
+              <input type="text" placeholder="Ingresa tu apellido" id="apellido" name="apellido" class="form_style" required>
+            </div>
+            <div class="form_group">
+              <label class="sub_title" for="contrasenia">Contraseña</label>
+              <input type="password" placeholder="Crea una contraseña" id="contrasenia" name="contrasenia" class="form_style" required minlength="6">
+            </div>
+            <div class="form_group">
+              <label class="sub_title" for="confirmPassword">Confirmar Contraseña</label>
+              <input placeholder="Repite tu contraseña" id="confirmPassword" name="confirmPassword" class="form_style" type="password" required />
+              <p class="error" id="passwordError" style="display: none;">Las contraseñas no coinciden</p>
+            </div>
+            <button class="modal-btn" type="submit">REGISTRARSE</button>
+            <p class="line">¿Ya tienes cuenta? <a href="javascript:void(0)" onclick="toggleForm()">Inicia Sesión</a></p>
+          </form>
+
+          <!-- Formulario de Inicio de Sesión -->
+          <form action="/auth/login" method="POST" id="loginForm" onsubmit="return validarLogin();">
+            <p class="modal-title">INICIAR SESIÓN</p>
+
+            <div class="form_group">
+              <label class="sub_title" for="loginEmail">Email</label>
+              <input type="email" placeholder="Ingresa tu email" id="loginEmail" name="email" class="form_style" required>
+            </div>
+
+            <div class="form_group">
+              <label class="sub_title" for="loginPassword">Contraseña</label>
+              <input type="password" placeholder="Ingresa tu contraseña" id="loginPassword" name="contrasenia" class="form_style" required>
+            </div>
+
+            <button class="modal-btn" type="submit">INICIA SESIÓN</button>
+
+            <p class="line">¿Has olvidado tu contraseña?
+              <a href="javascript:void(0);" onclick="abrirRecuperarContrasenia()">Recupérala aquí</a>
+            </p>
+
+
+            <p class="line">¿No tienes cuenta?
+              <a href="javascript:void(0)" onclick="toggleForm()">Regístrate</a>
+            </p>
+          </form>
+
+
+        </div>
+      </div>
+
     </div>
+  </div>
+</div>
+
 
     <!-- Modal de Notificación -->
     <div class="modal fade" id="notificationModal" tabindex="-1" aria-labelledby="notificationModalLabel" aria-hidden="true">
@@ -263,10 +276,48 @@
       </div>
     </div>
 
+  <!-- Modal para Solicitar Recuperación de Contraseña -->
+  <div class="modal fade" id="recuperarPasswordModal" tabindex="-1" aria-labelledby="recuperarPasswordModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content login-modal-content">
+
+        <!-- Botón de cierre -->
+        <button type="button" class="close-modal" data-bs-dismiss="modal" aria-label="Cerrar">×</button>
+
+        <div class="modal-body">
+          <div class="form-area">
+
+            <!-- Formulario para solicitar enlace -->
+            <form id="recuperarPasswordForm">
+              <p class="modal-title">RECUPERAR CONTRASEÑA</p>
+
+              <div class="form_group">
+                <label class="sub_title" for="recuperarEmail">Email</label>
+                <input type="email" id="recuperarEmail" class="form_style" placeholder="Introduce tu email" required>
+              </div>
+
+              <div id="recuperarAlert" class="alert d-none mt-2" role="alert" style="display:none;"></div>
+
+              <button id="btnEnviarRecuperacion" class="modal-btn" type="submit">Enviar enlace</button>
+
+              <p class="line">
+                ¿Recuerdas tu contraseña? <a href="javascript:void(0)" onclick="cerrarModalRecuperacion()">Iniciar sesión</a>
+              </p>
+            </form>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/formIndex.js"></script>
-     <script src="js/cargarProductos.js"></script>
-    <script src="js/auth.js"></script>
+    <script src="js/authForm.js"></script>
+    <script src="js/cargarProductos.js"></script>
+    <script src="js/authCambiarContrasenia.js"></script>
+    <script src="js/authModal.js"></script>
 
 
   </body>
