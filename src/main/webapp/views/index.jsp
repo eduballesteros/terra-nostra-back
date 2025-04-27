@@ -220,13 +220,6 @@
               <p class="error" id="passwordError" style="display: none;">Las contraseñas no coinciden</p>
             </div>
             <button class="modal-btn" type="submit">REGISTRARSE</button>
-
-            <a href="/oauth2/authorization/google" class="google-login-btn">
-              <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google">
-              Registrarse con Google
-            </a>
-
-
             <p class="line">¿Ya tienes cuenta? <a href="javascript:void(0)" onclick="toggleForm()">Inicia Sesión</a></p>
           </form>
 
@@ -245,11 +238,6 @@
             </div>
 
             <button class="modal-btn" type="submit">INICIA SESIÓN</button>
-
-            <a href="/oauth2/authorization/google" class="google-login-btn">
-              <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google">
-              Iniciar sesión con Google
-            </a>
 
             <p class="line">¿Has olvidado tu contraseña?
               <a href="javascript:void(0);" onclick="abrirRecuperarContrasenia()">Recupérala aquí</a>
