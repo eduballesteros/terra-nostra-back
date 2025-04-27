@@ -1,42 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-# Directories
-target/
-build/
-node_modules/
-.vscode/
-.idea/
-.mvn/
-
-# IntelliJ IDEA
-*.iml
-
-# Eclipse
-.classpath
-.project
-
-# Log files
-*.log
-*.tmp
-
-# OS files
-.DS_Store
-Thumbs.db
-
-# Maven and Gradle wrapper files
-mvnw
-mvnw.cmd
-gradlew
-gradlew.bat
-
-# Environment variables
-.env
-
-# Other sensitive files
-application.properties
-=======
-=======
->>>>>>> 1a6902d27555ac3a37c7b1689a2e14afec122e18
 HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
@@ -70,7 +31,3 @@ build/
 
 ### VS Code ###
 .vscode/
-<<<<<<< HEAD
->>>>>>> 1a6902d27555ac3a37c7b1689a2e14afec122e18
-=======
->>>>>>> 1a6902d27555ac3a37c7b1689a2e14afec122e18
