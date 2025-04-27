@@ -1,33 +1,34 @@
-HELP.md
+# Directories
 target/
-!.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
-
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
-
-### IntelliJ IDEA ###
-.idea
-*.iws
-*.iml
-*.ipr
-
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
 build/
-!**/src/main/**/build/
-!**/src/test/**/build/
-
-### VS Code ###
+node_modules/
 .vscode/
+.idea/
+.mvn/
+
+# IntelliJ IDEA
+*.iml
+
+# Eclipse
+.classpath
+.project
+
+# Log files
+*.log
+*.tmp
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Maven and Gradle wrapper files
+mvnw
+mvnw.cmd
+gradlew
+gradlew.bat
+
+# Environment variables
+.env
+
+# Other sensitive files
+application.properties
