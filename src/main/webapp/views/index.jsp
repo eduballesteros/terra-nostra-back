@@ -226,7 +226,6 @@
               Registrarse con Google
             </a>
 
-
             <p class="line">¿Ya tienes cuenta? <a href="javascript:void(0)" onclick="toggleForm()">Inicia Sesión</a></p>
           </form>
 
