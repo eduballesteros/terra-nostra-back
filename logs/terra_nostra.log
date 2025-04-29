@@ -570,3 +570,286 @@ Unconditional classes:
 
 
 
+2025-04-29T18:11:42.835+02:00  INFO 18396 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : Starting TerraNostraApplication using Java 21.0.5 with PID 18396 (C:\Users\balle\Documents\Proyectos\terra-nostra\target\classes started by balle in C:\Users\balle\Documents\Proyectos\terra-nostra)
+2025-04-29T18:11:42.836+02:00 DEBUG 18396 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-04-29T18:11:42.837+02:00  INFO 18396 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : No active profile set, falling back to 1 default profile: "default"
+2025-04-29T18:11:42.897+02:00  INFO 18396 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-04-29T18:11:42.897+02:00  INFO 18396 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-04-29T18:11:44.362+02:00  INFO 18396 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-04-29T18:11:44.378+02:00  INFO 18396 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-04-29T18:11:44.378+02:00  INFO 18396 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-04-29T18:11:44.615+02:00  INFO 18396 --- [restartedMain] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-04-29T18:11:44.627+02:00  INFO 18396 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-04-29T18:11:44.627+02:00  INFO 18396 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1729 ms
+2025-04-29T18:11:44.997+02:00  WARN 18396 --- [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 32d4312c-fa05-48a0-87bd-2a200377596c
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-04-29T18:11:45.007+02:00  INFO 18396 --- [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2025-04-29T18:11:45.156+02:00  INFO 18396 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2025-04-29T18:11:45.191+02:00  INFO 18396 --- [restartedMain] o.s.v.b.OptionalValidatorFactoryBean     : Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-04-29T18:11:45.582+02:00  INFO 18396 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-04-29T18:11:45.633+02:00  INFO 18396 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-04-29T18:11:45.643+02:00  INFO 18396 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : Started TerraNostraApplication in 3.572 seconds (process running for 4.249)
+2025-04-29T18:12:10.827+02:00  INFO 18396 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-04-29T18:12:10.828+02:00  INFO 18396 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-04-29T18:12:10.830+02:00  INFO 18396 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2025-04-29T18:12:11.814+02:00  INFO 18396 --- [http-nio-8080-exec-3] c.terra_nostra.service.ProductoService   : 🔍 Enviando solicitud GET a la API para obtener productos...
+2025-04-29T18:12:12.355+02:00  INFO 18396 --- [http-nio-8080-exec-3] c.terra_nostra.service.ProductoService   : 🔹 Código de respuesta de la API: 200
+2025-04-29T18:12:18.606+02:00  INFO 18396 --- [http-nio-8080-exec-8] c.terra_nostra.service.ProductoService   : 🔍 Enviando solicitud GET a la API para obtener productos...
+2025-04-29T18:12:18.638+02:00  INFO 18396 --- [http-nio-8080-exec-8] c.terra_nostra.service.ProductoService   : 🔹 Código de respuesta de la API: 200
+2025-04-29T18:12:25.115+02:00  INFO 18396 --- [http-nio-8080-exec-9] c.terra_nostra.service.ProductoService   : 🔍 Enviando solicitud GET a la API para obtener productos...
+2025-04-29T18:12:25.146+02:00  INFO 18396 --- [http-nio-8080-exec-9] c.terra_nostra.service.ProductoService   : 🔹 Código de respuesta de la API: 200
+2025-04-29T18:14:27.320+02:00  INFO 18396 --- [http-nio-8080-exec-7] c.terra_nostra.service.ProductoService   : 🔍 Enviando solicitud GET a la API para obtener productos...
+2025-04-29T18:14:27.362+02:00  INFO 18396 --- [http-nio-8080-exec-7] c.terra_nostra.service.ProductoService   : 🔹 Código de respuesta de la API: 200
+2025-04-29T18:14:48.530+02:00  INFO 18396 --- [http-nio-8080-exec-6] c.terra_nostra.service.ProductoService   : 🔍 Enviando solicitud GET a la API para obtener productos...
+2025-04-29T18:14:48.563+02:00  INFO 18396 --- [http-nio-8080-exec-6] c.terra_nostra.service.ProductoService   : 🔹 Código de respuesta de la API: 200
+2025-04-29T18:15:00.108+02:00  INFO 18396 --- [http-nio-8080-exec-5] c.terra_nostra.service.ProductoService   : 🔍 Enviando solicitud GET a la API para obtener productos...
+2025-04-29T18:15:00.135+02:00  INFO 18396 --- [http-nio-8080-exec-5] c.terra_nostra.service.ProductoService   : 🔹 Código de respuesta de la API: 200
+2025-04-29T18:29:55.671+02:00  INFO 18396 --- [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-04-29T18:29:55.681+02:00  INFO 18396 --- [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-04-29T18:42:44.709+02:00  INFO 12008 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : Starting TerraNostraApplication using Java 21.0.5 with PID 12008 (C:\Users\balle\Documents\Proyectos\terra-nostra\target\classes started by balle in C:\Users\balle\Documents\Proyectos\terra-nostra)
+2025-04-29T18:42:44.713+02:00 DEBUG 12008 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-04-29T18:42:44.714+02:00  INFO 12008 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : No active profile set, falling back to 1 default profile: "default"
+2025-04-29T18:42:44.769+02:00  INFO 12008 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-04-29T18:42:44.769+02:00  INFO 12008 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-04-29T18:42:46.233+02:00  INFO 12008 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-04-29T18:42:46.248+02:00  INFO 12008 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-04-29T18:42:46.248+02:00  INFO 12008 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-04-29T18:42:46.465+02:00  INFO 12008 --- [restartedMain] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-04-29T18:42:46.475+02:00  INFO 12008 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-04-29T18:42:46.475+02:00  INFO 12008 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1706 ms
+2025-04-29T18:42:46.770+02:00  WARN 12008 --- [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: a062de8d-b7cc-4be4-a595-15dc2d093850
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-04-29T18:42:46.777+02:00  INFO 12008 --- [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2025-04-29T18:42:46.912+02:00  INFO 12008 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2025-04-29T18:42:46.946+02:00  INFO 12008 --- [restartedMain] o.s.v.b.OptionalValidatorFactoryBean     : Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-04-29T18:42:47.315+02:00  INFO 12008 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-04-29T18:42:47.357+02:00  INFO 12008 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-04-29T18:42:47.367+02:00  INFO 12008 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : Started TerraNostraApplication in 3.265 seconds (process running for 3.937)
+2025-04-29T18:44:43.029+02:00  INFO 12008 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-04-29T18:44:43.030+02:00  INFO 12008 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-04-29T18:44:43.032+02:00  INFO 12008 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-04-29T18:45:12.226+02:00  INFO 12008 --- [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-04-29T18:45:12.235+02:00  INFO 12008 --- [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-04-29T18:45:14.561+02:00  INFO 15856 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : Starting TerraNostraApplication using Java 21.0.5 with PID 15856 (C:\Users\balle\Documents\Proyectos\terra-nostra\target\classes started by balle in C:\Users\balle\Documents\Proyectos\terra-nostra)
+2025-04-29T18:45:14.565+02:00 DEBUG 15856 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-04-29T18:45:14.566+02:00  INFO 15856 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : No active profile set, falling back to 1 default profile: "default"
+2025-04-29T18:45:14.634+02:00  INFO 15856 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-04-29T18:45:14.634+02:00  INFO 15856 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-04-29T18:45:15.997+02:00  INFO 15856 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-04-29T18:45:16.011+02:00  INFO 15856 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-04-29T18:45:16.012+02:00  INFO 15856 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-04-29T18:45:16.214+02:00  INFO 15856 --- [restartedMain] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-04-29T18:45:16.222+02:00  INFO 15856 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-04-29T18:45:16.223+02:00  INFO 15856 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1588 ms
+2025-04-29T18:45:16.492+02:00  WARN 15856 --- [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 02d3f85d-9d14-4aa5-8888-4195de1b1b8e
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-04-29T18:45:16.500+02:00  INFO 15856 --- [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2025-04-29T18:45:16.644+02:00  INFO 15856 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2025-04-29T18:45:16.678+02:00  INFO 15856 --- [restartedMain] o.s.v.b.OptionalValidatorFactoryBean     : Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-04-29T18:45:16.998+02:00  INFO 15856 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-04-29T18:45:17.038+02:00  INFO 15856 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-04-29T18:45:17.048+02:00  INFO 15856 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : Started TerraNostraApplication in 3.098 seconds (process running for 3.855)
+2025-04-29T18:45:24.769+02:00  INFO 15856 --- [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-04-29T18:45:24.770+02:00  INFO 15856 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-04-29T18:45:24.771+02:00  INFO 15856 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-04-29T18:45:25.689+02:00  INFO 15856 --- [http-nio-8080-exec-3] c.terra_nostra.service.ProductoService   : 🔍 Enviando solicitud GET a la API para obtener productos...
+2025-04-29T18:45:26.189+02:00  INFO 15856 --- [http-nio-8080-exec-3] c.terra_nostra.service.ProductoService   : 🔹 Código de respuesta de la API: 200
+2025-04-29T18:50:04.862+02:00  INFO 15856 --- [http-nio-8080-exec-8] c.terra_nostra.service.ProductoService   : 🔍 Enviando solicitud GET a la API para obtener productos...
+2025-04-29T18:50:04.908+02:00  INFO 15856 --- [http-nio-8080-exec-8] c.terra_nostra.service.ProductoService   : 🔹 Código de respuesta de la API: 200
+2025-04-29T18:59:39.436+02:00  INFO 15856 --- [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-04-29T18:59:39.445+02:00  INFO 15856 --- [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-04-29T18:59:41.406+02:00  INFO 19772 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : Starting TerraNostraApplication using Java 21.0.5 with PID 19772 (C:\Users\balle\Documents\Proyectos\terra-nostra\target\classes started by balle in C:\Users\balle\Documents\Proyectos\terra-nostra)
+2025-04-29T18:59:41.408+02:00 DEBUG 19772 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-04-29T18:59:41.410+02:00  INFO 19772 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : No active profile set, falling back to 1 default profile: "default"
+2025-04-29T18:59:41.468+02:00  INFO 19772 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-04-29T18:59:41.468+02:00  INFO 19772 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-04-29T18:59:42.849+02:00  INFO 19772 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-04-29T18:59:42.865+02:00  INFO 19772 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-04-29T18:59:42.865+02:00  INFO 19772 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-04-29T18:59:43.062+02:00  INFO 19772 --- [restartedMain] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-04-29T18:59:43.069+02:00  INFO 19772 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-04-29T18:59:43.070+02:00  INFO 19772 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1601 ms
+2025-04-29T18:59:43.342+02:00  WARN 19772 --- [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: aeb0c19f-7560-4fd6-b257-b8202a53a8bc
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-04-29T18:59:43.348+02:00  INFO 19772 --- [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2025-04-29T18:59:43.479+02:00  INFO 19772 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2025-04-29T18:59:43.508+02:00  INFO 19772 --- [restartedMain] o.s.v.b.OptionalValidatorFactoryBean     : Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-04-29T18:59:43.834+02:00  INFO 19772 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-04-29T18:59:43.867+02:00  INFO 19772 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-04-29T18:59:43.876+02:00  INFO 19772 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : Started TerraNostraApplication in 3.055 seconds (process running for 3.688)
+2025-04-29T18:59:57.402+02:00  INFO 19772 --- [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-04-29T18:59:57.402+02:00  INFO 19772 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-04-29T18:59:57.403+02:00  INFO 19772 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-04-29T18:59:58.409+02:00  INFO 19772 --- [http-nio-8080-exec-3] c.terra_nostra.service.ProductoService   : 🔍 Enviando solicitud GET a la API para obtener productos...
+2025-04-29T18:59:58.535+02:00  INFO 19772 --- [http-nio-8080-exec-3] c.terra_nostra.service.ProductoService   : 🔹 Código de respuesta de la API: 200
+2025-04-29T19:00:51.505+02:00  INFO 19772 --- [http-nio-8080-exec-4] c.terra_nostra.service.ProductoService   : 🔍 Enviando solicitud GET a la API para obtener productos...
+2025-04-29T19:00:51.912+02:00  INFO 19772 --- [http-nio-8080-exec-4] c.terra_nostra.service.ProductoService   : 🔹 Código de respuesta de la API: 200
+2025-04-29T19:03:19.216+02:00  INFO 19772 --- [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-04-29T19:03:19.225+02:00  INFO 19772 --- [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-04-29T19:03:21.318+02:00  INFO 16620 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : Starting TerraNostraApplication using Java 21.0.5 with PID 16620 (C:\Users\balle\Documents\Proyectos\terra-nostra\target\classes started by balle in C:\Users\balle\Documents\Proyectos\terra-nostra)
+2025-04-29T19:03:21.321+02:00 DEBUG 16620 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-04-29T19:03:21.322+02:00  INFO 16620 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : No active profile set, falling back to 1 default profile: "default"
+2025-04-29T19:03:21.381+02:00  INFO 16620 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-04-29T19:03:21.381+02:00  INFO 16620 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-04-29T19:03:22.713+02:00  INFO 16620 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-04-29T19:03:22.728+02:00  INFO 16620 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-04-29T19:03:22.728+02:00  INFO 16620 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-04-29T19:03:22.920+02:00  INFO 16620 --- [restartedMain] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-04-29T19:03:22.929+02:00  INFO 16620 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-04-29T19:03:22.930+02:00  INFO 16620 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1549 ms
+2025-04-29T19:03:23.222+02:00  WARN 16620 --- [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 307b0442-c393-416a-8a28-9aa9259ce177
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-04-29T19:03:23.231+02:00  INFO 16620 --- [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2025-04-29T19:03:23.355+02:00  INFO 16620 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2025-04-29T19:03:23.386+02:00  INFO 16620 --- [restartedMain] o.s.v.b.OptionalValidatorFactoryBean     : Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-04-29T19:03:23.708+02:00  INFO 16620 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-04-29T19:03:23.745+02:00  INFO 16620 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-04-29T19:03:23.753+02:00  INFO 16620 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : Started TerraNostraApplication in 3.004 seconds (process running for 3.683)
+2025-04-29T19:03:30.529+02:00  INFO 16620 --- [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-04-29T19:03:30.529+02:00  INFO 16620 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-04-29T19:03:30.530+02:00  INFO 16620 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-04-29T19:03:31.632+02:00  INFO 16620 --- [http-nio-8080-exec-3] c.terra_nostra.service.ProductoService   : 🔍 Enviando solicitud GET a la API para obtener productos...
+2025-04-29T19:03:32.138+02:00  INFO 16620 --- [http-nio-8080-exec-3] c.terra_nostra.service.ProductoService   : 🔹 Código de respuesta de la API: 200
+2025-04-29T19:07:13.570+02:00  INFO 16620 --- [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-04-29T19:07:13.579+02:00  INFO 16620 --- [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-04-29T19:07:15.762+02:00  INFO 16860 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : Starting TerraNostraApplication using Java 21.0.5 with PID 16860 (C:\Users\balle\Documents\Proyectos\terra-nostra\target\classes started by balle in C:\Users\balle\Documents\Proyectos\terra-nostra)
+2025-04-29T19:07:15.764+02:00 DEBUG 16860 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-04-29T19:07:15.765+02:00  INFO 16860 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : No active profile set, falling back to 1 default profile: "default"
+2025-04-29T19:07:15.820+02:00  INFO 16860 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-04-29T19:07:15.820+02:00  INFO 16860 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-04-29T19:07:17.152+02:00  INFO 16860 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-04-29T19:07:17.171+02:00  INFO 16860 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-04-29T19:07:17.172+02:00  INFO 16860 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-04-29T19:07:17.417+02:00  INFO 16860 --- [restartedMain] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-04-29T19:07:17.425+02:00  INFO 16860 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-04-29T19:07:17.425+02:00  INFO 16860 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1604 ms
+2025-04-29T19:07:17.709+02:00  WARN 16860 --- [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 27d804e4-56b2-4be9-bf0b-a001cf55494c
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-04-29T19:07:17.716+02:00  INFO 16860 --- [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2025-04-29T19:07:17.857+02:00  INFO 16860 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2025-04-29T19:07:17.889+02:00  INFO 16860 --- [restartedMain] o.s.v.b.OptionalValidatorFactoryBean     : Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-04-29T19:07:18.217+02:00  INFO 16860 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-04-29T19:07:18.258+02:00  INFO 16860 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-04-29T19:07:18.267+02:00  INFO 16860 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : Started TerraNostraApplication in 3.076 seconds (process running for 3.689)
+2025-04-29T19:07:36.950+02:00  INFO 16860 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-04-29T19:07:36.951+02:00  INFO 16860 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-04-29T19:07:36.952+02:00  INFO 16860 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-04-29T19:07:37.899+02:00  INFO 16860 --- [http-nio-8080-exec-5] c.terra_nostra.service.ProductoService   : 🔍 Enviando solicitud GET a la API para obtener productos...
+2025-04-29T19:07:38.073+02:00  INFO 16860 --- [http-nio-8080-exec-5] c.terra_nostra.service.ProductoService   : 🔹 Código de respuesta de la API: 200
+2025-04-29T19:10:24.416+02:00  INFO 16860 --- [http-nio-8080-exec-2] c.terra_nostra.service.ProductoService   : 🔍 Enviando solicitud GET a la API para obtener productos...
+2025-04-29T19:10:24.462+02:00  INFO 16860 --- [http-nio-8080-exec-2] c.terra_nostra.service.ProductoService   : 🔹 Código de respuesta de la API: 200
+2025-04-29T19:11:08.357+02:00  INFO 16860 --- [http-nio-8080-exec-1] c.terra_nostra.service.ProductoService   : 🔍 Enviando solicitud GET a la API para obtener productos...
+2025-04-29T19:11:08.390+02:00  INFO 16860 --- [http-nio-8080-exec-1] c.terra_nostra.service.ProductoService   : 🔹 Código de respuesta de la API: 200
+2025-04-29T19:12:14.748+02:00  INFO 16860 --- [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-04-29T19:12:14.757+02:00  INFO 16860 --- [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-04-29T19:12:16.907+02:00  INFO 19708 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : Starting TerraNostraApplication using Java 21.0.5 with PID 19708 (C:\Users\balle\Documents\Proyectos\terra-nostra\target\classes started by balle in C:\Users\balle\Documents\Proyectos\terra-nostra)
+2025-04-29T19:12:16.909+02:00 DEBUG 19708 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-04-29T19:12:16.910+02:00  INFO 19708 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : No active profile set, falling back to 1 default profile: "default"
+2025-04-29T19:12:16.969+02:00  INFO 19708 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-04-29T19:12:16.970+02:00  INFO 19708 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-04-29T19:12:18.226+02:00  INFO 19708 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-04-29T19:12:18.240+02:00  INFO 19708 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-04-29T19:12:18.240+02:00  INFO 19708 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-04-29T19:12:18.439+02:00  INFO 19708 --- [restartedMain] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-04-29T19:12:18.448+02:00  INFO 19708 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-04-29T19:12:18.449+02:00  INFO 19708 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1477 ms
+2025-04-29T19:12:18.726+02:00  WARN 19708 --- [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: f18095db-7886-490c-af6f-840b43912f4d
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-04-29T19:12:18.735+02:00  INFO 19708 --- [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2025-04-29T19:12:18.872+02:00  INFO 19708 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2025-04-29T19:12:18.904+02:00  INFO 19708 --- [restartedMain] o.s.v.b.OptionalValidatorFactoryBean     : Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-04-29T19:12:19.214+02:00  INFO 19708 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-04-29T19:12:19.249+02:00  INFO 19708 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-04-29T19:12:19.258+02:00  INFO 19708 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : Started TerraNostraApplication in 2.914 seconds (process running for 3.533)
+2025-04-29T19:12:24.982+02:00  INFO 19708 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-04-29T19:12:24.982+02:00  INFO 19708 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-04-29T19:12:24.983+02:00  INFO 19708 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-04-29T19:12:25.930+02:00  INFO 19708 --- [http-nio-8080-exec-5] c.terra_nostra.service.ProductoService   : 🔍 Enviando solicitud GET a la API para obtener productos...
+2025-04-29T19:12:26.082+02:00  INFO 19708 --- [http-nio-8080-exec-5] c.terra_nostra.service.ProductoService   : 🔹 Código de respuesta de la API: 200
+2025-04-29T19:20:11.284+02:00  INFO 19708 --- [http-nio-8080-exec-7] c.terra_nostra.service.ProductoService   : 🔍 Enviando solicitud GET a la API para obtener productos...
+2025-04-29T19:20:11.329+02:00  INFO 19708 --- [http-nio-8080-exec-7] c.terra_nostra.service.ProductoService   : 🔹 Código de respuesta de la API: 200
+2025-04-29T19:20:15.461+02:00  INFO 19708 --- [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-04-29T19:20:15.473+02:00  INFO 19708 --- [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-04-29T19:20:19.281+02:00  INFO 10828 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : Starting TerraNostraApplication using Java 21.0.5 with PID 10828 (C:\Users\balle\Documents\Proyectos\terra-nostra\target\classes started by balle in C:\Users\balle\Documents\Proyectos\terra-nostra)
+2025-04-29T19:20:19.283+02:00 DEBUG 10828 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-04-29T19:20:19.284+02:00  INFO 10828 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : No active profile set, falling back to 1 default profile: "default"
+2025-04-29T19:20:19.339+02:00  INFO 10828 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-04-29T19:20:19.339+02:00  INFO 10828 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-04-29T19:20:19.824+02:00  WARN 10828 --- [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.support.BeanDefinitionOverrideException: Invalid bean definition with name 'passwordEncoder' defined in class path resource [com/terra_nostra/security/PasswordEncoderConfig.class]: Cannot register bean definition [Root bean: class=null; scope=; abstract=false; lazyInit=null; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; fallback=false; factoryBeanName=passwordEncoderConfig; factoryMethodName=passwordEncoder; initMethodNames=null; destroyMethodNames=[(inferred)]; defined in class path resource [com/terra_nostra/security/PasswordEncoderConfig.class]] for bean 'passwordEncoder' since there is already [Root bean: class=null; scope=; abstract=false; lazyInit=null; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; fallback=false; factoryBeanName=securityConfig; factoryMethodName=passwordEncoder; initMethodNames=null; destroyMethodNames=[(inferred)]; defined in class path resource [com/terra_nostra/config/SecurityConfig.class]] bound.
+2025-04-29T19:20:19.833+02:00  INFO 10828 --- [restartedMain] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-04-29T19:20:19.858+02:00 ERROR 10828 --- [restartedMain] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+The bean 'passwordEncoder', defined in class path resource [com/terra_nostra/security/PasswordEncoderConfig.class], could not be registered. A bean with that name has already been defined in class path resource [com/terra_nostra/config/SecurityConfig.class] and overriding is disabled.
+
+Action:
+
+Consider renaming one of the beans or enabling overriding by setting spring.main.allow-bean-definition-overriding=true
+
+2025-04-29T19:20:43.234+02:00  INFO 20360 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : Starting TerraNostraApplication using Java 21.0.5 with PID 20360 (C:\Users\balle\Documents\Proyectos\terra-nostra\target\classes started by balle in C:\Users\balle\Documents\Proyectos\terra-nostra)
+2025-04-29T19:20:43.237+02:00 DEBUG 20360 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-04-29T19:20:43.238+02:00  INFO 20360 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : No active profile set, falling back to 1 default profile: "default"
+2025-04-29T19:20:43.292+02:00  INFO 20360 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-04-29T19:20:43.292+02:00  INFO 20360 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-04-29T19:20:44.592+02:00  INFO 20360 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-04-29T19:20:44.608+02:00  INFO 20360 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-04-29T19:20:44.608+02:00  INFO 20360 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-04-29T19:20:44.810+02:00  INFO 20360 --- [restartedMain] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-04-29T19:20:44.819+02:00  INFO 20360 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-04-29T19:20:44.819+02:00  INFO 20360 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1526 ms
+2025-04-29T19:20:45.088+02:00  WARN 20360 --- [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 3dbc0e37-c5f6-484a-953b-4e0fe15eb8c6
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-04-29T19:20:45.094+02:00  INFO 20360 --- [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2025-04-29T19:20:45.239+02:00  INFO 20360 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2025-04-29T19:20:45.268+02:00  INFO 20360 --- [restartedMain] o.s.v.b.OptionalValidatorFactoryBean     : Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-04-29T19:20:45.598+02:00  INFO 20360 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-04-29T19:20:45.639+02:00  INFO 20360 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-04-29T19:20:45.651+02:00  INFO 20360 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : Started TerraNostraApplication in 3.008 seconds (process running for 3.565)
+2025-04-29T19:20:50.373+02:00  INFO 20360 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-04-29T19:20:50.374+02:00  INFO 20360 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-04-29T19:20:50.375+02:00  INFO 20360 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-04-29T19:20:51.563+02:00  INFO 20360 --- [http-nio-8080-exec-5] c.terra_nostra.service.ProductoService   : 🔍 Enviando solicitud GET a la API para obtener productos...
+2025-04-29T19:20:51.730+02:00  INFO 20360 --- [http-nio-8080-exec-5] c.terra_nostra.service.ProductoService   : 🔹 Código de respuesta de la API: 200
+2025-04-29T19:24:00.194+02:00  INFO 20360 --- [http-nio-8080-exec-7] c.terra_nostra.service.ProductoService   : 🔍 Enviando solicitud GET a la API para obtener productos...
+2025-04-29T19:24:00.237+02:00  INFO 20360 --- [http-nio-8080-exec-7] c.terra_nostra.service.ProductoService   : 🔹 Código de respuesta de la API: 200
+2025-04-29T19:24:29.738+02:00  INFO 20360 --- [http-nio-8080-exec-8] c.terra_nostra.service.ProductoService   : 🔍 Enviando solicitud GET a la API para obtener productos...
+2025-04-29T19:24:29.774+02:00  INFO 20360 --- [http-nio-8080-exec-8] c.terra_nostra.service.ProductoService   : 🔹 Código de respuesta de la API: 200
