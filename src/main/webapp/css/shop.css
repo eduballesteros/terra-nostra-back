@@ -18,7 +18,7 @@ html, body {
   color: var(--color-primary);
 }
 /* =====================================================
-   HEADER (CABECERA)
+   HEADER
    ===================================================== */
 .header {
   display: flex;
@@ -26,11 +26,10 @@ html, body {
   align-items: center;
   padding: 1rem 2rem;
   background-color: var(--color-light);
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   flex-wrap: wrap;
 }
 
-/* Logo */
 .header .logo {
   display: flex;
   align-items: center;
@@ -38,17 +37,14 @@ html, body {
 }
 .header .logo img {
   max-width: 60px;
-  height: auto;
 }
 .header .logo h4 {
   font-family: "Libre Baskerville", serif;
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--color-primary);
   margin: 0;
 }
 
-/* Navegación */
 .navigation ul {
   list-style: none;
   display: flex;
@@ -60,15 +56,19 @@ html, body {
   font-family: "Libre Baskerville", serif;
   font-weight: 400;
   font-size: 1.1rem;
-  color: var(--color-primary);
   text-decoration: none;
+  color: var(--color-primary);
   transition: color 0.3s ease;
 }
 .navigation a:hover {
-  color: var(--color-accent);
+  color: var(--color-secondary);
+}
+.active {
+  color: var(--color-warning);
+  font-weight: bold;
 }
 
-/* Íconos del header */
+/* Íconos header */
 .header-icons {
   display: flex;
   gap: 1.5rem;
@@ -90,6 +90,7 @@ html, body {
   width: 20px;
   height: 20px;
 }
+
 /* Reset básico */
 * {
     margin: 0;
@@ -167,4 +168,144 @@ button {
 
 button:hover {
     background: #1f5e4a;
+}
+/* =====================================================
+   TIENDA - SHOP.JSP
+   ===================================================== */
+
+/* Contenedor principal */
+main.container {
+  background-color: var(--color-light);
+  padding: 2rem;
+  border-radius: 12px;
+}
+
+/* Buscador */
+#buscadorProductos {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+}
+button.btn-outline-dark {
+  border-radius: 8px;
+  padding: 0.5rem 1.2rem;
+}
+
+/* Panel lateral izquierdo */
+aside {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+aside h5 {
+  color: var(--color-primary);
+  margin-bottom: 0.8rem;
+  font-size: 1.1rem;
+}
+
+aside ul li a {
+  color: var(--color-primary);
+  font-weight: 400;
+  padding: 0.4rem 0;
+  display: block;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+}
+
+aside ul li a:hover {
+  background-color: var(--color-light);
+}
+
+.form-check-label {
+  font-size: 0.95rem;
+  color: var(--color-primary);
+}
+
+.form-check-input:checked {
+  background-color: var(--color-secondary);
+  border-color: var(--color-secondary);
+}
+
+/* Grid de productos */
+#contenedorProductos .card {
+  border-radius: 12px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+#contenedorProductos .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+#contenedorProductos .card-img-top {
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  max-height: 200px;
+  object-fit: contain;
+}
+
+#contenedorProductos .card-body {
+  display: flex;
+  flex-direction: column;
+}
+
+#contenedorProductos .card-title {
+  font-size: 1.2rem;
+  color: var(--color-primary);
+}
+
+#contenedorProductos .card-text {
+  font-size: 0.95rem;
+}
+
+#contenedorProductos .btn {
+  border-radius: 8px;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.9rem;
+}
+
+#contenedorProductos .btn-outline-primary {
+  border-color: var(--color-warning);
+  color: var(--color-warning);
+}
+
+#contenedorProductos .btn-outline-primary:hover {
+  background-color: var(--color-warning);
+  color: #fff;
+}
+
+#contenedorProductos .btn-success {
+  background-color: var(--color-secondary);
+  border: none;
+}
+
+#contenedorProductos .btn-success:hover {
+  background-color: var(--color-primary);
+}
+
+/* Icono del carrito */
+#contenedorProductos .btn-success img {
+  width: 20px;
+  height: 20px;
+}
+
+/* Responsive extra */
+@media (max-width: 768px) {
+  #buscadorProductos {
+    width: 100% !important;
+    margin-bottom: 1rem;
+  }
+
+  .d-flex.justify-content-center {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  aside {
+    margin-bottom: 2rem;
+  }
 }
