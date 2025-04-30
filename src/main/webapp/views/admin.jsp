@@ -13,24 +13,14 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- CSS personalizado -->
     <link rel="stylesheet" href="css/admin.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/header.css">
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
 </head>
 
 <body>
 
-<!-- Header -->
-<header class="header d-flex justify-content-between align-items-center p-3 border-bottom bg-white">
-    <div class="logo d-flex align-items-center">
-        <img src="images/logo.webp" alt="Logo Terra Nostra" width="40">
-        <h4 class="ms-2 mb-0">Terra Nostra</h4>
-    </div>
-    <nav class="navigation d-none d-md-block">
-        <ul class="nav">
-            <li class="nav-item"><a class="nav-link text-dark" href="/">Home</a></li>
-            <li class="nav-item"><a class="nav-link text-dark" href="/shop">Productos</a></li>
-        </ul>
-    </nav>
-</header>
+    <jsp:include page="/includes/header.jsp" />
+
 
 <!-- Panel -->
 <div class="container-fluid mt-4">
@@ -165,24 +155,32 @@
 <!-- Modal Editar Producto -->
 <div class="modal fade" id="editarProductoModal" tabindex="-1" aria-labelledby="editarProductoModalLabel" aria-hidden="true">
   <div class="modal-dialog">
-    <form class="modal-content" id="editarProductoForm">
-      <div class="modal-header">
-        <h5 class="modal-title">Editar Producto</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-      <div class="modal-body">
-        <input type="hidden" id="editProductoId" name="id">
-        <input type="text" id="editNombre" name="nombre" class="form-control mb-3" required placeholder="Nombre">
-        <textarea id="editDescripcion" name="descripcion" class="form-control mb-3" required placeholder="Descripción"></textarea>
-        <input type="number" id="editPrecio" name="precio" class="form-control mb-3" step="0.01" required placeholder="Precio">
-        <input type="number" id="editStock" name="stock" class="form-control mb-3" required placeholder="Stock">
-        <input type="text" id="editCategoria" name="categoria" class="form-control mb-3" required placeholder="Categoría">
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-        <button type="submit" class="btn btn-success">Guardar Cambios</button>
-      </div>
-    </form>
+   <form class="modal-content" id="editarProductoForm">
+     <div class="modal-header">
+       <h5 class="modal-title">Editar Producto</h5>
+       <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+     </div>
+     <div class="modal-body">
+       <input type="hidden" id="editProductoId" name="id">
+       <input type="text" id="editNombre" name="nombre" class="form-control mb-3" required placeholder="Nombre">
+       <textarea id="editDescripcion" name="descripcion" class="form-control mb-3" required placeholder="Descripción"></textarea>
+       <input type="number" id="editPrecio" name="precio" class="form-control mb-3" step="0.01" required placeholder="Precio">
+       <input type="number" id="editStock" name="stock" class="form-control mb-3" required placeholder="Stock">
+       <input type="text" id="editCategoria" name="categoria" class="form-control mb-3" required placeholder="Categoría">
+
+       <!-- Campo nuevo para imagen -->
+       <div class="mb-3">
+         <label for="editImagen" class="form-label">Imagen:</label>
+         <input type="file" id="editImagen" name="imagen" class="form-control">
+       </div>
+
+     </div>
+     <div class="modal-footer">
+       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+       <button type="submit" class="btn btn-success">Guardar Cambios</button>
+     </div>
+   </form>
+
   </div>
 </div>
 

@@ -1,171 +1,146 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
     console.log("📦 Cargando módulo de gestión de productos...");
 
     let idProductoPendienteEliminar = null;
 
+    // Utilidades
+    const getElement = id => document.getElementById(id);
+    const mostrarModal = id => new bootstrap.Modal(getElement(id)).show();
+    const ocultarModal = id => bootstrap.Modal.getInstance(getElement(id))?.hide();
+
     function mostrarAlerta(idElemento, mensaje, tipo = "success") {
-        const alerta = document.getElementById(idElemento);
+        const alerta = getElement(idElemento);
         if (!alerta) return;
 
-        alerta.classList.remove("d-none", "alert-success", "alert-danger", "alert-info", "alert-warning");
-        alerta.classList.add(`alert-${tipo}`);
-        alerta.innerText = mensaje;
+        alerta.className = `alert alert-${tipo}`;
+        alerta.textContent = mensaje;
 
-        setTimeout(() => {
-            alerta.classList.add("d-none");
-        }, 4000);
+        setTimeout(() => alerta.classList.add("d-none"), 4000);
     }
 
-    function cargarProductos() {
-        fetch("/productos/listar")
-            .then(response => response.ok ? response.json() : Promise.reject("Error al obtener los productos"))
-            .then(productos => {
-                let tbody = document.getElementById("productosTableBody");
-                tbody.innerHTML = "";
-                productos.forEach(agregarProductoATabla);
-            })
-            .catch(error => console.error("❌ Error al cargar productos:", error));
+    async function cargarProductos() {
+        try {
+            const res = await fetch("/productos/listar");
+            if (!res.ok) throw new Error("Error al obtener productos");
+            const productos = await res.json();
+
+            const tbody = getElement("productosTableBody");
+            tbody.innerHTML = "";
+            productos.forEach(agregarProductoATabla);
+        } catch (err) {
+            console.error("❌ Error al cargar productos:", err);
+        }
     }
 
     function agregarProductoATabla(producto) {
-        let tbody = document.getElementById("productosTableBody");
+        const tbody = getElement("productosTableBody");
 
-        let fila = document.createElement("tr");
-        fila.setAttribute("data-id", producto.id);
+        const fila = document.createElement("tr");
+        fila.dataset.id = producto.id;
         fila.innerHTML = `
             <td>${producto.nombre}</td>
             <td>${producto.descripcion}</td>
-            <td>${producto.precio ? producto.precio.toFixed(2) + " €" : "N/A"}</td>
+            <td>${producto.precio?.toFixed(2) || "N/A"} €</td>
             <td>${producto.stock}</td>
             <td>${producto.categoria}</td>
-            <td>
-                ${producto.imagen
-                    ? `<img src="data:image/png;base64,${producto.imagen}" width="50">`
-                    : 'Sin imagen'}
-            </td>
-            <td>
-                <button class="btn btn-success btn-sm editar-producto"
-                    data-id="${producto.id}"
-                    data-nombre="${producto.nombre}"
-                    data-descripcion="${producto.descripcion}"
-                    data-precio="${producto.precio}"
-                    data-stock="${producto.stock}"
-                    data-categoria="${producto.categoria}">
-                    Editar
-                </button>
-            </td>
-            <td>
-                <button class="btn btn-danger btn-sm eliminar-producto" data-id="${producto.id}" data-nombre="${producto.nombre}">
-                    Eliminar
-                </button>
-            </td>
+            <td>${producto.imagen ? `<img src="data:image/png;base64,${producto.imagen}" width="50">` : 'Sin imagen'}</td>
+            <td><button class="btn btn-success btn-sm editar-producto"
+                data-id="${producto.id}"
+                data-nombre="${encodeURIComponent(producto.nombre)}"
+                data-descripcion="${encodeURIComponent(producto.descripcion)}"
+                data-precio="${producto.precio}"
+                data-stock="${producto.stock}"
+                data-categoria="${encodeURIComponent(producto.categoria)}">Editar</button></td>
+            <td><button class="btn btn-danger btn-sm eliminar-producto"
+                data-id="${producto.id}"
+                data-nombre="${producto.nombre}">Eliminar</button></td>
         `;
 
+        fila.querySelector(".eliminar-producto").addEventListener("click", () => {
+            idProductoPendienteEliminar = producto.id;
+            getElement("nombreProductoAEliminar").textContent = producto.nombre;
+            mostrarModal("modalConfirmarEliminarProducto");
+        });
+
+        fila.querySelector(".editar-producto").addEventListener("click", e => cargarDatosEdicion(e.currentTarget));
+
         tbody.appendChild(fila);
-
-        fila.querySelector(".eliminar-producto").addEventListener("click", function () {
-            idProductoPendienteEliminar = this.getAttribute("data-id");
-            document.getElementById("nombreProductoAEliminar").textContent = producto.nombre;
-
-            const modal = new bootstrap.Modal(document.getElementById("modalConfirmarEliminarProducto"));
-            modal.show();
-        });
-
-        fila.querySelector(".editar-producto").addEventListener("click", function () {
-            cargarDatosEdicion(this);
-        });
     }
 
-    const formProducto = document.getElementById("formProducto");
-    if (formProducto) {
-        formProducto.addEventListener("submit", function (event) {
-            event.preventDefault();
+    async function eliminarProducto(id) {
+        try {
+            const res = await fetch(`/productos/eliminar/${id}`, { method: "DELETE" });
+            if (!res.ok) throw new Error("Error en la eliminación");
 
-            let formData = new FormData(this);
-
-            fetch("/productos/guardar", {
-                method: "POST",
-                body: formData
-            })
-                .then(response => response.ok ? response.json() : Promise.reject("Error al guardar el producto"))
-                .then(producto => {
-                    mostrarAlerta("alertaProductos", "✅ Producto guardado con éxito", "success");
-                    agregarProductoATabla(producto);
-                    this.reset();
-                })
-                .catch(error => {
-                    console.error("❌ Error al guardar el producto:", error);
-                    mostrarAlerta("alertaProductos", "❌ Error al guardar el producto", "danger");
-                });
-        });
-    }
-
-    function eliminarProducto(id) {
-        fetch(`/productos/eliminar/${id}`, { method: "DELETE" })
-            .then(response => response.ok ? response.json() : Promise.reject("Error en la eliminación"))
-            .then(() => {
-                mostrarAlerta("alertaProductos", "✅ Producto eliminado correctamente.", "success");
-                document.querySelector(`tr[data-id='${id}']`)?.remove();
-            })
-            .catch(() => mostrarAlerta("alertaProductos", "❌ Error al eliminar producto.", "danger"));
+            getElement("productosTableBody").querySelector(`tr[data-id="${id}"]`)?.remove();
+            mostrarAlerta("alertaProductos", "✅ Producto eliminado correctamente.");
+        } catch (err) {
+            mostrarAlerta("alertaProductos", "❌ Error al eliminar producto", "danger");
+        }
     }
 
     function cargarDatosEdicion(btn) {
-        let idProducto = btn.getAttribute("data-id");
-
-        if (!idProducto || idProducto === "null" || isNaN(idProducto) || idProducto <= 0) {
-            console.error("❌ Error: ID del producto no válido.");
-            mostrarAlerta("alertaProductos", "❌ Error al cargar datos del producto", "danger");
+        const id = btn.dataset.id;
+        if (!id || isNaN(id) || id <= 0) {
+            mostrarAlerta("alertaProductos", "❌ ID no válido para edición", "danger");
             return;
         }
 
-        document.getElementById("editProductoId").value = idProducto;
-        document.getElementById("editNombre").value = btn.getAttribute("data-nombre");
-        document.getElementById("editDescripcion").value = btn.getAttribute("data-descripcion");
-        document.getElementById("editPrecio").value = btn.getAttribute("data-precio");
-        document.getElementById("editStock").value = btn.getAttribute("data-stock");
-        document.getElementById("editCategoria").value = btn.getAttribute("data-categoria");
+        getElement("editProductoId").value = id;
+        getElement("editNombre").value = decodeURIComponent(btn.dataset.nombre);
+        getElement("editDescripcion").value = decodeURIComponent(btn.dataset.descripcion);
+        getElement("editPrecio").value = btn.dataset.precio;
+        getElement("editStock").value = btn.dataset.stock;
+        getElement("editCategoria").value = decodeURIComponent(btn.dataset.categoria);
 
-        let modal = new bootstrap.Modal(document.getElementById("editarProductoModal"));
-        modal.show();
+        mostrarModal("editarProductoModal");
     }
 
-    document.getElementById("editarProductoForm")?.addEventListener("submit", function (event) {
-        event.preventDefault();
+    getElement("formProducto")?.addEventListener("submit", async e => {
+        e.preventDefault();
+        const form = e.currentTarget;
+        const formData = new FormData(form);
 
-        let productoId = document.getElementById("editProductoId").value;
+        try {
+            const res = await fetch("/productos/guardar", { method: "POST", body: formData });
+            if (!res.ok) throw new Error("Error al guardar el producto");
+            await res.json();
+            mostrarAlerta("alertaProductos", "✅ Producto guardado con éxito");
+            cargarProductos(); // Recarga toda la tabla y los eventos
+            form.reset();
+        } catch (err) {
+            mostrarAlerta("alertaProductos", "❌ Error al guardar el producto", "danger");
+        }
+    });
 
-        if (!productoId || productoId === "null" || isNaN(productoId) || productoId <= 0) {
-            console.error("❌ Error: Intentando actualizar un producto sin ID válido.");
-            mostrarAlerta("alertaProductos", "❌ Error: No se puede actualizar el producto.", "danger");
+    getElement("editarProductoForm")?.addEventListener("submit", async e => {
+        e.preventDefault();
+        const id = getElement("editProductoId").value;
+        if (!id || isNaN(id) || id <= 0) {
+            mostrarAlerta("alertaProductos", "❌ ID no válido para edición", "danger");
             return;
         }
 
-        let formData = new FormData(this);
+        const formData = new FormData(e.currentTarget);
 
-        fetch(`/productos/editar/${productoId}`, {
-            method: "PUT",
-            body: formData
-        })
-            .then(response => response.ok ? response.json() : Promise.reject(response.json()))
-            .then(data => {
-                mostrarAlerta("alertaProductos", data.mensaje || "✅ Producto actualizado correctamente.", "success");
-                cargarProductos();
-                bootstrap.Modal.getInstance(document.getElementById("editarProductoModal")).hide();
-            })
-            .catch(async err => {
-                const error = await err;
-                mostrarAlerta("alertaProductos", error.mensaje || "❌ Error al actualizar producto", "danger");
-            });
+        try {
+            const res = await fetch(`/productos/editar/${id}`, { method: "PUT", body: formData });
+            const data = await res.json();
+            if (!res.ok) throw data;
+
+            mostrarAlerta("alertaProductos", data.mensaje || "✅ Producto actualizado correctamente.");
+            cargarProductos();
+            ocultarModal("editarProductoModal");
+        } catch (error) {
+            mostrarAlerta("alertaProductos", error.mensaje || "❌ Error al actualizar producto", "danger");
+        }
     });
 
-    document.getElementById("btnConfirmarEliminarProducto")?.addEventListener("click", () => {
+    getElement("btnConfirmarEliminarProducto")?.addEventListener("click", () => {
         if (idProductoPendienteEliminar) {
             eliminarProducto(idProductoPendienteEliminar);
             idProductoPendienteEliminar = null;
-
-            const modal = bootstrap.Modal.getInstance(document.getElementById("modalConfirmarEliminarProducto"));
-            modal.hide();
+            ocultarModal("modalConfirmarEliminarProducto");
         }
     });
 
