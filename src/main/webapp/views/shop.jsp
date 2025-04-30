@@ -8,38 +8,11 @@
     <link rel="stylesheet" type="text/css" href="css/shop.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="css/header.css">
 </head>
 <body>
-    <!-- Header -->
-   <header class="header">
-       <!-- Logo de la tienda -->
-       <div class="logo">
-           <img src="images/logo.webp" alt="Logo de la tienda" />
-           <h4>Terra Nostra</h4>
-       </div>
 
-       <!-- Barra de navegación -->
-       <nav class="navigation">
-           <ul>
-               <li><a href="/" >Home</a></li>
-               <li><a href="/shop" class="active">Productos</a></li>
-               <li><a href="/about">Sobre Nosotros</a></li>
-               <li><a href="/blog">Blog</a></li>
-               <li><a href="/contact">Contacto</a></li>
-           </ul>
-       </nav>
-
-       <!-- Íconos de la cabecera -->
-       <div class="header-icons">
-           <a class="account" aria-label="Cuenta de usuario" href="#">
-               <img src="icons/user.svg" alt="Icono de usuario" />
-           </a>
-           <a class="cart" aria-label="Carrito de compras" href="#">
-               <img src="icons/cart.svg" alt="Icono del carrito" />
-           </a>
-       </div>
-   </header>
-
+    <jsp:include page="/includes/header.jsp" />
 
     <main class="container mt-5">
         <!-- Buscador -->
@@ -50,8 +23,9 @@
             </div>
         </div>
 
+        <!-- Cuerpo de la tienda -->
         <div class="row">
-            <!-- Panel lateral -->
+            <!-- Panel lateral de filtros -->
             <aside class="col-md-3 mb-4">
                 <div class="mb-4">
                     <h5 class="fw-bold">Categorías</h5>
@@ -71,18 +45,19 @@
                 </div>
             </aside>
 
-            <!-- Grid de productos -->
+            <!-- Grid de productos con mayor ancho -->
             <section class="col-md-9">
                 <h3 class="mb-4">Nuestros Productos</h3>
-                <div class="row" id="contenedorProductos">
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 g-4" id="contenedorProductos">
                     <!-- Los productos se cargarán dinámicamente aquí -->
                 </div>
             </section>
         </div>
     </main>
 
-
     <!-- Scripts -->
     <script src="js/tienda.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 </body>
 </html>

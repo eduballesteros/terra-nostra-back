@@ -16,23 +16,9 @@
 <body data-email="${usuarioLogueado}">
 
 <!-- Header -->
-<header class="header d-flex justify-content-between align-items-center p-3 border-bottom bg-white">
-    <div class="logo d-flex align-items-center">
-        <img src="images/logo.webp" alt="Logo Terra Nostra" width="40">
-        <h4 class="ms-2 mb-0">Terra Nostra</h4>
-    </div>
 
-    <nav class="navigation">
-    			<ul>
-                    <li><a href="/" class="active">Home</a></li>
-    				<li><a href="/shop">Productos</a></li>
-    				<li><a href="/about">Sobre Nosotros</a></li>
-    				<li><a href="/blog">Blog</a></li>
-    				<li><a href="/contact">Contacto</a></li>
-    			</ul>
-    		</nav>
+    <jsp:include page="/includes/header.jsp" />
 
-</header>
 
 <!-- Panel -->
 <div class="container-fluid mt-4">
