@@ -30,31 +30,35 @@ document.addEventListener("DOMContentLoaded", function () {
                 ? (producto.precio - (producto.precio * producto.descuento / 100)).toFixed(2)
                 : precioOriginal;
 
-            const productoHTML = `
-                <div class="col-md-4">
-                    <div class="card mb-4 shadow-sm">
-                        ${producto.imagen
-                            ? `<img src="data:image/png;base64,${producto.imagen}" class="card-img-top" alt="${producto.nombre}">`
-                            : '<img src="images/default.png" class="card-img-top" alt="Imagen no disponible">'}
-                        <div class="card-body">
-                            <h5 class="card-title">${producto.nombre}</h5>
-                            <p class="card-text">${producto.descripcionBreve}</p>
-                            <p class="text-muted">
-                                Precio:
-                                ${tieneDescuento
-                                    ? `<span class="text-decoration-line-through">€${precioOriginal}</span>
-                                       <strong class="text-danger">€${precioFinal}</strong>
-                                       <span class="badge bg-success">${producto.descuento}% dto</span>`
-                                    : `<strong>€${precioOriginal}</strong>`}
-                            </p>
-                            <button class="btn btn-primary">Ver más</button>
-                        </div>
-                    </div>
-                </div>
-            `;
+             const productoHTML = `
+                 <div class="col-md-4 d-flex">
+                     <div class="card shadow-sm h-100 w-100 d-flex flex-column">
+                         ${producto.imagen
+                             ? `<img src="data:image/png;base64,${producto.imagen}" class="card-img-top" alt="${producto.nombre}">`
+                             : '<img src="images/default.png" class="card-img-top" alt="Imagen no disponible">'}
+                         <div class="card-body d-flex flex-column">
+                             <div>
+                                 <h5 class="card-title">${producto.nombre}</h5>
+                                 <p class="card-text">${producto.descripcionBreve}</p>
+                                 <p class="text-muted">
+                                     Precio:
+                                     ${tieneDescuento
+                                         ? `<span class="text-decoration-line-through">€${precioOriginal}</span>
+                                            <strong class="text-danger">€${precioFinal}</strong>
+                                            <span class="badge bg-success">${producto.descuento}% dto</span>`
+                                         : `<strong>€${precioOriginal}</strong>`}
+                                 </p>
+                             </div>
+                             <div class="mt-auto">
+                                 <a href="#" class="btn btn-success w-100">Ver más</a>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+             `;
+
             mejoresProductosContainer.innerHTML += productoHTML;
         });
     }
-
     cargarProductos();
 });

@@ -80,7 +80,20 @@ document.addEventListener("DOMContentLoaded", function () {
                             : '<img src="images/default.png" class="producto-img" alt="Imagen no disponible">'}
                         <div class="producto-titulo">${producto.nombre}</div>
                         <div class="producto-descripcion">${producto.descripcionBreve || ''}</div>
-                        <div class="producto-precio">${producto.precio ? producto.precio.toFixed(2) : "N/A"} €</div>
+                        <div class="producto-precio">
+                            ${
+                                producto.descuento && producto.descuento > 0
+                                    ? `
+                                        <span class="text-decoration-line-through text-muted">${producto.precio.toFixed(2)} €</span>
+                                        <span class="fw-bold text-danger ms-2">
+                                            ${(producto.precio * (1 - producto.descuento / 100)).toFixed(2)} €
+                                        </span>
+                                        <span class="badge bg-success ms-2">${producto.descuento}% dto</span>
+                                      `
+                                    : `${producto.precio ? producto.precio.toFixed(2) : "N/A"} €`
+                            }
+                        </div>
+
                         <div class="mt-auto d-flex justify-content-between align-items-center gap-2">
                             <a href="/producto?id=${producto.id}" class="btn btn-outline-primary w-100">Ver más</a>
                             <button class="btn btn-success d-flex align-items-center justify-content-center"
