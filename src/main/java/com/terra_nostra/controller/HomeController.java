@@ -159,6 +159,14 @@ public class HomeController {
         return null;
     }
 
+    @GetMapping("/producto")
+    public ModelAndView mostrarProducto(@RequestParam("id") Long id) {
+        ModelAndView mav = new ModelAndView("producto");
+        mav.addObject("productoId", id); // opcional, por si quieres usarlo desde el JSP
+        return mav;
+    }
+
+
     @GetMapping("/cambiar-contrasenia")
     public ModelAndView mostrarFormularioCambio(@RequestParam("token") String token) {
         ModelAndView mav;
