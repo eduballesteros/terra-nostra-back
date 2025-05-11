@@ -1,8 +1,10 @@
 package com.terra_nostra.service;
 import java.net.URI;
+import java.net.URLEncoder;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
@@ -173,44 +175,89 @@ public class UsuarioService {
      */
 
 
-    public boolean actualizarUsuario(String email, UsuarioDto userDto) {
+    public boolean actualizarUsuario(String email, UsuarioDto nuevosDatos) {
         try {
-            logger.info("✏ Enviando solicitud PUT a la API para actualizar usuario con email: {}", email);
+            logger.info("✏ Iniciando actualización para el usuario con email: {}", email);
 
+            // Obtener datos actuales del usuario
+            UsuarioDto usuarioActual = obtenerDetalleUsuarioDesdeAPI(email);
+            if (usuarioActual == null) {
+                logger.warn("⚠️ Usuario no encontrado: {}", email);
+                return false;
+            }
+
+            // ✅ Sobrescribir solo los campos editables
+            if (nuevosDatos.getNombre() != null && !nuevosDatos.getNombre().isBlank())
+                usuarioActual.setNombre(nuevosDatos.getNombre());
+
+            if (nuevosDatos.getApellido() != null && !nuevosDatos.getApellido().isBlank())
+                usuarioActual.setApellido(nuevosDatos.getApellido());
+
+            usuarioActual.setTelefono(nuevosDatos.getTelefono());
+            usuarioActual.setDireccion(nuevosDatos.getDireccion());
+            usuarioActual.setRol(nuevosDatos.getRol());
+            usuarioActual.setFechaModificacion(LocalDateTime.now());
+
+            // Enviar PUT con datos completos y válidos
             HttpClient cliente = HttpClient.newHttpClient();
             ObjectMapper mapeo = new ObjectMapper();
-            mapeo.registerModule(new JavaTimeModule()); // Para manejar fechas correctamente
+            mapeo.registerModule(new JavaTimeModule());
             mapeo.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
 
-            // Convertimos el DTO a JSON
-            String usuarioJson = mapeo.writeValueAsString(userDto);
+            String usuarioJson = mapeo.writeValueAsString(usuarioActual);
 
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(new URI(API_BASE_URL + "/email/" + email)) // Ruta correcta
+                    .uri(new URI(API_BASE_URL + "/email/" + email))
                     .header("Content-Type", "application/json")
                     .PUT(HttpRequest.BodyPublishers.ofString(usuarioJson))
                     .build();
 
-            logger.debug("🔹 Cuerpo de la solicitud: {}", usuarioJson);
-            logger.info("📤 Enviando solicitud PUT a la API: {}", request.uri());
-
             HttpResponse<String> response = cliente.send(request, HttpResponse.BodyHandlers.ofString());
 
-            logger.info("🔹 Código de respuesta de la API: {}", response.statusCode());
-            logger.debug("🔹 Respuesta de la API: {}", response.body());
-
             if (response.statusCode() == 200) {
-                logger.info("✅ Usuario actualizado correctamente en la API.");
+                logger.info("✅ Usuario actualizado correctamente.");
                 return true;
             } else {
-                logger.error("❌ No se pudo actualizar el usuario. Código: {}, Respuesta: {}", response.statusCode(), response.body());
+                logger.error("❌ Error en la actualización. Código: {}, Respuesta: {}", response.statusCode(), response.body());
                 return false;
             }
+
         } catch (Exception e) {
-            logger.error("❌ Error al actualizar usuario en la API:", e);
+            logger.error("❌ Error al actualizar usuario:", e);
             return false;
         }
     }
+
+    /**
+     * Reenvía el correo de verificación si el usuario aún no está verificado.
+     *
+     * @param email Email del usuario al que se desea reenviar el correo.
+     * @return Mensaje de la respuesta de la API (éxito o error).
+     */
+    public String reenviarCorreoVerificacion(String email) {
+        try {
+            HttpClient cliente = HttpClient.newHttpClient();
+            String url = "http://localhost:8081/verificacion/reenviar-verificacion";
+            String cuerpo = "email=" + URLEncoder.encode(email, StandardCharsets.UTF_8);
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(new URI(url))
+                    .header("Content-Type", "application/x-www-form-urlencoded")
+                    .POST(HttpRequest.BodyPublishers.ofString(cuerpo))
+                    .build();
+
+            HttpResponse<String> respuesta = cliente.send(request, HttpResponse.BodyHandlers.ofString());
+
+            logger.info("📤 Respuesta al reenviar verificación: {}", respuesta.body());
+
+            return respuesta.body();
+        } catch (Exception e) {
+            logger.error("❌ Error al reenviar correo de verificación:", e);
+            return "❌ Error al reenviar el correo.";
+        }
+    }
+
+
 
     public UsuarioDto obtenerDetalleUsuarioDesdeAPI(String email) {
         try {

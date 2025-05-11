@@ -4,6 +4,7 @@ import com.terra_nostra.service.UsuarioService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.http.ResponseEntity;
 import com.terra_nostra.utils.JwtUtil;
@@ -141,6 +142,25 @@ public class UsuarioController {
 		}
 	}
 
+	@PutMapping("/actualizar")
+	public ResponseEntity<?> actualizarUsuario(@RequestBody UsuarioDto usuarioDto) {
+		try {
+			logger.info("🛠 Recibida solicitud para actualizar usuario con email: {}", usuarioDto.getEmail());
+
+			boolean actualizado = usuarioService.actualizarUsuario(usuarioDto.getEmail(), usuarioDto);
+
+			if (actualizado) {
+				return ResponseEntity.ok().body("{\"mensaje\": \"✅ Usuario actualizado correctamente.\"}");
+			} else {
+				return ResponseEntity.status(400).body("{\"mensaje\": \"❌ No se pudo actualizar el usuario.\"}");
+			}
+		} catch (Exception e) {
+			logger.error("❌ Error al actualizar usuario:", e);
+			return ResponseEntity.status(500).body("{\"mensaje\": \"❌ Error interno del servidor.\"}");
+		}
+	}
+
+
 	/**
 	 * Determina la página a la que debe ser redirigido un usuario según su rol.*
 	 * @param session Objeto `HttpSession` para obtener la información del usuario en sesión.
@@ -164,6 +184,16 @@ public class UsuarioController {
 		return "perfil-usuario"; // Cargar perfil-usuario.jsp
 	}
 
+	@PostMapping("/reenviar-verificacion")
+	@ResponseBody
+	public ResponseEntity<String> reenviarVerificacion(@RequestParam String email) {
+		try {
+			String respuesta = usuarioService.reenviarCorreoVerificacion(email);
+			return ResponseEntity.ok(respuesta);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("❌ Error al reenviar el correo.");
+		}
+	}
 
 	@GetMapping("/detalle")
 	public ResponseEntity<?> obtenerDetalleUsuario(@RequestParam String email) {

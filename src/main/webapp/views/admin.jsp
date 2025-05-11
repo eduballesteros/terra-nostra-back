@@ -110,6 +110,55 @@
         </div>
     </div>
 
+    <!-- Modal Editar Usuario (Panel Admin) -->
+    <div class="modal fade" id="editarUsuarioModal" tabindex="-1" aria-labelledby="editarUsuarioModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editarUsuarioModalLabel">Editar Usuario (Admin)</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Alerta visual -->
+                    <div id="alertaModalUsuario" class="alert d-none" role="alert"></div>
+
+                    <form id="editarUsuarioForm">
+                        <div class="mb-3">
+                            <label for="editNombre" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="editNombre" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editApellido" class="form-label">Apellido</label>
+                            <input type="text" class="form-control" id="editApellido" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editTelefono" class="form-label">Teléfono</label>
+                            <input type="text" class="form-control" id="editTelefono">
+                        </div>
+                        <div class="mb-3">
+                            <label for="editDireccion" class="form-label">Dirección</label>
+                            <input type="text" class="form-control" id="editDireccion">
+                        </div>
+                        <div class="mb-3">
+                            <label for="editRol" class="form-label">Rol</label>
+                            <select id="editRol" class="form-select">
+                                <option value="ROLE_USER">Usuario</option>
+                                <option value="ROLE_ADMIN">Administrador</option>
+                            </select>
+                        </div>
+
+                        <input type="hidden" id="editEmail">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary" form="editarUsuarioForm">Guardar cambios</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <!-- Modal Editar Producto -->
     <div class="modal fade" id="editarProductoModal" tabindex="-1" aria-labelledby="editarProductoModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -172,6 +221,27 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal Confirmar Eliminación de Usuario -->
+    <div class="modal fade" id="modalConfirmarEliminarUsuario" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow">
+          <div class="modal-header bg-danger text-white">
+            <h5 class="modal-title">Confirmar eliminación</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <p>¿Estás seguro de que deseas eliminar al usuario <strong id="nombreUsuarioAEliminar"></strong>?</p>
+            <input type="text" id="inputConfirmarEmail" class="form-control mt-3" placeholder="Confirma el correo del usuario">
+          </div>
+          <div class="modal-footer justify-content-end">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-danger" id="btnConfirmarEliminarUsuario">Eliminar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

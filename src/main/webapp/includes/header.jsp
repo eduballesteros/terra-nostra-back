@@ -32,7 +32,7 @@
 </header>
 
 <!-- Modal de Login y Registro -->
-<div id="loginModal" class="modal fade" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div id="loginModal" class="modal fade" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content login-modal-content">
             <button type="button" class="close-modal" id="closeModalButton" aria-label="Cerrar">×</button>
@@ -53,7 +53,8 @@
                     </div>
 
                     <!-- Registro -->
-                    <form action="${pageContext.request.contextPath}/usuario/registrar" method="POST" id="registerForm" onsubmit="return validarRegistro();">
+                    <!-- Registro -->
+                    <form id="registerForm">
                         <p class="modal-title" id="modalTitle">REGISTRARSE</p>
 
                         <div class="form_group">
@@ -91,6 +92,7 @@
 
                         <p class="line">¿Ya tienes cuenta? <a href="javascript:void(0)" onclick="toggleForm()">Inicia Sesión</a></p>
                     </form>
+
 
                     <!-- Login -->
                     <form action="${pageContext.request.contextPath}/auth/login" method="POST" id="loginForm" onsubmit="return validarLogin();">

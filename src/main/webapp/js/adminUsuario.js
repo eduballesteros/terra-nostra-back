@@ -1,53 +1,46 @@
-document.addEventListener("DOMContentLoaded", function () {
-    console.log("📡 Cargando módulo de gestión de usuarios...");
-
+document.addEventListener("DOMContentLoaded", () => {
+    // let emailUsuarioPendienteEliminar
     let emailUsuarioPendienteEliminar = null;
 
-    function mostrarAlerta(idElemento, mensaje, tipo = "success") {
-        const alerta = document.getElementById(idElemento);
+    const mostrarAlerta = (id, mensaje, tipo = "success") => {
+        const alerta = document.getElementById(id);
         if (!alerta) return;
 
-        alerta.classList.remove("d-none", "alert-success", "alert-danger", "alert-info", "alert-warning");
-        alerta.classList.add(`alert-${tipo}`);
+        alerta.className = `alert alert-${tipo}`;
         alerta.innerText = mensaje;
 
-        setTimeout(() => {
-            alerta.classList.add("d-none");
-        }, 4000);
-    }
+        setTimeout(() => alerta.classList.add("d-none"), 4000);
+    };
 
-    function cargarUsuarios() {
+    const cargarUsuarios = () => {
         fetch("/usuario/listar")
-            .then(response => {
-                if (!response.ok) throw new Error("Error al obtener los usuarios");
-                return response.json();
-            })
+            .then(res => res.ok ? res.json() : Promise.reject("Error al obtener usuarios"))
             .then(usuarios => {
                 const tbody = document.getElementById("usuariosTableBody");
                 tbody.innerHTML = "";
 
-                usuarios.forEach(usuario => {
-                    let fila = document.createElement("tr");
+                usuarios.forEach(({ nombre, apellido, email, telefono, direccion, rol }) => {
+                    const fila = document.createElement("tr");
                     fila.innerHTML = `
-                        <td>${usuario.nombre}</td>
-                        <td>${usuario.apellido}</td>
-                        <td>${usuario.email}</td>
-                        <td>${usuario.telefono || "No disponible"}</td>
-                        <td>${usuario.direccion || "No especificada"}</td>
-                        <td>${usuario.rol}</td>
+                        <td>${nombre}</td>
+                        <td>${apellido}</td>
+                        <td>${email}</td>
+                        <td>${telefono || "No disponible"}</td>
+                        <td>${direccion || "No especificada"}</td>
+                        <td>${rol}</td>
                         <td>
                             <button class="btn btn-primary btn-sm editar-usuario"
-                                data-email="${usuario.email}"
-                                data-nombre="${usuario.nombre}"
-                                data-apellido="${usuario.apellido}"
-                                data-telefono="${usuario.telefono}"
-                                data-direccion="${usuario.direccion}"
-                                data-rol="${usuario.rol}">
+                                data-email="${email}"
+                                data-nombre="${nombre}"
+                                data-apellido="${apellido}"
+                                data-telefono="${telefono || ""}"
+                                data-direccion="${direccion || ""}"
+                                data-rol="${rol}">
                                 Editar
                             </button>
                             <button class="btn btn-danger btn-sm eliminar-usuario"
-                                data-email="${usuario.email}"
-                                data-nombre="${usuario.nombre}">
+                                data-email="${email}"
+                                data-nombre="${nombre}">
                                 Eliminar
                             </button>
                         </td>
@@ -57,43 +50,37 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 agregarEventosUsuarios();
             })
-            .catch(error => {
-                console.error("❌ Error al cargar usuarios:", error);
-                mostrarAlerta("alertaUsuarios", "❌ Error al cargar la lista de usuarios.", "danger");
+            .catch(() => {
+                mostrarAlerta("alertaUsuarios", "❌ Error al cargar usuarios.", "danger");
             });
-    }
+    };
 
-    function agregarEventosUsuarios() {
+    const agregarEventosUsuarios = () => {
         document.querySelectorAll(".eliminar-usuario").forEach(btn => {
-            btn.addEventListener("click", function () {
-                emailUsuarioPendienteEliminar = this.getAttribute("data-email");
-                const nombre = this.getAttribute("data-nombre");
-                document.getElementById("nombreUsuarioAEliminar").textContent = nombre;
+            btn.addEventListener("click", () => {
+                emailUsuarioPendienteEliminar = btn.dataset.email;
+                document.getElementById("nombreUsuarioAEliminar").textContent = btn.dataset.nombre;
                 document.getElementById("inputConfirmarEmail").value = "";
-
-                const modal = new bootstrap.Modal(document.getElementById("modalConfirmarEliminarUsuario"));
-                modal.show();
+                new bootstrap.Modal(document.getElementById("modalConfirmarEliminarUsuario")).show();
             });
         });
 
         document.querySelectorAll(".editar-usuario").forEach(btn => {
-            btn.addEventListener("click", function () {
-                const modalElement = document.getElementById("editarUsuarioModal");
-                document.getElementById("editEmail").value = this.getAttribute("data-email") || "";
-                document.getElementById("editNombre").value = this.getAttribute("data-nombre") || "";
-                document.getElementById("editApellido").value = this.getAttribute("data-apellido") || "";
-                document.getElementById("editTelefono").value = this.getAttribute("data-telefono") || "";
-                document.getElementById("editDireccion").value = this.getAttribute("data-direccion") || "";
-                document.getElementById("editRol").value = this.getAttribute("data-rol") || "";
+            btn.addEventListener("click", () => {
+                document.getElementById("editEmail").value = btn.dataset.email || "";
+                document.getElementById("editNombre").value = btn.dataset.nombre || "";
+                document.getElementById("editApellido").value = btn.dataset.apellido || "";
+                document.getElementById("editTelefono").value = btn.dataset.telefono || "";
+                document.getElementById("editDireccion").value = btn.dataset.direccion || "";
+                document.getElementById("editRol").value = btn.dataset.rol || "";
 
-                new bootstrap.Modal(modalElement).show();
+                new bootstrap.Modal(document.getElementById("editarUsuarioModal")).show();
             });
         });
-    }
+    };
 
     document.getElementById("btnConfirmarEliminarUsuario")?.addEventListener("click", () => {
         const inputEmail = document.getElementById("inputConfirmarEmail").value.trim();
-
         if (inputEmail !== emailUsuarioPendienteEliminar) {
             mostrarAlerta("alertaUsuarios", "❌ El correo no coincide. Eliminación cancelada.", "danger");
             return;
@@ -103,45 +90,46 @@ document.addEventListener("DOMContentLoaded", function () {
             method: "DELETE",
             headers: { "Accept": "application/json" }
         })
-            .then(response => {
-                if (!response.ok) throw new Error("Error en la eliminación");
-                return response.json();
-            })
+            .then(res => res.ok ? res.json() : Promise.reject("Error en la eliminación"))
             .then(data => {
                 mostrarAlerta("alertaUsuarios", data.mensaje || "✅ Usuario eliminado correctamente.", "success");
                 cargarUsuarios();
-                emailUsuarioPendienteEliminar = null;
                 bootstrap.Modal.getInstance(document.getElementById("modalConfirmarEliminarUsuario")).hide();
             })
-            .catch(error => {
-                console.error("❌ Error al eliminar usuario:", error);
+            .catch(() => {
                 mostrarAlerta("alertaUsuarios", "❌ Error al eliminar usuario.", "danger");
             });
     });
 
-    document.getElementById("editarUsuarioForm")?.addEventListener("submit", function (event) {
-        event.preventDefault();
+    document.getElementById("editarUsuarioForm")?.addEventListener("submit", e => {
+        e.preventDefault();
 
-        const formData = new FormData(this);
-        const email = document.getElementById("editEmail").value;
-        const datosUsuario = Object.fromEntries(formData);
+        const email = document.getElementById("editEmail").value.trim();
+        const datosUsuario = {
+            nombre: document.getElementById("editNombre").value.trim(),
+            apellido: document.getElementById("editApellido").value.trim(),
+            telefono: document.getElementById("editTelefono").value.trim(),
+            direccion: document.getElementById("editDireccion").value.trim(),
+            rol: document.getElementById("editRol").value
+        };
+
+        if (!datosUsuario.nombre || !datosUsuario.apellido || !datosUsuario.rol) {
+            mostrarAlerta("alertaUsuarios", "❌ Nombre, apellido y rol son obligatorios.", "danger");
+            return;
+        }
 
         fetch(`/admin/editarUsuario?email=${email}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(datosUsuario)
         })
-            .then(response => {
-                if (!response.ok) throw new Error("Error al actualizar usuario");
-                return response.json();
-            })
+            .then(res => res.ok ? res.json() : Promise.reject("Error al actualizar usuario"))
             .then(data => {
                 mostrarAlerta("alertaUsuarios", data.mensaje || "✅ Usuario actualizado correctamente.", "success");
                 cargarUsuarios();
                 bootstrap.Modal.getInstance(document.getElementById("editarUsuarioModal")).hide();
             })
-            .catch(error => {
-                console.error("❌ Error al actualizar usuario:", error);
+            .catch(() => {
                 mostrarAlerta("alertaUsuarios", "❌ Error al actualizar usuario.", "danger");
             });
     });

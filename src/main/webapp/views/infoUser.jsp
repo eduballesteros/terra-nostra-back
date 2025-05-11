@@ -80,7 +80,23 @@
                 </div>
             </div>
 
-            <!-- Bloque contraseña -->
+            <!-- Bloque verificación de correo -->
+            <div id="bloqueVerificacionCorreo" class="py-3 border-bottom d-none">
+                <p class="mb-2 text-danger fw-semibold">
+                    ✉ Tu correo electrónico aún no ha sido verificado.
+                </p>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="text-muted small">
+                        Por favor, verifica tu cuenta para poder realizar compras y acceder a todas las funcionalidades.
+                    </div>
+                    <button id="btnSolicitarVerificacion" class="btn btn-warning btn-sm rounded-pill px-3">
+                        Reenviar correo de verificación
+                    </button>
+                </div>
+                <div id="mensajeVerificacion" class="alert d-none mt-3 py-2 px-3" role="alert"></div>
+            </div>
+
+
             <!-- Bloque contraseña -->
             <div class="py-3 d-flex justify-content-between align-items-center">
                 <div>

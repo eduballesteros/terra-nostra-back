@@ -4,34 +4,23 @@ document.addEventListener("DOMContentLoaded", function () {
     let telefonoActual = "";
     let direccionActual = "";
 
-    // 🔐 Verificar sesión y obtener el email
     fetch("/auth/verificar-sesion", {
         method: "GET",
         credentials: "include"
     })
     .then(res => res.json())
     .then(sessionData => {
-        if (!sessionData.sesionActiva) {
-            console.warn("⚠️ No hay sesión activa.");
-            return;
-        }
+        if (!sessionData.sesionActiva) return;
 
         const emailUsuario = sessionData.emailUsuario;
-        console.log("📧 Email del usuario logueado:", emailUsuario);
-        document.body.dataset.email = emailUsuario; // ✅ importante para usar luego
+        document.body.dataset.email = emailUsuario;
 
-        // Obtener detalles del usuario
         fetch(`/usuario/detalle?email=${encodeURIComponent(emailUsuario)}`)
             .then(response => {
-                console.log("🔄 Respuesta del backend:", response);
-                if (!response.ok) {
-                    throw new Error("No se pudo cargar la información del usuario.");
-                }
+                if (!response.ok) throw new Error("No se pudo cargar la información del usuario.");
                 return response.json();
             })
             .then(data => {
-                console.log("📦 Datos del usuario cargados:", data);
-
                 nombreActual = data.nombre || "";
                 apellidoActual = data.apellido || "";
                 telefonoActual = data.telefono || "";
@@ -43,18 +32,48 @@ document.addEventListener("DOMContentLoaded", function () {
                 document.getElementById("telefonoUsuario").textContent = telefonoActual || "No especificado";
                 document.getElementById("direccionUsuario").textContent = direccionActual || "No especificada";
 
-                console.log("✅ Usuario renderizado correctamente.");
+                // Mostrar aviso de correo no verificado
+                if (data.correoVerificado === false) {
+                    const bloqueVerificacion = document.getElementById("bloqueVerificacionCorreo");
+                    if (bloqueVerificacion) bloqueVerificacion.classList.remove("d-none");
+
+                    const btnSolicitar = document.getElementById("btnSolicitarVerificacion");
+                    const mensaje = document.getElementById("mensajeVerificacion");
+
+                    if (btnSolicitar && mensaje) {
+                        btnSolicitar.addEventListener("click", () => {
+                            fetch("/usuario/reenviar-verificacion", {
+                                method: "POST",
+                                headers: {
+                                    "Content-Type": "application/x-www-form-urlencoded"
+                                },
+                                body: `email=${encodeURIComponent(data.email)}`
+                            })
+                            .then(res => {
+                                if (!res.ok) throw new Error();
+                                return res.text();
+                            })
+                            .then(mensajeRespuesta => {
+                                mensaje.textContent = mensajeRespuesta;
+                                mensaje.className = "alert alert-success d-block";
+                            })
+                            .catch(() => {
+                                mensaje.textContent = "❌ Error al reenviar el correo de verificación.";
+                                mensaje.className = "alert alert-danger d-block";
+                            });
+                        });
+                    }
+                }
             })
-            .catch(error => {
-                console.error("❌ Error al obtener los datos del usuario:", error);
+            .catch(() => {
                 document.getElementById("infoUsuario").innerHTML = `
                     <div class="alert alert-danger mt-3">
-                        ⚠️ Error al cargar tus datos: ${error.message}
+                        ⚠️ Error al cargar tus datos. Intenta nuevamente.
                     </div>`;
             });
     })
-    .catch(error => {
-        console.error("❌ Error al verificar sesión:", error);
+    .catch(() => {
+        // Error al verificar sesión
     });
 
     const linkPedidos = document.getElementById("linkPedidos");
@@ -65,7 +84,6 @@ document.addEventListener("DOMContentLoaded", function () {
     if (linkPedidos && linkPerfil && seccionPedidos && seccionPerfil) {
         linkPedidos.addEventListener("click", function (e) {
             e.preventDefault();
-            console.log("🧾 Cambiando a sección Pedidos");
             seccionPedidos.classList.remove("d-none");
             seccionPerfil.classList.add("d-none");
             linkPedidos.classList.add("active", "fw-bold", "text-primary");
@@ -74,7 +92,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         linkPerfil.addEventListener("click", function (e) {
             e.preventDefault();
-            console.log("👤 Cambiando a sección Perfil");
             seccionPerfil.classList.remove("d-none");
             seccionPedidos.classList.add("d-none");
             linkPerfil.classList.add("active", "fw-bold", "text-primary");
@@ -82,35 +99,25 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // ✏️ Modal edición
     const btnEditar = document.querySelector("#infoUsuario .btn");
     const modal = new bootstrap.Modal(document.getElementById("modalEditarUsuario"));
     const formEditar = document.getElementById("formEditarUsuario");
     const alerta = document.getElementById("alertaModal");
 
     if (btnEditar && modal && formEditar && alerta) {
-        console.log("🛠 Modal de edición inicializado.");
-
         btnEditar.addEventListener("click", () => {
-            console.log("🖋 Abriendo modal con datos:");
-            console.log(" - Nombre:", nombreActual);
-            console.log(" - Apellido:", apellidoActual);
-            console.log(" - Teléfono:", telefonoActual);
-            console.log(" - Dirección:", direccionActual);
-
             document.getElementById("editNombre").value = nombreActual;
             document.getElementById("editApellido").value = apellidoActual;
             document.getElementById("editTelefono").value = telefonoActual;
             document.getElementById("editDireccion").value = direccionActual;
             document.getElementById("editEmail").value = document.getElementById("emailUsuario").textContent || "";
 
-            alerta.classList.add("d-none"); // Ocultar alerta anterior
+            alerta.classList.add("d-none");
             modal.show();
         });
 
         formEditar.addEventListener("submit", (e) => {
             e.preventDefault();
-            console.log("📤 Enviando datos actualizados...");
 
             const datos = {
                 nombre: document.getElementById("editNombre").value,
@@ -120,7 +127,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 email: document.getElementById("editEmail").value
             };
 
-            console.log("📦 Payload enviado:", datos);
+            if (datos.telefono && !/^\d{9}$/.test(datos.telefono)) {
+                alerta.textContent = "⚠️ El teléfono debe tener 9 dígitos.";
+                alerta.className = "alert alert-warning";
+                alerta.classList.remove("d-none");
+                return;
+            }
 
             fetch("/usuario/actualizar", {
                 method: "PUT",
@@ -131,19 +143,26 @@ document.addEventListener("DOMContentLoaded", function () {
             })
             .then(res => res.json())
             .then(respuesta => {
-                console.log("✅ Respuesta del servidor:", respuesta);
                 alerta.textContent = respuesta.mensaje;
                 alerta.className = "alert alert-success";
                 alerta.classList.remove("d-none");
 
+                const nombreCompleto = `${datos.nombre} ${datos.apellido}`.trim();
+                document.getElementById("nombreUsuario").textContent = nombreCompleto;
+                document.getElementById("telefonoUsuario").textContent = datos.telefono || "No especificado";
+                document.getElementById("direccionUsuario").textContent = datos.direccion || "No especificada";
+
+                nombreActual = datos.nombre;
+                apellidoActual = datos.apellido;
+                telefonoActual = datos.telefono;
+                direccionActual = datos.direccion;
+
                 setTimeout(() => {
                     alerta.classList.add("d-none");
                     modal.hide();
-                    location.reload();
-                }, 2500);
+                }, 2000);
             })
-            .catch(error => {
-                console.error("❌ Error al actualizar usuario:", error);
+            .catch(() => {
                 alerta.textContent = "❌ Error al actualizar tus datos. Intenta de nuevo.";
                 alerta.className = "alert alert-danger";
                 alerta.classList.remove("d-none");
@@ -151,11 +170,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 setTimeout(() => alerta.classList.add("d-none"), 3000);
             });
         });
-    } else {
-        console.warn("⚠️ Elementos del modal no encontrados.");
     }
 
-    // 🔐 Cambio de contraseña desde el modal
     const btnEnviarEnlace = document.getElementById("btnEnviarEnlaceCambio");
     const alertaCambio = document.getElementById("alertaCambioContrasenia");
 
@@ -178,9 +194,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 body: `email=${encodeURIComponent(email)}`
             })
             .then(res => {
-                if (!res.ok) {
-                    throw new Error("No se pudo enviar el correo.");
-                }
+                if (!res.ok) throw new Error();
                 return res.text();
             })
             .then(data => {
@@ -188,13 +202,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 alertaCambio.className = "alert alert-success";
                 alertaCambio.textContent = data;
             })
-            .catch(err => {
-                console.error("❌ Error al enviar enlace:", err);
+            .catch(() => {
                 alertaCambio.classList.remove("d-none");
                 alertaCambio.className = "alert alert-danger";
                 alertaCambio.textContent = "❌ Error al enviar el correo. Intenta más tarde.";
             });
         });
     }
-
 });

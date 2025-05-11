@@ -30,6 +30,20 @@
     <!-- Header -->
     <jsp:include page="/includes/header.jsp" />
 
+    <c:choose>
+        <c:when test="${param.verificacion == 'exitosa'}">
+            <div id="alertaVerificacion" class="alert alert-success text-center" style="margin: 20px auto; max-width: 600px;">
+                ✅ Tu correo ha sido verificado correctamente. ¡Ya puedes iniciar sesión!
+            </div>
+        </c:when>
+        <c:when test="${param.verificacion == 'fallida'}">
+            <div id="alertaVerificacion" class="alert alert-danger text-center" style="margin: 20px auto; max-width: 600px;">
+                ❌ El enlace de verificación es inválido o ha expirado.
+            </div>
+        </c:when>
+    </c:choose>
+
+
     <!-- Carrusel de imágenes -->
     <div id="carouselExampleDark" class="carousel slide custom-carousel" data-bs-ride="carousel">
         <div class="carousel-indicators">
@@ -68,30 +82,40 @@
     </div>
 
     <!-- Sección de características -->
-    <section class="container features-container mt-5 mb-5">
-        <div class="features-grid">
-            <div class="feature-box">
-                <img src="https://www.biosano.es/cdnassets/redesign/icon/icon-home-1-rs.png" class="img-responsive feature-icon" alt="Envío en 24/48h">
-                <div class="feature-content">Envío en 24/48h</div>
-                <a href="https://www.biosano.es/envios-y-devoluciones" class="feature-link">Saber más</a>
-            </div>
-            <div class="feature-box">
-                <img src="https://www.biosano.es/cdnassets/redesign/icon/icon-home-2-rs.png" class="img-responsive feature-icon" alt="Devoluciones fáciles">
-                <div class="feature-content">Devoluciones fáciles</div>
-                <a href="https://www.biosano.es/politica-de-devoluciones" class="feature-link">Saber más</a>
-            </div>
-            <div class="feature-box">
-                <img src="https://www.biosano.es/cdnassets/redesign/icon/icon-home-3-rs.png" class="img-responsive feature-icon" alt="Pago 100% seguro">
-                <div class="feature-content">Pago 100% seguro</div>
-                <a href="https://www.biosano.es/formas-de-pago" class="feature-link">Saber más</a>
-            </div>
-            <div class="feature-box">
-                <img src="https://www.biosano.es/cdnassets/redesign/icon/icon-home-4-rs.png" class="img-responsive feature-icon" alt="Mejor precio garantizado">
-                <div class="feature-content">Mejor precio garantizado</div>
-                <a href="https://www.biosano.es/promociones" class="feature-link">Saber más</a>
-            </div>
-        </div>
-    </section>
+
+     <section class="container my-5">
+         <div class="row g-4">
+             <div class="col-12 col-md-6">
+                 <div class="feature-box text-center h-100 shadow-sm">
+                     <img src="https://www.biosano.es/cdnassets/redesign/icon/icon-home-1-rs.png" class="feature-icon" alt="Envío en 24/48h">
+                     <div class="feature-content mt-2">Envío en 24/48h</div>
+                     <a href="https://www.biosano.es/envios-y-devoluciones" class="feature-link d-inline-block mt-2">Saber más</a>
+                 </div>
+             </div>
+             <div class="col-12 col-md-6">
+                 <div class="feature-box text-center h-100 shadow-sm">
+                     <img src="https://www.biosano.es/cdnassets/redesign/icon/icon-home-2-rs.png" class="feature-icon" alt="Devoluciones fáciles">
+                     <div class="feature-content mt-2">Devoluciones fáciles</div>
+                     <a href="https://www.biosano.es/politica-de-devoluciones" class="feature-link d-inline-block mt-2">Saber más</a>
+                 </div>
+             </div>
+             <div class="col-12 col-md-6">
+                 <div class="feature-box text-center h-100 shadow-sm">
+                     <img src="https://www.biosano.es/cdnassets/redesign/icon/icon-home-3-rs.png" class="feature-icon" alt="Pago 100% seguro">
+                     <div class="feature-content mt-2">Pago 100% seguro</div>
+                     <a href="https://www.biosano.es/formas-de-pago" class="feature-link d-inline-block mt-2">Saber más</a>
+                 </div>
+             </div>
+             <div class="col-12 col-md-6">
+                 <div class="feature-box text-center h-100 shadow-sm">
+                     <img src="https://www.biosano.es/cdnassets/redesign/icon/icon-home-4-rs.png" class="feature-icon" alt="Mejor precio garantizado">
+                     <div class="feature-content mt-2">Mejor precio garantizado</div>
+                     <a href="https://www.biosano.es/promociones" class="feature-link d-inline-block mt-2">Saber más</a>
+                 </div>
+             </div>
+         </div>
+     </section>
+
 
     <!-- Footer -->
     <footer class="bg-dark text-light pt-4">
@@ -134,5 +158,6 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/cargarProductos.js"></script>
+    <script src="js/authForm.js"></script>
 </body>
 </html>
