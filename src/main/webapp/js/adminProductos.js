@@ -1,46 +1,41 @@
 document.addEventListener("DOMContentLoaded", () => {
-    console.log("📦 Cargando módulo de gestión de productos...");
+    console.log("📦 Módulo de gestión de productos cargado.");
 
     let idProductoPendienteEliminar = null;
 
-    const getElement = id => document.getElementById(id);
-    const mostrarModal = id => new bootstrap.Modal(getElement(id)).show();
-    const ocultarModal = id => bootstrap.Modal.getInstance(getElement(id))?.hide();
+    const $ = id => document.getElementById(id);
+    const mostrarModal = id => new bootstrap.Modal($(id)).show();
+    const ocultarModal = id => bootstrap.Modal.getInstance($(id))?.hide();
 
-    function mostrarAlerta(idElemento, mensaje, tipo = "success") {
-        const alerta = getElement(idElemento);
+    const mostrarAlerta = (id, mensaje, tipo = "success") => {
+        const alerta = $(id);
         if (!alerta) return;
-
         alerta.className = `alert alert-${tipo}`;
         alerta.textContent = mensaje;
         alerta.classList.remove("d-none");
-
         setTimeout(() => alerta.classList.add("d-none"), 4000);
-    }
+    };
 
-    async function cargarProductos() {
-        try {
-            const res = await fetch("/productos/listar");
-            if (!res.ok) throw new Error("Error al obtener productos");
-            const productos = await res.json();
+    const validarCamposProducto = ({ nombre, descripcion, descripcionBreve, categoria, precio, descuento, stock }) => {
+        if (!nombre || !descripcion || !descripcionBreve || !categoria)
+            return "❌ Todos los campos de texto son obligatorios";
+        if (isNaN(precio) || precio <= 0)
+            return "❌ El precio debe ser un número positivo";
+        if (isNaN(descuento) || descuento < 0)
+            return "❌ El descuento debe ser un número positivo o cero";
+        if (isNaN(stock) || stock < 0)
+            return "❌ La cantidad en stock no puede ser negativa";
+        return null;
+    };
 
-            const tbody = getElement("productosTableBody");
-            tbody.innerHTML = "";
-            productos.forEach(agregarProductoATabla);
-        } catch (err) {
-            console.error("❌ Error al cargar productos:", err);
-        }
-    }
-
-    function agregarProductoATabla(producto) {
-        const tbody = getElement("productosTableBody");
+    const renderProducto = producto => {
         const fila = document.createElement("tr");
         fila.dataset.id = producto.id;
 
         fila.innerHTML = `
             <td>${producto.nombre}</td>
             <td>${producto.descripcion}</td>
-            <td>${producto.descripcionBreve}</td>
+            <td>${producto.descripcion_breve}</td>
             <td>${producto.precio?.toFixed(2)} €</td>
             <td>${producto.descuento ?? 0}%</td>
             <td>${producto.stock}</td>
@@ -51,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     data-id="${producto.id}"
                     data-nombre="${encodeURIComponent(producto.nombre)}"
                     data-descripcion="${encodeURIComponent(producto.descripcion)}"
-                    data-descripcionbreve="${encodeURIComponent(producto.descripcionBreve)}"
+                    data-descripcionbreve="${encodeURIComponent(producto.descripcion_breve)}"
                     data-precio="${producto.precio}"
                     data-descuento="${producto.descuento}"
                     data-stock="${producto.stock}"
@@ -61,45 +56,47 @@ document.addEventListener("DOMContentLoaded", () => {
             </td>
             <td>
                 <button class="btn btn-danger btn-sm eliminar-producto"
-                    data-id="${producto.id}"
-                    data-nombre="${producto.nombre}">
+                    data-id="${producto.id}" data-nombre="${producto.nombre}">
                     Eliminar
                 </button>
             </td>
         `;
 
+        fila.querySelector(".editar-producto").addEventListener("click", e =>
+            cargarDatosEdicion(e.currentTarget)
+        );
+
         fila.querySelector(".eliminar-producto").addEventListener("click", () => {
             idProductoPendienteEliminar = producto.id;
-            getElement("nombreProductoAEliminar").textContent = producto.nombre;
+            $("nombreProductoAEliminar").textContent = producto.nombre;
             mostrarModal("modalConfirmarEliminarProducto");
         });
 
-        fila.querySelector(".editar-producto").addEventListener("click", e => cargarDatosEdicion(e.currentTarget));
-        tbody.appendChild(fila);
-    }
+        return fila;
+    };
 
-    async function eliminarProducto(id) {
+    const cargarProductos = async () => {
         try {
-            const res = await fetch(`/productos/eliminar/${id}`, { method: "DELETE" });
-            if (!res.ok) throw new Error("Error en la eliminación");
-
-            getElement("productosTableBody").querySelector(`tr[data-id="${id}"]`)?.remove();
-            mostrarAlerta("alertaProductos", "✅ Producto eliminado correctamente.");
+            const res = await fetch("/productos/listar");
+            if (!res.ok) throw new Error("No se pudo obtener la lista de productos");
+            const productos = await res.json();
+            const tbody = $("productosTableBody");
+            tbody.innerHTML = "";
+            productos.forEach(p => tbody.appendChild(renderProducto(p)));
         } catch (err) {
-            mostrarAlerta("alertaProductos", "❌ Error al eliminar producto", "danger");
+            console.error("❌ Error al cargar productos:", err);
         }
-    }
+    };
 
-    async function cargarCategorias() {
+    const cargarCategorias = async () => {
         try {
             const res = await fetch("/productos/categorias");
-            if (!res.ok) throw new Error("Error al obtener categorías");
+            if (!res.ok) throw new Error("No se pudo obtener la lista de categorías");
             const categorias = await res.json();
-
-            const selects = [getElement("categoria"), getElement("editCategoria")];
-            selects.forEach(select => {
+            ["categoria", "editCategoria"].forEach(id => {
+                const select = $(id);
                 if (!select) return;
-                select.innerHTML = '<option value="">Selecciona una categoría</option>';
+                select.innerHTML = `<option value="">Selecciona una categoría</option>`;
                 categorias.forEach(cat => {
                     const option = document.createElement("option");
                     option.value = cat;
@@ -110,127 +107,115 @@ document.addEventListener("DOMContentLoaded", () => {
         } catch (err) {
             console.error("❌ Error al cargar categorías:", err);
         }
-    }
+    };
 
-
-    function cargarDatosEdicion(btn) {
+    const cargarDatosEdicion = btn => {
         const id = btn.dataset.id;
         if (!id || isNaN(id) || id <= 0) {
             mostrarAlerta("alertaProductos", "❌ ID no válido para edición", "danger");
             return;
         }
 
-        getElement("editProductoId").value = id;
-        getElement("editNombre").value = decodeURIComponent(btn.dataset.nombre);
-        getElement("editDescripcion").value = decodeURIComponent(btn.dataset.descripcion);
-        getElement("editDescripcionBreve").value = decodeURIComponent(btn.dataset.descripcionbreve);
-        getElement("editPrecio").value = btn.dataset.precio;
-        getElement("editDescuento").value = btn.dataset.descuento || 0;
-        getElement("editStock").value = btn.dataset.stock;
-        getElement("editCategoria").value = decodeURIComponent(btn.dataset.categoria);
+        $("editProductoId").value = id;
+        $("editNombre").value = decodeURIComponent(btn.dataset.nombre);
+        $("editDescripcion").value = decodeURIComponent(btn.dataset.descripcion);
+        $("editDescripcionBreve").value = decodeURIComponent(btn.dataset.descripcionbreve);
+        $("editPrecio").value = btn.dataset.precio;
+        $("editDescuento").value = btn.dataset.descuento || 0;
+        $("editStock").value = btn.dataset.stock;
+        $("editCategoria").value = decodeURIComponent(btn.dataset.categoria);
 
         mostrarModal("editarProductoModal");
-    }
+    };
 
-    getElement("formProducto")?.addEventListener("submit", async e => {
+    $("formProducto")?.addEventListener("submit", async e => {
         e.preventDefault();
         const form = e.currentTarget;
         const formData = new FormData(form);
 
-        const nombre = formData.get("nombre")?.trim();
-        const descripcion = formData.get("descripcion")?.trim();
-        const descripcionBreve = formData.get("descripcionBreve")?.trim();
-        const categoria = formData.get("categoria")?.trim();
-        const precio = parseFloat(formData.get("precio"));
-        const descuento = parseFloat(formData.get("descuento"));
-        const stock = parseInt(formData.get("stock"));
+        const datos = {
+            nombre: formData.get("nombre")?.trim(),
+            descripcion: formData.get("descripcion")?.trim(),
+            descripcionBreve: formData.get("descripcionBreve")?.trim(),
+            categoria: formData.get("categoria")?.trim(),
+            precio: parseFloat(formData.get("precio")),
+            descuento: parseFloat(formData.get("descuento")),
+            stock: parseInt(formData.get("stock"))
+        };
 
-        if (!nombre || !descripcion || !descripcionBreve || !categoria) {
-            mostrarAlerta("alertaProductos", "❌ Todos los campos de texto son obligatorios", "warning");
-            return;
-        }
-        if (isNaN(precio) || precio <= 0) {
-            mostrarAlerta("alertaProductos", "❌ El precio debe ser un número positivo", "warning");
-            return;
-        }
-        if (isNaN(descuento) || descuento < 0) {
-            mostrarAlerta("alertaProductos", "❌ El descuento debe ser un número positivo o cero", "warning");
-            return;
-        }
-        if (isNaN(stock) || stock <= 0) {
-            mostrarAlerta("alertaProductos", "❌ La cantidad en stock debe ser un número positivo", "warning");
-            return;
-        }
+        const error = validarCamposProducto(datos);
+        if (error) return mostrarAlerta("alertaProductos", error, "warning");
 
         try {
             const res = await fetch("/productos/guardar", { method: "POST", body: formData });
-            if (!res.ok) throw await res.json();
-            await res.json();
+            const data = await res.json();
+            if (!res.ok) throw data;
             mostrarAlerta("alertaProductos", "✅ Producto guardado con éxito");
-            cargarProductos();
             form.reset();
+            cargarProductos();
         } catch (err) {
             mostrarAlerta("alertaProductos", err.mensaje || "❌ Error al guardar el producto", "danger");
         }
     });
 
-    getElement("editarProductoForm")?.addEventListener("submit", async e => {
+    $("editarProductoForm")?.addEventListener("submit", async e => {
         e.preventDefault();
-        const id = getElement("editProductoId").value;
+        const id = $("editProductoId").value;
         if (!id || isNaN(id) || id <= 0) {
-            mostrarAlerta("alertaProductos", "❌ ID no válido para edición", "danger");
+            mostrarAlerta("alertaProductos", "❌ ID no válido", "danger");
             return;
         }
 
-        const form = e.currentTarget;
-        const formData = new FormData(form);
+        const datos = {
+            nombre: $("editNombre").value.trim(),
+            descripcion: $("editDescripcion").value.trim(),
+            descripcionBreve: $("editDescripcionBreve").value.trim(),
+            categoria: $("editCategoria").value.trim(),
+            precio: parseFloat($("editPrecio").value),
+            descuento: parseFloat($("editDescuento").value),
+            stock: parseInt($("editStock").value)
+        };
 
-        const nombre = getElement("editNombre").value.trim();
-        const descripcionBreve = getElement("editDescripcionBreve").value.trim();
-        const descripcion = getElement("editDescripcion").value.trim();
-        const precio = parseFloat(getElement("editPrecio").value);
-        const descuento = parseFloat(getElement("editDescuento").value);
-        const stock = parseInt(getElement("editStock").value);
-        const categoria = getElement("editCategoria").value.trim();
-
-        if (!nombre || !descripcionBreve || !descripcion || !categoria) {
-            mostrarAlerta("alertaProductos", "❌ Todos los campos de texto son obligatorios", "warning");
-            return;
-        }
-        if (isNaN(precio) || precio <= 0) {
-            mostrarAlerta("alertaProductos", "❌ El precio debe ser un número positivo", "warning");
-            return;
-        }
-        if (isNaN(descuento) || descuento < 0) {
-            mostrarAlerta("alertaProductos", "❌ El descuento debe ser positivo o cero", "warning");
-            return;
-        }
-        if (isNaN(stock) || stock <= 0) {
-            mostrarAlerta("alertaProductos", "❌ La cantidad en stock debe ser un número positivo", "warning");
-            return;
-        }
+        const formData = new FormData(e.currentTarget);
+        const error = validarCamposProducto(datos);
+        if (error) return mostrarAlerta("alertaProductos", error, "warning");
 
         try {
-            const res = await fetch(`/productos/editar/${id}`, { method: "PUT", body: formData });
+            const res = await fetch(`/productos/editar/${id}`, {
+                method: "PUT",
+                body: formData
+            });
             const data = await res.json();
             if (!res.ok) throw data;
 
-            mostrarAlerta("alertaProductos", data.mensaje || "✅ Producto actualizado correctamente.");
-            cargarProductos();
+            mostrarAlerta("alertaProductos", data.mensaje || "✅ Producto actualizado correctamente");
             ocultarModal("editarProductoModal");
-        } catch (error) {
-            mostrarAlerta("alertaProductos", error.mensaje || "❌ Error al actualizar producto", "danger");
+            cargarProductos();
+        } catch (err) {
+            mostrarAlerta("alertaProductos", err.mensaje || "❌ Error al actualizar producto", "danger");
         }
     });
 
-    getElement("btnConfirmarEliminarProducto")?.addEventListener("click", () => {
+    $("btnConfirmarEliminarProducto")?.addEventListener("click", () => {
         if (idProductoPendienteEliminar) {
             eliminarProducto(idProductoPendienteEliminar);
-            idProductoPendienteEliminar = null;
             ocultarModal("modalConfirmarEliminarProducto");
+            idProductoPendienteEliminar = null;
         }
     });
 
+    const eliminarProducto = async id => {
+        try {
+            const res = await fetch(`/productos/eliminar/${id}`, { method: "DELETE" });
+            if (!res.ok) throw new Error("No se pudo eliminar el producto");
+            $("productosTableBody").querySelector(`tr[data-id="${id}"]`)?.remove();
+            mostrarAlerta("alertaProductos", "✅ Producto eliminado correctamente");
+        } catch (err) {
+            mostrarAlerta("alertaProductos", "❌ Error al eliminar producto", "danger");
+        }
+    };
+
+    // Inicializar
     cargarProductos();
     cargarCategorias();
 });

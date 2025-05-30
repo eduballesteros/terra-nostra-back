@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // let emailUsuarioPendienteEliminar
     let emailUsuarioPendienteEliminar = null;
 
     const mostrarAlerta = (id, mensaje, tipo = "success") => {
@@ -90,14 +89,19 @@ document.addEventListener("DOMContentLoaded", () => {
             method: "DELETE",
             headers: { "Accept": "application/json" }
         })
-            .then(res => res.ok ? res.json() : Promise.reject("Error en la eliminación"))
+            .then(res => res.ok ? res.json() : Promise.reject(res))
             .then(data => {
                 mostrarAlerta("alertaUsuarios", data.mensaje || "✅ Usuario eliminado correctamente.", "success");
                 cargarUsuarios();
                 bootstrap.Modal.getInstance(document.getElementById("modalConfirmarEliminarUsuario")).hide();
             })
-            .catch(() => {
-                mostrarAlerta("alertaUsuarios", "❌ Error al eliminar usuario.", "danger");
+            .catch(async (error) => {
+                if (error instanceof Response && error.status === 403) {
+                    const data = await error.json();
+                    mostrarAlerta("alertaUsuarios", data.mensaje || "⛔ No se puede eliminar al último administrador.", "danger");
+                } else {
+                    mostrarAlerta("alertaUsuarios", "❌ Error al eliminar usuario.", "danger");
+                }
             });
     });
 

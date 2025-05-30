@@ -15,6 +15,8 @@
         <link rel="stylesheet" href="css/admin.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/header.css">
         <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/carrito.css">
+
     </head>
 
     <body>
@@ -243,11 +245,18 @@
     </div>
 
 
+    <footer style="text-align: center; padding: 1rem 0; font-size: 0.9rem; color: #666; background-color: #f8f8f8;">
+        &copy; Terra Nostra 2025
+    </footer>
+
+
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/adminProductos.js"></script>
     <script src="js/adminUsuario.js"></script>
     <script src="js/adminPanel.js"></script>
+    <script src="${pageContext.request.contextPath}/js/carrito.js"></script>
+
 
     </body>
     </html>

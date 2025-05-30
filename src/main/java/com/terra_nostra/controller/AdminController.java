@@ -2,10 +2,12 @@ package com.terra_nostra.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.terra_nostra.service.UsuarioService;
 import com.terra_nostra.dto.UsuarioDto;
+import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -46,19 +48,34 @@ public class AdminController {
     public ResponseEntity<Map<String, String>> eliminarUsuario(@RequestParam String email) {
         logger.info("🗑 Solicitando eliminación del usuario con email: {}", email);
 
-        boolean eliminado = usuarioService.eliminarUsuarioDesdeAPI(email);
         Map<String, String> respuesta = new HashMap<>();
+        int statusCode = usuarioService.eliminarUsuarioDesdeAPI(email);
 
-        if (eliminado) {
-            logger.info("✅ Usuario eliminado correctamente: {}", email);
-            respuesta.put("mensaje", "✅ Usuario eliminado con éxito.");
-            return ResponseEntity.ok(respuesta);
-        } else {
-            logger.error("❌ Error al eliminar usuario con email: {}", email);
-            respuesta.put("mensaje", "❌ Error al eliminar usuario.");
-            return ResponseEntity.badRequest().body(respuesta);
+        switch (statusCode) {
+            case 200 -> {
+                respuesta.put("mensaje", "✅ Usuario eliminado con éxito.");
+                return ResponseEntity.ok(respuesta);
+            }
+            case 403 -> {
+                respuesta.put("mensaje", "⛔ No se puede eliminar al último administrador.");
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body(respuesta);
+            }
+            case 409 -> {
+                respuesta.put("mensaje", "⛔ El usuario tiene datos relacionados y no se puede eliminar.");
+                return ResponseEntity.status(HttpStatus.CONFLICT).body(respuesta);
+            }
+            case 404 -> {
+                respuesta.put("mensaje", "⚠️ Usuario no encontrado.");
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(respuesta);
+            }
+            default -> {
+                respuesta.put("mensaje", "❌ Error inesperado al eliminar el usuario.");
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(respuesta);
+            }
         }
     }
+
+
 
     /**
      * Actualiza la información de un usuario en el sistema.
