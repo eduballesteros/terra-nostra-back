@@ -31,3 +31,21 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Archivos de configuración ###
+*.properties
+*.env
+*.config
+application-local.properties
+application-dev.properties
+application-prod.properties
+database.properties
+secret.properties
+config.properties
+
+### Archivos sensibles ###
+*.key
+*.pem
+*.p12
+*.jks
+*.keystore
