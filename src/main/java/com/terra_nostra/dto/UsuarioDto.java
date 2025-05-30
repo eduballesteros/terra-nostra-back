@@ -38,8 +38,9 @@ public class UsuarioDto {
 
     private String telefono;
     private String direccion;
-    private boolean correoVerificado;
 
+    @JsonProperty("correo_verificado")
+    private boolean correoVerificado;
 
     @JsonProperty("fechaRegistro")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")

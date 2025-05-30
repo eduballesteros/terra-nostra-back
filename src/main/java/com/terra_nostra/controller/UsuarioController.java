@@ -86,7 +86,13 @@ public class UsuarioController {
 			logger.info("📌 Resultado del registro: {}", resultado);
 
 			if ("success".equals(resultado)) {
-				String token = jwtUtil.generarToken(email, usuarioNuevo.getRol(), usuarioNuevo.getNombre());
+				String token = jwtUtil.generarToken(
+						email,
+						usuarioNuevo.getRol(),
+						usuarioNuevo.getNombre(),
+						usuarioNuevo.isCorreoVerificado(),
+						usuarioNuevo.getId()
+				);
 				logger.info("📌 Token generado: {}", token);
 				logger.info("✅ Registro exitoso. Bienvenido a Terra Nostra!");
 
@@ -181,7 +187,7 @@ public class UsuarioController {
 		}
 
 		// Si es usuario normal, ir al perfil del usuario
-		return "perfil-usuario"; // Cargar perfil-usuario.jsp
+		return "perfil-usuario";
 	}
 
 	@PostMapping("/reenviar-verificacion")

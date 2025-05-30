@@ -137,7 +137,7 @@ public class UsuarioService {
      */
 
 
-    public boolean eliminarUsuarioDesdeAPI(String email) {
+    public int eliminarUsuarioDesdeAPI(String email) {
         try {
             logger.info("🗑 Enviando solicitud DELETE a la API para eliminar usuario con email: {}", email);
 
@@ -153,18 +153,14 @@ public class UsuarioService {
             logger.info("🔹 Código de respuesta de la API: {}", response.statusCode());
             logger.info("🔹 Respuesta de la API: {}", response.body());
 
-            if (response.statusCode() == 200) {
-                logger.info("✅ Usuario eliminado correctamente en la API.");
-                return true;
-            } else {
-                logger.error("❌ No se pudo eliminar el usuario. Código: {}, Respuesta: {}", response.statusCode(), response.body());
-                return false;
-            }
+            return response.statusCode();
+
         } catch (Exception e) {
             logger.error("❌ Error al eliminar usuario en la API:", e);
-            return false;
+            return 500; // Error interno por excepción
         }
     }
+
 
     /**
      * Actualiza los datos de un usuario en la API.

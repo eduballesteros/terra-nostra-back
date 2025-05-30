@@ -1,13 +1,41 @@
 /* ==============================
    HEADER
 ============================== */
+
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  color: var(--color-primary);
+}
+
+.libre-baskerville-regular {
+  font-family: "Libre Baskerville", serif;
+  font-weight: 400;
+}
+.libre-baskerville-bold {
+  font-weight: 700;
+}
+.libre-baskerville-regular-italic {
+  font-style: italic;
+}
+
+.footer-terra {
+    text-align: center;
+    padding: 1rem 0;
+    font-size: 0.9rem;
+    color: #666;
+    background-color: #f8f8f8;
+}
+
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
+  padding: 1.5rem 2.5rem;
   background-color: var(--color-light);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  flex-wrap: wrap;
   flex-wrap: wrap;
 }
 
@@ -18,12 +46,12 @@
 }
 
 .header .logo img {
-  max-width: 60px;
+  max-width: 90px;
 }
 
 .header .logo h4 {
   font-family: "Libre Baskerville", serif;
-  font-size: 1.5rem;
+  font-size: 1.7rem;
   font-weight: 700;
   margin: 0;
 }
@@ -39,7 +67,8 @@
 .navigation a {
   font-family: "Libre Baskerville", serif;
   font-weight: 400;
-  font-size: 1.1rem;
+  font-size: 1.5rem;
+  padding: 0.5rem 0;
   text-decoration: none;
   color: var(--color-primary);
   transition: color 0.3s ease;
@@ -54,7 +83,6 @@
   font-weight: bold;
 }
 
-/* Íconos header */
 .header-icons {
   display: flex;
   gap: 1.5rem;
@@ -80,18 +108,18 @@
   height: 20px;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   .header {
     flex-direction: column;
     text-align: center;
-    padding: 1rem;
+    padding: 1.5rem;
   }
 
   .logo {
     flex-direction: column;
     gap: 0.25rem;
     margin-bottom: 1rem;
+
   }
 
   .logo img {
@@ -118,6 +146,7 @@
     height: 18px;
   }
 }
+
 
 /* ==============================
    MODALES (Login, Registro, Notificación, Mi Cuenta)

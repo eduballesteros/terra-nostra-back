@@ -8,9 +8,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- CSS personalizado -->
-    <link rel="stylesheet" href="css/infoUsu.css">
+     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/shop.css">
+     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/header.css">
+     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/infoUsu.css">
+     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/carrito.css">
+     <link rel="icon" href="${pageContext.request.contextPath}/images/favicon.ico" type="image/x-icon">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
 </head>
 
 <body data-email="${usuarioLogueado}">
@@ -33,7 +39,7 @@
                         <svg width="18px" height="18px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M15 19L17 21L21 17M13 3H8.2C7.0799 3 6.51984 3 6.09202 3.21799C5.71569 3.40973 5.40973 3.71569 5.21799 4.09202C5 4.51984 5 5.0799 5 6.2V17.8C5 18.9201 5 19.4802 5.21799 19.908C5.40973 20.2843 5.71569 20.5903 6.09202 20.782C6.51984 21 7.0799 21 8.2 21H11.5M13 3L19 9M13 3V7.4C13 7.96005 13 8.24008 13.109 8.45399C13.2049 8.64215 13.3578 8.79513 13.546 8.89101C13.7599 9 14.0399 9 14.6 9H19M19 9V13.4M9 17H11.5M9 13H15M9 9H10" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        Pedidos y devoluciones
+                        Pedidos
                     </a>
                 </li>
                 <li class="nav-item mb-2">
@@ -115,8 +121,9 @@
         <!-- Sección de pedidos -->
         <section id="seccionPedidos" class="col-md-9 d-none">
             <h2 class="fw-bold mb-2">Pedidos y devoluciones</h2>
-            <p class="mb-4 text-muted">Todavía no tienes pedidos registrados.</p>
-            <div class="alert alert-info">🛈 Esta sección estará disponible pronto.</div>
+            <div id="contenedorPedidos">
+                <p class="mb-4 text-muted">Cargando pedidos...</p>
+            </div>
         </section>
     </div>
 
@@ -183,10 +190,33 @@
   </div>
 </div>
 
+<div class="modal fade" id="notificationModal" tabindex="-1" aria-labelledby="notificationModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content border-success border-2">
+            <div class="modal-header bg-success text-white">
+                <h5 class="modal-title" id="notificationModalLabel">✅ Factura enviada</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body" id="notificationMessage">
+                Te hemos enviado un correo con el PDF adjunto. Revisa tu bandeja de entrada y la carpeta de spam.
+            </div>
+            <div class="modal-footer bg-light">
+                <button type="button" class="btn btn-success" data-bs-dismiss="modal">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer style="text-align: center; padding: 1rem 0; font-size: 0.9rem; color: #666; background-color: #f8f8f8;">
+    &copy; Terra Nostra 2025
+</footer>
+
 
 <!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="js/perfilUsuario.js"></script>
+<script src="${pageContext.request.contextPath}/js/carrito.js"></script>
+
 
 </body>
 </html>

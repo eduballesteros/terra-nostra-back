@@ -13,6 +13,10 @@
     <!-- Estilos personalizados -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/index.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/header.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/carrito.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/footer.css">
+
+
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
@@ -118,46 +122,58 @@
 
 
     <!-- Footer -->
-    <footer class="bg-dark text-light pt-4">
-        <div class="container text-center text-md-start">
-            <div class="row">
-                <div class="col-md-3">
-                    <h5 class="text-success">Terra Nostra</h5>
-                    <p>Productos naturales para una vida mejor.</p>
-                </div>
-                <div class="col-md-3">
-                    <h5 class="text-success">Enlaces</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="#" class="text-light">Sobre Nosotros</a></li>
-                        <li><a href="#" class="text-light">Términos y Condiciones</a></li>
-                        <li><a href="#" class="text-light">Política de Privacidad</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-3">
-                    <h5 class="text-success">Síguenos</h5>
-                    <a href="#" class="text-light me-2"><i class="bi bi-facebook"></i></a>
-                    <a href="#" class="text-light me-2"><i class="bi bi-instagram"></i></a>
-                    <a href="#" class="text-light"><i class="bi bi-twitter"></i></a>
-                </div>
-                <div class="col-md-3">
-                    <h5 class="text-success">Suscríbete</h5>
-                    <form>
-                        <div class="input-group mb-3">
-                            <input type="email" class="form-control" placeholder="Tu email">
-                            <button class="btn btn-success" type="submit">Enviar</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="text-center mt-3 border-top pt-2">
-                <p class="mb-0">&copy; 2025 Terra Nostra. Todos los derechos reservados.</p>
-            </div>
+
+    <jsp:include page="/includes/footer.jsp" />
+
+
+    <div class="modal fade" id="modalPagoExitoso" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content custom-modal">
+          <div class="modal-header" style="background-color: #28a745; color: white;">
+            <h5 class="modal-title w-100 text-center">✅ ¡Gracias por tu compra!</h5>
+          </div>
+          <div class="modal-body text-center">
+            <p>Tu pedido se ha procesado correctamente. Pronto lo recibirás.</p>
+          </div>
         </div>
-    </footer>
+      </div>
+    </div>
+
+    <!-- Modal: Error en el pago -->
+    <div class="modal fade" id="modalPagoError" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content custom-modal">
+          <div class="modal-header" style="background-color: #dc3545; color: white;">
+            <h5 class="modal-title w-100 text-center">❌ Error en el pago</h5>
+          </div>
+          <div class="modal-body text-center">
+            <p>Ocurrió un problema al procesar el pago. Por favor, intenta nuevamente.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal: Pago cancelado -->
+    <div class="modal fade" id="modalPagoCancelado" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content custom-modal">
+          <div class="modal-header" style="background-color: #ffc107; color: #212529;">
+            <h5 class="modal-title w-100 text-center">⚠️ Pago cancelado</h5>
+          </div>
+          <div class="modal-body text-center">
+            <p>Has cancelado el proceso de pago. Puedes volver a intentarlo cuando quieras.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/cargarProductos.js"></script>
     <script src="js/authForm.js"></script>
+     <script src="${pageContext.request.contextPath}/js/authModal.js"></script>
+
+
 </body>
 </html>

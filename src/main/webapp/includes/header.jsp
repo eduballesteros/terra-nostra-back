@@ -6,17 +6,14 @@
     <!-- Logo de la tienda -->
     <div class="logo">
         <img src="${pageContext.request.contextPath}/images/logo.webp" alt="Logo de la tienda" />
-        <h4>Terra Nostra</h4>
     </div>
 
     <!-- Barra de navegación -->
     <nav class="navigation">
         <ul>
             <li><a href="${pageContext.request.contextPath}/" class="active">Home</a></li>
-            <li><a href="${pageContext.request.contextPath}/shop">Productos</a></li>
-            <li><a href="${pageContext.request.contextPath}/about">Sobre Nosotros</a></li>
-            <li><a href="${pageContext.request.contextPath}/blog">Blog</a></li>
-            <li><a href="${pageContext.request.contextPath}/contact">Contacto</a></li>
+            <li><a href="${pageContext.request.contextPath}/tienda">Productos</a></li>
+            <li><a href="${pageContext.request.contextPath}/sobre-nosotros">Sobre Nosotros</a></li>
         </ul>
     </nav>
 
@@ -25,9 +22,10 @@
         <a class="account" aria-label="Ir a cuenta de usuario" href="#">
             <img src="${pageContext.request.contextPath}/icons/user.svg" alt="Icono de usuario" />
         </a>
-        <a class="cart" aria-label="Ir al carrito de compras" href="#">
+        <a class="cart" aria-label="Abrir carrito" href="javascript:void(0)">
             <img src="${pageContext.request.contextPath}/icons/cart.svg" alt="Icono del carrito" />
         </a>
+
     </div>
 </header>
 
@@ -95,7 +93,7 @@
 
 
                     <!-- Login -->
-                    <form action="${pageContext.request.contextPath}/auth/login" method="POST" id="loginForm" onsubmit="return validarLogin();">
+                    <form id="loginForm">
                         <p class="modal-title">INICIAR SESIÓN</p>
 
                         <div class="form_group">
@@ -172,10 +170,16 @@
 </div>
 
 <!-- Toasts -->
+<!-- Toasts -->
 <div class="toast-container position-fixed bottom-0 end-0 p-3" id="toastContainer"></div>
 
-<!-- JS -->
+<!-- Scripts -->
 <script src="${pageContext.request.contextPath}/js/authForm.js"></script>
 <script src="${pageContext.request.contextPath}/js/authGoogleLogin.js"></script>
 <script src="${pageContext.request.contextPath}/js/authCambiarContrasenia.js"></script>
 <script src="${pageContext.request.contextPath}/js/authModal.js"></script>
+
+
+<jsp:include page="/includes/carritoLateral.jsp" />
+
+

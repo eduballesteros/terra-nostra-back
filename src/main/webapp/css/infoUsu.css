@@ -71,6 +71,97 @@ body {
   color: var(--color-secondary);
 }
 
+#seccionPedidos {
+    padding: 1.5rem;
+    background-color: #fdfdfc;
+    border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.pedido-card {
+    border: 1px solid var(--color-secondary, #ccc);
+    border-radius: 12px;
+    background-color: #fff;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+    transition: box-shadow 0.3s ease;
+}
+
+.pedido-card:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.pedido-encabezado {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.pedido-encabezado h5 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #1b1f3b;
+}
+
+.pedido-encabezado .fecha {
+    font-size: 0.9rem;
+    color: #888;
+}
+
+.pedido-info p {
+    margin: 0.2rem 0;
+    font-size: 0.95rem;
+}
+
+.producto-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.card-producto {
+    border: 1px solid #eee;
+    border-radius: 10px;
+    background-color: #fdfdfd;
+    padding: 1rem;
+    transition: transform 0.2s;
+}
+
+.card-producto:hover {
+    transform: translateY(-3px);
+}
+
+.card-producto h6 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.card-producto p {
+    font-size: 0.9rem;
+    margin: 0.2rem 0;
+}
+
+.btn-factura {
+    display: inline-block;
+    margin-top: 0.5rem;
+    padding: 0.3rem 0.8rem;
+    font-size: 0.85rem;
+    background-color: var(--color-primary, #ff6600);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-factura:hover {
+    background-color: #e55a00;
+}
+
 /* ==============================
     Menú lateral izquierdo
 ============================== */

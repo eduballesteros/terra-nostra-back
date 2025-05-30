@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function mostrarLoader(visible) {
         if (loader) loader.style.display = visible ? "block" : "none";
-        if (contenedorProductos) contenedorProductos.classList.toggle("d-none", visible);
+        contenedorProductos.classList.toggle("d-none", visible);
     }
 
     function cargarTodosLosProductos(filtros = {}) {
@@ -33,6 +33,15 @@ document.addEventListener("DOMContentLoaded", function () {
             .finally(() => mostrarLoader(false));
     }
 
+    function generarSlug(nombre) {
+        return nombre
+            .toLowerCase()
+            .normalize("NFD")                     // descompone tildes
+            .replace(/[\u0300-\u036f]/g, "")     // elimina tildes
+            .replace(/\s+/g, "-")                // espacios por guiones
+            .replace(/[^a-z0-9\-]/g, "");        // elimina otros símbolos
+    }
+
     function aplicarFiltros() {
         const filtros = {
             texto: inputBuscador.value.trim(),
@@ -40,7 +49,6 @@ document.addEventListener("DOMContentLoaded", function () {
             categoria: categoriaSeleccionada
         };
 
-        // ✅ Evita enviar categoría vacía al backend
         if (!filtros.categoria) {
             delete filtros.categoria;
         }
@@ -72,14 +80,21 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         productos.forEach(producto => {
+            const agotado = producto.stock <= 0;
+
             const productoHTML = `
                 <div class="col">
-                    <div class="producto-card d-flex flex-column h-100">
-                        ${producto.imagen
-                            ? `<img src="data:image/png;base64,${producto.imagen}" class="producto-img" alt="${producto.nombre}">`
-                            : '<img src="images/default.png" class="producto-img" alt="Imagen no disponible">'}
+                    <div class="producto-card d-flex flex-column h-100 ${agotado ? 'producto-agotado' : ''}">
+                        <div class="imagen-wrapper ${agotado ? 'filtro-gris' : ''}">
+                            ${producto.imagen
+                                ? `<img src="data:image/png;base64,${producto.imagen}" class="producto-img" alt="${producto.nombre}">`
+                                : '<img src="images/default.png" class="producto-img" alt="Imagen no disponible">'}
+                        </div>
+
+                        ${agotado ? '<span class="etiqueta-agotado">Agotado</span>' : ''}
+
                         <div class="producto-titulo">${producto.nombre}</div>
-                        <div class="producto-descripcion">${producto.descripcionBreve || ''}</div>
+                        <div class="producto-descripcion">${producto.descripcion_breve || ''}</div>
                         <div class="producto-precio">
                             ${
                                 producto.descuento && producto.descuento > 0
@@ -95,24 +110,18 @@ document.addEventListener("DOMContentLoaded", function () {
                         </div>
 
                         <div class="mt-auto d-flex justify-content-between align-items-center gap-2">
-                            <a href="/producto?id=${producto.id}" class="btn btn-outline-primary w-100">Ver más</a>
-                            <button class="btn btn-success d-flex align-items-center justify-content-center"
-                                    onclick="añadirAlCarrito(${producto.id})"
-                                    title="Añadir al carrito"
-                                    style="width: 40px; height: 40px; border-radius: 50%;">
-                                <img src="icons/cart.svg" alt="Añadir al carrito" style="width: 20px; height: 20px;">
-                            </button>
+                            <a href="/producto/${generarSlug(producto.nombre)}"
+                               class="btn ${agotado ? 'btn-outline-secondary' : 'btn-outline-primary'} w-100">
+                                Ver más
+                            </a>
                         </div>
                     </div>
                 </div>
             `;
+
             contenedorProductos.innerHTML += productoHTML;
         });
     }
-
-    window.añadirAlCarrito = function (id) {
-        console.log(`🛒 Producto con ID ${id} añadido al carrito`);
-    };
 
     cargarTodosLosProductos();
 });
