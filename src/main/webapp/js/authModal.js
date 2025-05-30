@@ -1,4 +1,16 @@
-// authModal.js
+function abrirCarrito() {
+    document.getElementById("carritoLateral")?.classList.add("abierto");
+}
+function cerrarCarrito() {
+    document.getElementById("carritoLateral")?.classList.remove("abierto");
+}
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelector(".cart")?.addEventListener("click", (e) => {
+        e.preventDefault();
+        abrirCarrito();
+    });
+});
+
 document.addEventListener("DOMContentLoaded", function () {
     const loginModalElement = document.getElementById("loginModal");
     const recuperarPasswordModalElement = document.getElementById("recuperarPasswordModal");
@@ -17,12 +29,8 @@ document.addEventListener("DOMContentLoaded", function () {
     let recuperarPasswordModal = null;
     let isRegister = false;
 
-    if (loginModalElement) {
-        loginModal = new bootstrap.Modal(loginModalElement);
-    }
-    if (recuperarPasswordModalElement) {
-        recuperarPasswordModal = new bootstrap.Modal(recuperarPasswordModalElement);
-    }
+    if (loginModalElement) loginModal = new bootstrap.Modal(loginModalElement);
+    if (recuperarPasswordModalElement) recuperarPasswordModal = new bootstrap.Modal(recuperarPasswordModalElement);
 
     if (accountIcon) {
         accountIcon.addEventListener("click", function (e) {
@@ -40,38 +48,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
     window.toggleForm = function () {
         isRegister = !isRegister;
-
-        if (isRegister) {
-            modalTitle.textContent = "REGISTRARSE";
-            registerForm.style.display = "block";
-            loginForm.style.display = "none";
-            registerForm.reset();
-        } else {
-            modalTitle.textContent = "INICIAR SESIÓN";
-            registerForm.style.display = "none";
-            loginForm.style.display = "block";
-            loginForm.reset();
-        }
+        modalTitle.textContent = isRegister ? "REGISTRARSE" : "INICIAR SESIÓN";
+        registerForm.style.display = isRegister ? "block" : "none";
+        loginForm.style.display = isRegister ? "none" : "block";
+        (isRegister ? registerForm : loginForm).reset();
     };
 
     window.abrirRecuperarContrasenia = function () {
-        const loginModalElement = document.getElementById("loginModal");
-        const loginModal = bootstrap.Modal.getInstance(loginModalElement) || new bootstrap.Modal(loginModalElement);
-        loginModal.hide();
-
-        const recuperarModalElement = document.getElementById("recuperarPasswordModal");
-        const recuperarModal = bootstrap.Modal.getInstance(recuperarModalElement) || new bootstrap.Modal(recuperarModalElement);
-        recuperarModal.show();
+        bootstrap.Modal.getOrCreateInstance(loginModalElement).hide();
+        bootstrap.Modal.getOrCreateInstance(recuperarPasswordModalElement).show();
     };
 
     window.cerrarModalRecuperacion = function () {
-        const recuperarModalElement = document.getElementById("recuperarPasswordModal");
-        const recuperarModal = bootstrap.Modal.getInstance(recuperarModalElement) || new bootstrap.Modal(recuperarModalElement);
-        recuperarModal.hide();
-
-        const loginModalElement = document.getElementById("loginModal");
-        const loginModal = bootstrap.Modal.getInstance(loginModalElement) || new bootstrap.Modal(loginModalElement);
-        loginModal.show();
+        bootstrap.Modal.getOrCreateInstance(recuperarPasswordModalElement).hide();
+        bootstrap.Modal.getOrCreateInstance(loginModalElement).show();
     };
 
     function verificarSesion() {
@@ -82,27 +72,21 @@ document.addEventListener("DOMContentLoaded", function () {
         .then(res => res.json())
         .then(data => {
             if (data.sesionActiva) {
-                if (userManager) userManager.style.display = "block";
-                if (loginForm) loginForm.style.display = "none";
-                if (registerForm) registerForm.style.display = "none";
-                if (userName) userName.textContent = data.nombreUsuario || "Usuario";
+                userManager && (userManager.style.display = "block");
+                loginForm && (loginForm.style.display = "none");
+                registerForm && (registerForm.style.display = "none");
+                userName && (userName.textContent = data.nombreUsuario || "Usuario");
                 if (profileLink) {
                     profileLink.href = data.rol === "ROLE_ADMIN" ? "/admin" : "/infoUser";
                 }
-
-                const saludoHeader = document.getElementById("saludoHeader");
-                if (saludoHeader) {
-                    saludoHeader.textContent = `Hola, ${data.nombreUsuario}`;
-                }
+                const saludo = document.getElementById("saludoHeader");
+                if (saludo) saludo.textContent = `Hola, ${data.nombreUsuario}`;
             } else {
-                if (userManager) userManager.style.display = "none";
-                if (loginForm) loginForm.style.display = "block";
-                if (registerForm) registerForm.style.display = "none";
-
-                const saludoHeader = document.getElementById("saludoHeader");
-                if (saludoHeader) {
-                    saludoHeader.textContent = "";
-                }
+                userManager && (userManager.style.display = "none");
+                loginForm && (loginForm.style.display = "block");
+                registerForm && (registerForm.style.display = "none");
+                const saludo = document.getElementById("saludoHeader");
+                if (saludo) saludo.textContent = "";
             }
         })
         .catch(error => console.error("❌ Error verificando sesión:", error));
@@ -125,4 +109,26 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     verificarSesion();
+
+    // Mostrar modal de pago si corresponde
+    const urlParams = new URLSearchParams(window.location.search);
+    const pagoParam = urlParams.get("pago");
+    let modal = null;
+
+    if (pagoParam === "exito") {
+        modal = new bootstrap.Modal(document.getElementById("modalPagoExitoso"));
+    } else if (pagoParam === "error") {
+        modal = new bootstrap.Modal(document.getElementById("modalPagoError"));
+    }
+
+    if (modal) {
+        modal.show();
+        setTimeout(() => {
+            modal.hide();
+
+            // Limpiar parámetro de la URL
+            const nuevaUrl = window.location.origin + window.location.pathname;
+            window.history.replaceState({}, document.title, nuevaUrl);
+        }, 3000);
+    }
 });

@@ -21,6 +21,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 return response.json();
             })
             .then(data => {
+                document.body.dataset.id = data.id;
+
                 nombreActual = data.nombre || "";
                 apellidoActual = data.apellido || "";
                 telefonoActual = data.telefono || "";
@@ -32,7 +34,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 document.getElementById("telefonoUsuario").textContent = telefonoActual || "No especificado";
                 document.getElementById("direccionUsuario").textContent = direccionActual || "No especificada";
 
-                // Mostrar aviso de correo no verificado
                 if (data.correoVerificado === false) {
                     const bloqueVerificacion = document.getElementById("bloqueVerificacionCorreo");
                     if (bloqueVerificacion) bloqueVerificacion.classList.remove("d-none");
@@ -71,10 +72,123 @@ document.addEventListener("DOMContentLoaded", function () {
                         ⚠️ Error al cargar tus datos. Intenta nuevamente.
                     </div>`;
             });
-    })
-    .catch(() => {
-        // Error al verificar sesión
     });
+
+    function cargarPedidos() {
+        const usuarioId = document.body.dataset.id;
+        if (!usuarioId) return;
+
+        fetch(`/usuario/pedidos?usuarioId=${usuarioId}`)
+            .then(res => res.json())
+            .then(pedidos => {
+                const contenedor = document.getElementById("contenedorPedidos");
+                if (!contenedor) return;
+
+                if (!pedidos.length) {
+                    contenedor.innerHTML = `<div class="alert alert-info">No tienes pedidos registrados aún.</div>`;
+                    return;
+                }
+
+                let html = "";
+
+                pedidos.forEach(pedido => {
+                    const fecha = new Date(pedido.fecha).toLocaleDateString('es-ES');
+
+                    html += `
+                        <div class="border rounded-4 p-4 mb-4 shadow-sm bg-light-subtle">
+                            <div class="d-flex justify-content-between align-items-center flex-wrap">
+                                <div>
+                                    <h5 class="fw-semibold mb-1 text-primary">Pedido realizado el ${fecha}</h5>
+                                    <div class="text-muted small">Estado: <strong>${pedido.estado}</strong></div>
+                                    <div class="text-muted small">Pago: <strong>${pedido.metodoPago || 'Paypal'}</strong></div>
+                                </div>
+                                <div class="text-end mt-3 mt-md-0">
+                                    <span class="fw-bold text-dark">Total: ${pedido.total.toFixed(2)} €</span>
+                                </div>
+                            </div>
+
+                            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3 mt-3">
+                    `;
+
+                    pedido.productos.forEach(prod => {
+                        html += `
+                            <div class="col">
+                                <div class="card h-100 border-0 shadow-sm">
+                                    <div class="card-body d-flex flex-column">
+                                        <h6 class="card-title fw-semibold">${prod.nombre || 'Producto'}</h6>
+                                        <p class="mb-1 small">Cantidad: <strong>${prod.cantidad}</strong></p>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    });
+
+                    html += `
+                            </div>
+                            <div class="text-end mt-4">
+                                <button class="btn btn-outline-success rounded-pill px-4" onclick="solicitarFactura(${pedido.id})">
+                                    Solicitar factura
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                contenedor.innerHTML = html;
+            })
+            .catch(error => {
+                console.error("❌ Error al cargar pedidos:", error);
+                const contenedor = document.getElementById("contenedorPedidos");
+                if (contenedor) {
+                    contenedor.innerHTML = `<div class="alert alert-danger">❌ Error al cargar los pedidos.</div>`;
+                }
+            });
+    }
+
+
+    window.solicitarFactura = function (pedidoId) {
+        const email = document.body.dataset.email;
+        if (!email) {
+            mostrarModal("❌ Error", "No se pudo recuperar el email del usuario.", "danger");
+            return;
+        }
+
+        const boton = event.target;
+        boton.disabled = true;
+        boton.innerHTML = 'Enviando...';
+
+        fetch(`/factura/enviar?pedidoId=${pedidoId}&email=${encodeURIComponent(email)}`, {
+            method: "POST"
+        })
+        .then(response => response.text())
+        .then(mensaje => {
+            mostrarModal("✅ Factura enviada", "Tu factura se ha enviado correctamente al correo proporcionado. Revisa tu bandeja de entrada o spam.", "success");
+            boton.innerHTML = 'Solicitar factura';
+            boton.disabled = false;
+        })
+        .catch(error => {
+            console.error("❌ Error al enviar la factura:", error);
+            mostrarModal("❌ Error", "Hubo un error al enviar la factura. Inténtalo más tarde.", "danger");
+            boton.innerHTML = 'Solicitar factura';
+            boton.disabled = false;
+        });
+    };
+
+    function mostrarModal(titulo, mensaje, tipo = "primary") {
+        const modalTitulo = document.getElementById("notificationModalLabel");
+        const modalMensaje = document.getElementById("notificationMessage");
+        const modal = new bootstrap.Modal(document.getElementById("notificationModal"));
+
+        modalTitulo.textContent = titulo;
+        modalMensaje.textContent = mensaje;
+
+        // Cambia el color del botón en función del tipo
+        const footerBtn = document.querySelector("#notificationModal .modal-footer .btn");
+        footerBtn.className = "btn btn-" + tipo;
+
+        modal.show();
+    }
+
 
     const linkPedidos = document.getElementById("linkPedidos");
     const linkPerfil = document.getElementById("linkPerfil");
@@ -88,6 +202,7 @@ document.addEventListener("DOMContentLoaded", function () {
             seccionPerfil.classList.add("d-none");
             linkPedidos.classList.add("active", "fw-bold", "text-primary");
             linkPerfil.classList.remove("active", "fw-bold", "text-primary");
+            cargarPedidos();
         });
 
         linkPerfil.addEventListener("click", function (e) {
@@ -99,86 +214,12 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    const btnEditar = document.querySelector("#infoUsuario .btn");
-    const modal = new bootstrap.Modal(document.getElementById("modalEditarUsuario"));
-    const formEditar = document.getElementById("formEditarUsuario");
-    const alerta = document.getElementById("alertaModal");
-
-    if (btnEditar && modal && formEditar && alerta) {
-        btnEditar.addEventListener("click", () => {
-            document.getElementById("editNombre").value = nombreActual;
-            document.getElementById("editApellido").value = apellidoActual;
-            document.getElementById("editTelefono").value = telefonoActual;
-            document.getElementById("editDireccion").value = direccionActual;
-            document.getElementById("editEmail").value = document.getElementById("emailUsuario").textContent || "";
-
-            alerta.classList.add("d-none");
-            modal.show();
-        });
-
-        formEditar.addEventListener("submit", (e) => {
-            e.preventDefault();
-
-            const datos = {
-                nombre: document.getElementById("editNombre").value,
-                apellido: document.getElementById("editApellido").value,
-                telefono: document.getElementById("editTelefono").value,
-                direccion: document.getElementById("editDireccion").value,
-                email: document.getElementById("editEmail").value
-            };
-
-            if (datos.telefono && !/^\d{9}$/.test(datos.telefono)) {
-                alerta.textContent = "⚠️ El teléfono debe tener 9 dígitos.";
-                alerta.className = "alert alert-warning";
-                alerta.classList.remove("d-none");
-                return;
-            }
-
-            fetch("/usuario/actualizar", {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(datos)
-            })
-            .then(res => res.json())
-            .then(respuesta => {
-                alerta.textContent = respuesta.mensaje;
-                alerta.className = "alert alert-success";
-                alerta.classList.remove("d-none");
-
-                const nombreCompleto = `${datos.nombre} ${datos.apellido}`.trim();
-                document.getElementById("nombreUsuario").textContent = nombreCompleto;
-                document.getElementById("telefonoUsuario").textContent = datos.telefono || "No especificado";
-                document.getElementById("direccionUsuario").textContent = datos.direccion || "No especificada";
-
-                nombreActual = datos.nombre;
-                apellidoActual = datos.apellido;
-                telefonoActual = datos.telefono;
-                direccionActual = datos.direccion;
-
-                setTimeout(() => {
-                    alerta.classList.add("d-none");
-                    modal.hide();
-                }, 2000);
-            })
-            .catch(() => {
-                alerta.textContent = "❌ Error al actualizar tus datos. Intenta de nuevo.";
-                alerta.className = "alert alert-danger";
-                alerta.classList.remove("d-none");
-
-                setTimeout(() => alerta.classList.add("d-none"), 3000);
-            });
-        });
-    }
-
     const btnEnviarEnlace = document.getElementById("btnEnviarEnlaceCambio");
     const alertaCambio = document.getElementById("alertaCambioContrasenia");
 
     if (btnEnviarEnlace && alertaCambio) {
         btnEnviarEnlace.addEventListener("click", () => {
             const email = document.body.dataset.email;
-
             if (!email) {
                 alertaCambio.classList.remove("d-none");
                 alertaCambio.className = "alert alert-danger";
@@ -188,9 +229,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             fetch("/recuperacion/enviar-enlace", {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/x-www-form-urlencoded"
-                },
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
                 body: `email=${encodeURIComponent(email)}`
             })
             .then(res => {

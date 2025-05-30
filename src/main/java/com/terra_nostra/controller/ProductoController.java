@@ -1,7 +1,14 @@
 package com.terra_nostra.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.terra_nostra.dto.CrearReseniaDto;
 import com.terra_nostra.dto.ProductoDto;
+import com.terra_nostra.dto.ReseniaDto;
 import com.terra_nostra.service.ProductoService;
+import com.terra_nostra.service.ReseniaService;
+import com.terra_nostra.utils.JwtUtil;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
+import java.text.Normalizer;
 import java.util.*;
 
 @RestController
@@ -18,7 +26,13 @@ import java.util.*;
 public class ProductoController {
 
     @Autowired
+    private ReseniaService reseniaService;
+
+    @Autowired
     private ProductoService productoService;
+
+    @Autowired
+    private JwtUtil jwtUtil;
 
     private static final Logger logger = LoggerFactory.getLogger(ProductoController.class);
 
@@ -97,7 +111,7 @@ public class ProductoController {
     }
 
 
-    @GetMapping("/{id}")
+    @GetMapping("obtener/{id}")
     public ResponseEntity<ProductoDto> obtenerProductoPorId(@PathVariable Long id) {
         ProductoDto producto = productoService.obtenerProductoPorId(id);
         return producto != null ? ResponseEntity.ok(producto) : ResponseEntity.notFound().build();
@@ -127,6 +141,38 @@ public class ProductoController {
         }
     }
 
+    @GetMapping("/ver/{slug}")
+    public ResponseEntity<ProductoDto> obtenerProductoPorSlug(@PathVariable String slug) {
+        try {
+            String slugNormalizado = normalizarTexto(slug.replace("-", " "));
+
+            List<ProductoDto> productos = productoService.obtenerTodosLosProductos();
+
+            for (ProductoDto p : productos) {
+                String nombreNormalizado = normalizarTexto(p.getNombre());
+                String comparacion = nombreNormalizado.replaceAll("[^a-z0-9]+", " ").trim().replaceAll(" +", "-");
+
+                if (comparacion.equals(slugNormalizado.replaceAll(" +", "-"))) {
+                    return ResponseEntity.ok(p);
+                }
+            }
+
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+
+        } catch (Exception e) {
+            logger.error("❌ Error al obtener producto por slug '{}': {}", slug, e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    private String normalizarTexto(String texto) {
+        return Normalizer.normalize(texto, Normalizer.Form.NFD)
+                .replaceAll("\\p{M}", "")            // elimina tildes y diacríticos
+                .toLowerCase()
+                .replaceAll("[ñ]", "n")              // opcionalmente reemplazar ñ
+                .replaceAll("[^a-z0-9\\s]", "");     // elimina símbolos raros
+    }
+
 
     private ProductoDto construirDto(String nombre, String descripcion, String descripcionBreve, BigDecimal precio,
                                      Integer stock, String categoria, BigDecimal descuento) {
@@ -142,5 +188,81 @@ public class ProductoController {
         dto.setCategoria(categoria);
         dto.setDescuento(descuento);
         return dto;
+    }
+
+    /**
+     * Crea una nueva resenia.
+     *
+     * @param ReseniaDto Datos de la resenia enviados desde el frontend.
+     * @return ReseniaDto con la información de la resenia creada.
+     */
+    @PostMapping("/crear-resenia")
+    public ResponseEntity<?> crearResenia(@RequestBody String rawJson, HttpServletRequest request) {
+        try {
+            // 🔍 Muestra el JSON recibido (opcional)
+            logger.info("📦 JSON recibido: {}", rawJson);
+
+            // 🧠 Deserialización manual
+            ObjectMapper mapper = new ObjectMapper();
+            CrearReseniaDto dto = mapper.readValue(rawJson, CrearReseniaDto.class);
+
+            // 🔐 Obtener token de la cookie
+            String token = null;
+            Cookie[] cookies = request.getCookies();
+            if (cookies != null) {
+                for (Cookie cookie : cookies) {
+                    if ("SESSIONID".equals(cookie.getName())) {
+                        token = cookie.getValue();
+                        break;
+                    }
+                }
+            }
+
+            if (token == null || !jwtUtil.isTokenValido(token)) {
+                logger.warn("❌ Token inválido o no presente.");
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                        .body(Map.of("error", "Sesión no válida. Por favor, inicia sesión."));
+            }
+
+            // ✅ Extraer ID del usuario del token
+            Long usuarioId = jwtUtil.obtenerUsuarioIdDesdeToken(token);
+            if (usuarioId == null) {
+                logger.error("❌ No se pudo extraer el ID del usuario del token.");
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body(Map.of("error", "Usuario no identificado."));
+            }
+
+            // ✅ Setear usuario manualmente
+            dto.setUsuarioId(usuarioId);
+
+            // ✅ Crear la reseña
+            ReseniaDto resenia = reseniaService.crearResenia(dto);
+            return ResponseEntity.status(HttpStatus.CREATED).body(resenia);
+
+        } catch (IllegalArgumentException e) {
+            logger.warn("⚠️ Validación fallida: {}", e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("mensaje", e.getMessage()));
+        } catch (Exception e) {
+            logger.error("❌ Error interno:", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("error", e.getMessage()));
+        }
+    }
+
+
+    /**
+     * Lista todas las resenias de un producto.
+     *
+     * @param productoId ID del producto.
+     * @return Lista de resenias asociadas al producto.
+     */
+    @GetMapping("/producto/{productoId}")
+    public ResponseEntity<List<ReseniaDto>> listarPorProducto(@PathVariable Long productoId) {
+        try {
+            List<ReseniaDto> resenias = reseniaService.listarReseniasPorProducto(productoId);
+            return ResponseEntity.ok(resenias);
+        } catch (Exception e) {
+            logger.error("❌ Error al obtener resenias del producto {}: {}", productoId, e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Collections.emptyList());
+        }
     }
 }

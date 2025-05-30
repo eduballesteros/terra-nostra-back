@@ -290,4 +290,18 @@
             }
         }
 
+        public ProductoDto obtenerProductoPorNombre(String nombre) {
+            try {
+                List<ProductoDto> productos = obtenerTodosLosProductos();
+                return productos.stream()
+                        .filter(p -> p.getNombre().equalsIgnoreCase(nombre))
+                        .findFirst()
+                        .orElse(null);
+            } catch (Exception e) {
+                logger.error("❌ Error al buscar producto por nombre: {}", nombre, e);
+                return null;
+            }
+        }
+
+
     }

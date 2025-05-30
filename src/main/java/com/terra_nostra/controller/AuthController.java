@@ -82,7 +82,14 @@ public class AuthController {
             logger.info("🎭 Rol obtenido del usuario autenticado: {}", rolReal);
 
             // ✅ Generamos un nuevo token con el rol correcto
-            String newToken = jwtUtil.generarToken(usuario.getEmail(), rolReal, usuario.getNombre());
+            String newToken = jwtUtil.generarToken(
+                    usuario.getEmail(),
+                    rolReal,
+                    usuario.getNombre(),
+                    usuario.isCorreoVerificado(),
+                    usuario.getId()
+            );
+
             logger.info("✅ Nuevo token generado con rol '{}' para el usuario {}", rolReal, usuario.getEmail());
 
 
@@ -97,7 +104,8 @@ public class AuthController {
 
             Cookie sessionCookie = new Cookie("SESSIONID", newToken);
             sessionCookie.setHttpOnly(true);
-            sessionCookie.setSecure(true);
+            //FALSE SOLO EN LOCAL!!!!!
+            sessionCookie.setSecure(false);
             sessionCookie.setPath("/");
             sessionCookie.setMaxAge(60 * 60 * 24);
 
@@ -143,18 +151,24 @@ public class AuthController {
             return ResponseEntity.ok(response);
         }
 
-        // Extraer el email desde el JWT (sin consultar la base de datos)
+        // Extraer datos del token JWT
         String emailUsuario = jwtUtil.obtenerEmailDesdeToken(token);
         String rolUsuario = jwtUtil.obtenerRolDesdeToken(token);
         String nombreUsuario = jwtUtil.obtenerNombreDesdeToken(token);
+        boolean correoVerificado = jwtUtil.obtenerVerificacionCorreoDesdeToken(token);
+        Long usuarioId = jwtUtil.obtenerUsuarioIdDesdeToken(token); // ✅ NUEVO
 
         response.put("sesionActiva", true);
         response.put("emailUsuario", emailUsuario);
         response.put("nombreUsuario", nombreUsuario);
         response.put("rol", rolUsuario);
+        response.put("correoVerificado", correoVerificado);
+        response.put("usuarioId", usuarioId);
 
         return ResponseEntity.ok(response);
     }
+
+
 
     /**
      * Cierra la sesión del usuario eliminando la cookie de autenticación.

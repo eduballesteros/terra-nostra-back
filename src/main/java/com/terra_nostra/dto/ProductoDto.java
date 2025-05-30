@@ -6,6 +6,7 @@ import jakarta.persistence.Lob;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -30,7 +31,7 @@ public class ProductoDto {
     private BigDecimal precio;
 
     @NotNull(message = "La cantidad en stock no puede estar vacía")
-    @Positive(message = "La cantidad en stock debe ser positiva")
+    @PositiveOrZero(message = "La cantidad en stock debe ser positiva")
     private int stock;
 
     @NotBlank(message = "La categoría no puede estar vacía")
@@ -40,7 +41,7 @@ public class ProductoDto {
     @Basic(fetch = FetchType.LAZY)
     private byte[] imagen;
 
-    @Positive(message = "El descuento debe ser un valor positivo")
+    @PositiveOrZero(message = "El descuento debe ser un valor positivo")
     private BigDecimal descuento;
 
     private LocalDateTime fechaAlta;
