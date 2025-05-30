@@ -1,18 +1,19 @@
 package com.terra_nostra.controller;
 
+
+import com.terra_nostra.dto.UsuarioDto;
+import com.terra_nostra.service.UsuarioService;
 import com.terra_nostra.utils.JwtUtil;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import com.terra_nostra.dto.UsuarioDto;
-import com.terra_nostra.service.UsuarioService;
-import org.slf4j.Logger;
-
 
 import java.util.List;
 
@@ -55,9 +56,14 @@ public class HomeController {
      */
 
 
-    @GetMapping("/shop")
+    @GetMapping("/tienda")
     public ModelAndView mostrarTienda() {
-        return new ModelAndView("shop");
+        return new ModelAndView("tienda");
+    }
+
+    @GetMapping("/sobre-nosotros")
+    public ModelAndView mostrarSobreNosotros() {
+        return new ModelAndView("sobre-nosotros");
     }
 
     /**
@@ -159,12 +165,54 @@ public class HomeController {
         return null;
     }
 
-    @GetMapping("/producto")
-    public ModelAndView mostrarProducto(@RequestParam("id") Long id) {
+    @GetMapping("/producto/{nombre}")
+    public ModelAndView mostrarProductoPorNombre(@PathVariable String nombre, HttpServletRequest request) {
         ModelAndView mav = new ModelAndView("producto");
-        mav.addObject("productoId", id); // opcional, por si quieres usarlo desde el JSP
+
+        // Convertimos el slug a nombre normal: "vitamina-c-natural" → "Vitamina C Natural"
+        String nombreFormateado = nombre.replace("-", " ");
+        mav.addObject("nombreProducto", nombreFormateado);
+
+        String token = obtenerTokenDesdeCookies(request);
+        if (token != null && jwtUtil.isTokenValido(token)) {
+            Long usuarioId = jwtUtil.obtenerUsuarioIdDesdeToken(token);
+            mav.addObject("usuarioId", usuarioId);
+        }
+
         return mav;
     }
+
+
+    @GetMapping("/carrito")
+    public ModelAndView mostrarCarrito(HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView("carrito");
+
+        String token = obtenerTokenDesdeCookies(request);
+        if (token != null && jwtUtil.isTokenValido(token)) {
+            Long usuarioId = jwtUtil.obtenerUsuarioIdDesdeToken(token);
+            boolean verificado = jwtUtil.obtenerVerificacionCorreoDesdeToken(token);
+
+            mav.addObject("usuarioId", usuarioId);
+            mav.addObject("correoVerificado", verificado);
+
+        }
+
+        return mav;
+    }
+
+    @GetMapping("/resumenPedido")
+    public ModelAndView mostrarCompra(HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView("resumenPedido");
+        String token = obtenerTokenDesdeCookies(request);
+        if (token != null && jwtUtil.isTokenValido(token)) {
+            Long usuarioId = jwtUtil.obtenerUsuarioIdDesdeToken(token);
+            boolean verificado = jwtUtil.obtenerVerificacionCorreoDesdeToken(token);
+            mav.addObject("usuarioId", usuarioId);
+            mav.addObject("correoVerificado", verificado);
+        }
+        return mav;
+    }
+
 
 
     @GetMapping("/cambiar-contrasenia")
@@ -183,7 +231,6 @@ public class HomeController {
 
         return mav;
     }
-
 
 }
 
