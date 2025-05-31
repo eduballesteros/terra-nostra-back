@@ -32,7 +32,7 @@
     public class ProductoService {
 
         private static final Logger logger = LoggerFactory.getLogger(ProductoService.class);
-        private static final String API_BASE_URL = "http://localhost:8081/api/productos"; // URL de la API
+        private static final String API_BASE_URL = "http://terraapi:8080/api/productos";
 
         private final HttpClient cliente = HttpClient.newHttpClient();
         private final ObjectMapper mapeo;

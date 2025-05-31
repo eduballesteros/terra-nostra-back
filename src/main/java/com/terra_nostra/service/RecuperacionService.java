@@ -16,7 +16,7 @@ import java.util.Collections;
 public class RecuperacionService {
 
     private static final Logger logger = LoggerFactory.getLogger(RecuperacionService.class);
-    private static final String API_BASE_URL = "http://localhost:8081/api/auth"; // la URL base de tu API
+    private static final String API_BASE_URL = "http://terraapi:8080/api/auth"; // la URL base de tu API
 
     public boolean cambiarContrasenia(String token, String nuevaContrasenia) {
         try {

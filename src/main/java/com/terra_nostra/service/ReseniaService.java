@@ -22,7 +22,7 @@ import java.util.List;
 public class ReseniaService {
 
     private static final Logger logger = LoggerFactory.getLogger(ReseniaService.class);
-    private static final String API_URL = "http://localhost:8081/api/resenias";
+    private static final String API_URL = "http://terraapi:8080/api/resenias";
 
     private final HttpClient httpClient = HttpClient.newHttpClient();
     private final ObjectMapper mapper;

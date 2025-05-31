@@ -1,4 +1,3 @@
-
 package com.terra_nostra.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -30,7 +29,7 @@ public class AuthService {
      * Objeto `ObjectMapper` para la conversión de objetos Java a JSON y viceversa.
      */
     @Autowired
-    private ObjectMapper objectMapper; // 🔹 Usar el ObjectMapper configurado
+    private ObjectMapper objectMapper;
 
     /**
      * Autentica a un usuario enviando sus credenciales a una API externa.
@@ -43,39 +42,30 @@ public class AuthService {
         try {
             HttpClient cliente = HttpClient.newHttpClient();
 
-            /**
-             * Convierte el objeto `LoginDto` en una cadena JSON para enviarlo en la solicitud HTTP.
-             */
+            // Convierte el objeto LoginDto a JSON
             String requestBody = objectMapper.writeValueAsString(loginDto);
             logger.info("📤 JSON enviado a la API: {}", requestBody);
 
-            /**
-             * Construye y envía una solicitud `POST` a la API de autenticación.
-             */
+            // Construye y envía la solicitud POST a la API
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(new URI("http://localhost:8081/api/auth/login"))
+                    .uri(new URI("http://terraapi:8080/api/auth/login")) // 🔄 CORREGIDO para Docker
                     .header("Content-Type", "application/json")
                     .POST(HttpRequest.BodyPublishers.ofString(requestBody))
                     .build();
 
-            // Enviar la solicitud y recibir la respuesta.
+            // Enviar la solicitud y recibir la respuesta
             HttpResponse<String> response = cliente.send(request, HttpResponse.BodyHandlers.ofString());
 
             logger.info("🔹 Código de respuesta de la API: {}", response.statusCode());
             logger.info("🔹 Respuesta de la API: {}", response.body());
 
-            /**
-             * Procesa la respuesta de la API.
-             * Si el código de estado es `200`, convierte el JSON en un objeto `UsuarioDto`.
-             * Si la autenticación falla, devuelve `null`.
-             */
-            if (response.statusCode() == 200) { // Login exitoso
+            if (response.statusCode() == 200) {
                 UsuarioDto usuarioAutenticado = objectMapper.readValue(response.body(), UsuarioDto.class);
                 logger.info("✅ Usuario autenticado: {}", usuarioAutenticado.getEmail());
                 return usuarioAutenticado;
             } else {
                 logger.warn("❌ Credenciales incorrectas o error en la API.");
-                return null; // Usuario no autenticado
+                return null;
             }
 
         } catch (Exception e) {

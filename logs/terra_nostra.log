@@ -3202,3 +3202,25 @@ Caused by: java.nio.channels.ClosedChannelException: null
 2025-05-30T23:21:44.987+02:00  INFO 5876 --- [http-nio-8080-exec-4] c.t.controller.ProductoController        : ✅ Productos obtenidos correctamente. Total: 7
 2025-05-30T23:21:48.162+02:00  INFO 5876 --- [http-nio-8080-exec-10] c.terra_nostra.service.ProductoService   : 🔹 Código de respuesta de la API: 200
 2025-05-30T23:21:48.231+02:00  INFO 5876 --- [http-nio-8080-exec-10] c.t.controller.ProductoController        : ✅ Productos obtenidos correctamente. Total: 7
+2025-05-31T00:25:15.646+02:00  INFO 29456 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : Starting TerraNostraApplication using Java 21.0.5 with PID 29456 (C:\Users\balle\Documents\terra-nostra\web\target\classes started by balle in C:\Users\balle\Documents\terra-nostra\web)
+2025-05-31T00:25:15.648+02:00 DEBUG 29456 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-05-31T00:25:15.649+02:00  INFO 29456 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : No active profile set, falling back to 1 default profile: "default"
+2025-05-31T00:25:15.702+02:00  INFO 29456 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-05-31T00:25:15.702+02:00  INFO 29456 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-05-31T00:25:17.091+02:00  INFO 29456 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-05-31T00:25:17.108+02:00  INFO 29456 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-05-31T00:25:17.108+02:00  INFO 29456 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-05-31T00:25:17.318+02:00  INFO 29456 --- [restartedMain] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-05-31T00:25:17.328+02:00  INFO 29456 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-05-31T00:25:17.329+02:00  INFO 29456 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1626 ms
+2025-05-31T00:25:17.677+02:00  WARN 29456 --- [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 23b5205c-3438-4a16-8738-a4872745f734
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-05-31T00:25:17.686+02:00  INFO 29456 --- [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2025-05-31T00:25:17.817+02:00  INFO 29456 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2025-05-31T00:25:18.163+02:00  WARN 29456 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : Unable to start LiveReload server
+2025-05-31T00:25:18.200+02:00  INFO 29456 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-05-31T00:25:18.210+02:00  INFO 29456 --- [restartedMain] c.terra_nostra.TerraNostraApplication    : Started TerraNostraApplication in 3.08 seconds (process running for 3.72)

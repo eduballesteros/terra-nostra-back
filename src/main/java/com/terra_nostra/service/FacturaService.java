@@ -21,7 +21,8 @@ import java.net.http.HttpResponse;
 @Service
 public class FacturaService {
 
-    private static final String API_URL = "http://localhost:8081/api/pedidos/";
+    private static final String API_URL = "http://terraapi:8080/api/pedidos/";
+
 
     private final HttpClient http = HttpClient.newHttpClient();
     private final ObjectMapper mapper = new ObjectMapper();

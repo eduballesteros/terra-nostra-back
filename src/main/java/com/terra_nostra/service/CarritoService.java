@@ -20,7 +20,7 @@ import java.util.Map;
 public class CarritoService {
 
     private static final Logger logger = LoggerFactory.getLogger(CarritoService.class);
-    private static final String API_BASE_URL = "http://localhost:8081/carrito";
+    private static final String API_BASE_URL = "http://terraapi:8080/carrito";
 
     private final HttpClient http = HttpClient.newHttpClient();
     private final ObjectMapper mapper;

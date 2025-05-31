@@ -19,7 +19,7 @@ import java.util.List;
 public class PedidoService {
 
     private static final Logger logger = LoggerFactory.getLogger(PedidoService.class);
-    private static final String API_URL = "http://localhost:8081/api/pedidos/usuario/";
+    private static final String API_URL = "http://terraapi:8080/api/pedidos/usuario/";
 
     private final HttpClient http = HttpClient.newHttpClient();
     private final ObjectMapper mapper;
